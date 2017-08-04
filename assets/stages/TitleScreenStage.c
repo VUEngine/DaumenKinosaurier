@@ -183,7 +183,7 @@ StageROMDef TITLE_SCREEN_ST =
     // streaming
 	{
         // minimum free ms in the current game frame to allow streaming to quick in
-        80,
+        0,
 		// load padding
 		40,
 		// unload padding
