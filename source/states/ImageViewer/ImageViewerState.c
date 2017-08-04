@@ -26,6 +26,7 @@
 
 #include <Game.h>
 #include <Screen.h>
+#include <CharSetManager.h>
 #include <SoundManager.h>
 #include <Printing.h>
 #include <ImageViewerState.h>
@@ -336,6 +337,9 @@ void ImageViewerState_playAnimation(ImageViewerState this)
 		// rewrite texture definition
 		Texture_setDefinition(entityTexture, ImageViewerState_getTexture(this, i));
 	}
+
+	// force CHAR memory defragmentation to prevent memory depletion
+	CharSetManager_defragment(CharSetManager_getInstance());
 
 	// rewrite animation description and play loop animation
 	AnimatedInGameEntity_setAnimationDescription(this->imageEntity, ImageViewerState_getAnimationDescription(this));
