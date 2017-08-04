@@ -36,7 +36,7 @@
 #include <AnimationState.h>
 #include <ImageViewerState.h>
 #include <CreditsState.h>
-#include <CreditsState.h>
+#include <CharSetManager.h>
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -217,6 +217,9 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					// delete cursor
 					Container_deleteMyself(__SAFE_CAST(Container, this->cursorEntity));
 					this->cursorEntity = NULL;
+
+					// force CHAR memory defragmentation to prevent memory depletion
+					CharSetManager_defragment(CharSetManager_getInstance());
 
 					// get logo entity from stage
 					AnimatedInGameEntity logoEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
@@ -407,12 +410,17 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 
 				case kMenuOptionCredits:
 				{
-					// delete logo
-					Container_deleteMyself(Container_getChildByName(
+					Entity logo = __SAFE_CAST(Entity, Container_getChildByName(
 						__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 						"Logo",
 						false
 					));
+
+					Entity_releaseSprites(logo, true);
+					Container_deleteMyself(__SAFE_CAST(Container, logo));
+
+					// force CHAR memory defragmentation to prevent memory depletion
+					CharSetManager_defragment(CharSetManager_getInstance());
 
 					// delayed adding of credits text entity
 					MessageDispatcher_dispatchMessage(1, __SAFE_CAST(Object, this), __SAFE_CAST(Object, this), kShowCreditsText, NULL);
@@ -459,18 +467,27 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 		case kShowCreditsAnimation:
 		{
 			// delete image entity
-			Container_deleteMyself(Container_getChildByName(
+			Entity image = __SAFE_CAST(Entity, Container_getChildByName(
 				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 				"Image",
 				false
 			));
 
+			Entity_releaseSprites(image, true);
+			Container_deleteMyself(__SAFE_CAST(Container, image));
+
 			// delete credits entity
-			Container_deleteMyself(Container_getChildByName(
+			Entity creditsText = __SAFE_CAST(Entity, Container_getChildByName(
 				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 				"CredText",
 				false
 			));
+
+			Entity_releaseSprites(creditsText, true);
+			Container_deleteMyself(__SAFE_CAST(Container, creditsText));
+
+			// force CHAR memory defragmentation to prevent memory depletion
+			CharSetManager_defragment(CharSetManager_getInstance());
 
 			// add image entity
 			PositionedEntityROMDef positionedEntity[] =
