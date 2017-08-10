@@ -201,18 +201,24 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					Game_disableKeypad(Game_getInstance());
 
 					// delete copyright
-					Container_deleteMyself(Container_getChildByName(
+					Entity copyright = __SAFE_CAST(Entity, Container_getChildByName(
 						__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 						"Copyright",
 						false
 					));
 
+					Entity_releaseSprites(copyright, true);
+					Container_deleteMyself(__SAFE_CAST(Container, copyright));
+
 					// delete menu
-					Container_deleteMyself(Container_getChildByName(
+					Entity menu = __SAFE_CAST(Entity, Container_getChildByName(
 						__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 						"Menu",
 						false
 					));
+
+					Entity_releaseSprites(menu, true);
+					Container_deleteMyself(__SAFE_CAST(Container, menu));
 
 					// delete cursor
 					Container_deleteMyself(__SAFE_CAST(Container, this->cursorEntity));
