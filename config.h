@@ -133,9 +133,6 @@
 // Timer resolution
 #define __TIMER_RESOLUTION						1
 
-// Options are __TIMER_20US and __TIMER_100US
-#define __TIMER_FREQUENCY						__TIMER_20US
-
 /* __FRAME_CYCLE = 0 means __TARGET_FPS = 50
  * __FRAME_CYCLE = 1 means __TARGET_FPS = 25
  */
