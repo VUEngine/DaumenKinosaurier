@@ -98,18 +98,17 @@ CharSetROMDef* const CREDITS_ST_CHARSETS[] =
 	NULL
 };
 
-StageTextureEntryROMDef CREDITS_ST_TEXTURES[] =
+TextureDefinition* const CREDITS_ST_TEXTURES[] =
 {
-	{&GALLERY_BUTTON_BACK_L_TX, true},
-	{&GALLERY_BUTTON_BACK_R_TX, true},
-	{&GALLERY_BUTTON_PAUSE_L_TX, true},
-	{&GALLERY_BUTTON_PAUSE_R_TX, true},
-	{&GALLERY_BUTTON_RESUME_L_TX, true},
-	{&GALLERY_BUTTON_RESUME_R_TX, true},
-	{&CREDITS_L_TX, true},
-	{&CREDITS_R_TX, true},
-
-	{NULL, false}
+	&GALLERY_BUTTON_BACK_L_TX,
+	&GALLERY_BUTTON_BACK_R_TX,
+	&GALLERY_BUTTON_PAUSE_L_TX,
+	&GALLERY_BUTTON_PAUSE_R_TX,
+	&GALLERY_BUTTON_RESUME_L_TX,
+	&GALLERY_BUTTON_RESUME_R_TX,
+	&CREDITS_L_TX,
+	&CREDITS_R_TX,
+	NULL
 };
 
 
@@ -274,7 +273,7 @@ StageROMDef CREDITS_ST =
 		(CharSetDefinition**)CREDITS_ST_CHARSETS,
 
 		// textures to preload
-		(StageTextureEntryDefinition*)CREDITS_ST_TEXTURES,
+		(TextureDefinition**)CREDITS_ST_TEXTURES,
 
         // background music
         NULL,

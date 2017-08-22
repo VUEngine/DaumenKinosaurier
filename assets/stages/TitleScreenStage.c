@@ -129,23 +129,23 @@ CharSetROMDef* const TITLE_SCREEN_ST_CHARSETS[] =
 	NULL
 };
 
-StageTextureEntryROMDef TITLE_SCREEN_ST_TEXTURES[] =
+TextureDefinition* const TITLE_SCREEN_ST_TEXTURES[] =
 {
-	{&GALLERY_BUTTON_BACK_L_TX, true},
-	{&GALLERY_BUTTON_BACK_R_TX, true},
-	{&GALLERY_BUTTON_NEXT_L_TX, true},
-	{&GALLERY_BUTTON_NEXT_R_TX, true},
-	{&GALLERY_BUTTON_PAUSE_L_TX, true},
-	{&GALLERY_BUTTON_PAUSE_R_TX, true},
-	{&GALLERY_BUTTON_RESUME_L_TX, true},
-	{&GALLERY_BUTTON_RESUME_R_TX, true},
-	{&COPYRIGHT_TX, true},
-	{&MENU_TX, true},
-	{&MENU_CURSOR_TX, true},
-	{&LOGO_L_TX, true},
-	{&LOGO_R_TX, true},
-	{&VOLCANO_L_TX, true},
-	{&VOLCANO_R_TX, true},
+	&GALLERY_BUTTON_BACK_L_TX,
+	&GALLERY_BUTTON_BACK_R_TX,
+	&GALLERY_BUTTON_NEXT_L_TX,
+	&GALLERY_BUTTON_NEXT_R_TX,
+	&GALLERY_BUTTON_PAUSE_L_TX,
+	&GALLERY_BUTTON_PAUSE_R_TX,
+	&GALLERY_BUTTON_RESUME_L_TX,
+	&GALLERY_BUTTON_RESUME_R_TX,
+	&COPYRIGHT_TX,
+	&MENU_TX,
+	&MENU_CURSOR_TX,
+	&LOGO_L_TX,
+	&LOGO_R_TX,
+	&VOLCANO_L_TX,
+	&VOLCANO_R_TX,
 
 	{NULL, false}
 };
@@ -312,7 +312,7 @@ StageROMDef TITLE_SCREEN_ST =
 		(CharSetDefinition**)TITLE_SCREEN_ST_CHARSETS,
 
 		// textures to preload
-		(StageTextureEntryDefinition*)TITLE_SCREEN_ST_TEXTURES,
+		(TextureDefinition**)TITLE_SCREEN_ST_TEXTURES,
 
         // background music
         NULL,

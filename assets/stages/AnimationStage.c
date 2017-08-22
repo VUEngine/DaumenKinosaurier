@@ -90,16 +90,15 @@ CharSetROMDef* const ANIMATION_ST_CHARSETS[] =
 	NULL
 };
 
-StageTextureEntryROMDef ANIMATION_ST_TEXTURES[] =
+TextureDefinition* const ANIMATION_ST_TEXTURES[] =
 {
-	{&GALLERY_BUTTON_BACK_L_TX, true},
-	{&GALLERY_BUTTON_BACK_R_TX, true},
-	{&GALLERY_BUTTON_RESUME_L_TX, true},
-	{&GALLERY_BUTTON_RESUME_R_TX, true},
-	{&REX_L_TX, true},
-	{&REX_R_TX, true},
-
-	{NULL, false}
+	&GALLERY_BUTTON_BACK_L_TX,
+	&GALLERY_BUTTON_BACK_R_TX,
+	&GALLERY_BUTTON_RESUME_L_TX,
+	&GALLERY_BUTTON_RESUME_R_TX,
+	&REX_L_TX,
+	&REX_R_TX,
+	NULL
 };
 
 
@@ -264,7 +263,7 @@ StageROMDef ANIMATION_ST =
 		(CharSetDefinition**)ANIMATION_ST_CHARSETS,
 
 		// textures to preload
-		(StageTextureEntryDefinition*)ANIMATION_ST_TEXTURES,
+		(TextureDefinition**)ANIMATION_ST_TEXTURES,
 
         // background music
         NULL,
