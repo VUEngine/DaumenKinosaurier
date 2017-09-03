@@ -24,7 +24,7 @@
 //												INCLUDES
 //---------------------------------------------------------------------------------------------------------
 
-#include <StaticImage.h>
+#include <Entity.h>
 #include <BgmapSprite.h>
 
 
@@ -79,6 +79,9 @@ TextureROMDef COPYRIGHT_TX =
 
 	// palette number (0-3)
 	1,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef COPYRIGHT_IM_SPRITE =
@@ -114,8 +117,8 @@ BgmapSpriteROMDef* const COPYRIGHT_IM_SPRITES[] =
 	NULL
 };
 
-StaticImageROMDef COPYRIGHT_IM =
+EntityROMDef COPYRIGHT_IM =
 {
-	__TYPE(StaticImage),
+	__TYPE(Entity),
 	(SpriteROMDef**)COPYRIGHT_IM_SPRITES,
 };

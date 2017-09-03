@@ -56,9 +56,9 @@ __CLASS(CreditsState);
 
 #define CreditsState_ATTRIBUTES							        										\
         GameState_ATTRIBUTES																			\
-		AnimatedInGameEntity pauseButtonEntity;															\
-		AnimatedInGameEntity resumeButtonEntity;														\
-		AnimatedInGameEntity backButtonEntity;															\
+		AnimatedEntity pauseButtonEntity;															\
+		AnimatedEntity resumeButtonEntity;														\
+		AnimatedEntity backButtonEntity;															\
 		u16 remaining;																					\
 		bool isPaused;																					\
 		bool fadeInComplete;																			\

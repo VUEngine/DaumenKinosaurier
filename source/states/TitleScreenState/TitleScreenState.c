@@ -31,7 +31,7 @@
 #include <Actor.h>
 #include <SoundManager.h>
 #include <MessageDispatcher.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <TitleScreenState.h>
 #include <AnimationState.h>
 #include <ImageViewerState.h>
@@ -122,27 +122,27 @@ static void TitleScreenState_enter(TitleScreenState this, void* owner __attribut
 	this->isPaused = false;
 
 	// get entities
-	this->cursorEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->cursorEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Cursor",
 		false
 	));
-	this->pauseButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->pauseButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Pause",
 		false
 	));
-	this->resumeButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->resumeButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Resume",
 		false
 	));
-	this->backButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->backButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Back",
 		false
 	));
-	this->nextButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->nextButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Next",
 		false
@@ -224,7 +224,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					this->cursorEntity = NULL;
 
 					// get logo entity from stage
-					AnimatedInGameEntity logoEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+					AnimatedEntity logoEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 						__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 						"Logo",
 						false
@@ -235,7 +235,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 
 					// play logo's fade out anim
-					AnimatedInGameEntity_playAnimation(logoEntity, "FadeOut");
+					AnimatedEntity_playAnimation(logoEntity, "FadeOut");
 
 					// after a short delay, handle menu selection
 					MessageDispatcher_dispatchMessage(750, __SAFE_CAST(Object, this), __SAFE_CAST(Object, this), kMenuSelection, NULL);
@@ -254,7 +254,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				);
 				if(imageEntity) {
 					// pause/resume animation
-					AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, imageEntity), this->isPaused);
+					AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, imageEntity), this->isPaused);
 				}
 
 				// get logo entity from stage
@@ -266,7 +266,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				if(logoEntity)
 				{
 					// pause/resume animation
-					AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, logoEntity), this->isPaused);
+					AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, logoEntity), this->isPaused);
 				}
 
 				// get ende entity from stage
@@ -278,7 +278,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				if(creditsEntity)
 				{
 					// pause/resume animation
-					AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, creditsEntity), this->isPaused);
+					AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, creditsEntity), this->isPaused);
 				}
 
 				// update ui
@@ -332,12 +332,12 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					case 2:
 					case 3:
 					{
-						AnimatedInGameEntity creditsEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+						AnimatedEntity creditsEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 							__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 							"CredText",
 							false
 						));
-						AnimatedInGameEntity_nextFrame(creditsEntity);
+						AnimatedEntity_nextFrame(creditsEntity);
 						break;
 					}
 				}
@@ -398,14 +398,14 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 					Game_enableKeypad(Game_getInstance());
 
 					// get logo entity from stage
-					AnimatedInGameEntity logoEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+					AnimatedEntity logoEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 						__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 						"Logo",
 						false
 					));
 
 					// play "a flipbook by" anim
-					AnimatedInGameEntity_playAnimation(logoEntity, "AFlipbBy");
+					AnimatedEntity_playAnimation(logoEntity, "AFlipbBy");
 
 					break;
 				}
@@ -446,12 +446,12 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 			Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
 
 			// pause credits animation
-			AnimatedInGameEntity creditsEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+			AnimatedEntity creditsEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 				"CredText",
 				false
 			));
-			AnimatedInGameEntity_pauseAnimation(creditsEntity, true);
+			AnimatedEntity_pauseAnimation(creditsEntity, true);
 
 			// show buttons
 			Entity_show(__SAFE_CAST(Entity, this->nextButtonEntity));

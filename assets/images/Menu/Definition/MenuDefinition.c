@@ -24,7 +24,7 @@
 //												INCLUDES
 //---------------------------------------------------------------------------------------------------------
 
-#include <StaticImage.h>
+#include <Entity.h>
 #include <BgmapSprite.h>
 
 
@@ -79,6 +79,9 @@ TextureROMDef MENU_TX =
 
 	// palette number (0-3)
 	1,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef MENU_IM_SPRITE =
@@ -114,8 +117,8 @@ BgmapSpriteROMDef* const MENU_IM_SPRITES[] =
 	NULL
 };
 
-StaticImageROMDef MENU_IM =
+EntityROMDef MENU_IM =
 {
-	__TYPE(StaticImage),
+	__TYPE(Entity),
 	(SpriteROMDef**)MENU_IM_SPRITES,
 };

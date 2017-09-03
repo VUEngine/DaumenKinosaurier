@@ -76,11 +76,11 @@ __CLASS(TitleScreenState);
 
 #define TitleScreenState_ATTRIBUTES																		\
 		GameState_ATTRIBUTES																			\
-		AnimatedInGameEntity cursorEntity;																\
-		AnimatedInGameEntity pauseButtonEntity;															\
-		AnimatedInGameEntity resumeButtonEntity;														\
-		AnimatedInGameEntity backButtonEntity;															\
-		AnimatedInGameEntity nextButtonEntity;															\
+		AnimatedEntity cursorEntity;																\
+		AnimatedEntity pauseButtonEntity;															\
+		AnimatedEntity resumeButtonEntity;														\
+		AnimatedEntity backButtonEntity;															\
+		AnimatedEntity nextButtonEntity;															\
 		bool fadeInComplete;																			\
 		bool isPaused;																					\
 		u8 currentSelection;																			\

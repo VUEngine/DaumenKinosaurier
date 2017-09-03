@@ -30,7 +30,7 @@
 #include <AnimationState.h>
 #include <KeypadManager.h>
 #include <MessageDispatcher.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <CustomScreenEffectManager.h>
 #include <TitleScreenState.h>
 #include <CreditsState.h>
@@ -125,12 +125,12 @@ static void AnimationState_enter(AnimationState this, void* owner __attribute__ 
 	this->isPaused = false;
 
 	// get entities from stage
-	this->resumeButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->resumeButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Resume",
 		false
 	));
-	this->backButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->backButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Back",
 		false
@@ -166,7 +166,7 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 		if(K_A & userInput.pressedKey)
 		{
 			// get image entity from stage
-			AnimatedInGameEntity imageEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+			AnimatedEntity imageEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 				"Image",
 				false
@@ -176,7 +176,7 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			this->isPaused = !this->isPaused;
 
 			// pause/resume animation
-			AnimatedInGameEntity_pauseAnimation(imageEntity, this->isPaused);
+			AnimatedEntity_pauseAnimation(imageEntity, this->isPaused);
 
 			// stop all sound playback
 			SoundManager_stopAllSound(SoundManager_getInstance());
@@ -191,7 +191,7 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			if(endeEntity)
 			{
 				// pause/resume animation
-				AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, endeEntity), this->isPaused);
+				AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, endeEntity), this->isPaused);
 			}
 
 			// get ende entity from stage
@@ -204,7 +204,7 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			if(creditsEntity)
 			{
 				// pause/resume animation
-				AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, creditsEntity), this->isPaused);
+				AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, creditsEntity), this->isPaused);
 			}
 
 			// update ui
@@ -260,14 +260,14 @@ void AnimationState_execute(AnimationState this, void* owner)
 	GameState_execute(__SAFE_CAST(GameState, this), owner);
 
 	// get image entity from stage
-	AnimatedInGameEntity imageEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	AnimatedEntity imageEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Image",
 		false
 	));
 
 	// get current animation frame
-	s8 currentFrame = AnimatedInGameEntity_getActualFrame(imageEntity);
+	s8 currentFrame = AnimatedEntity_getActualFrame(imageEntity);
 
 	// play sounds according to current animation sequence and current animation frame
 	switch (this->currentSequence)

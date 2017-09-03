@@ -24,7 +24,7 @@
 // 												INCLUDES
 //---------------------------------------------------------------------------------------------------------
 
-#include <StaticImage.h>
+#include <Entity.h>
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -78,6 +78,9 @@ TextureROMDef ADJUSTMENT_SCREEN_VUENGINE_ICON_TX =
 
 	// palette number (0-3)
 	1,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_L_SPRITE =
@@ -147,14 +150,14 @@ BgmapSpriteROMDef* const ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_R_SPRITES[] =
 
 };
 
-StaticImageROMDef ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_L =
+EntityROMDef ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_L =
 {
-	__TYPE(StaticImage),
+	__TYPE(Entity),
 	(SpriteROMDef**) ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_L_SPRITES,
 };
 
-StaticImageROMDef ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_R =
+EntityROMDef ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_R =
 {
-	__TYPE(StaticImage),
+	__TYPE(Entity),
 	(SpriteROMDef**) ADJUSTMENT_SCREEN_VUENGINE_ICON_IM_R_SPRITES,
 };

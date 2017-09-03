@@ -147,7 +147,7 @@ TextureDefinition* const TITLE_SCREEN_ST_TEXTURES[] =
 	&VOLCANO_L_TX,
 	&VOLCANO_R_TX,
 
-	{NULL, false}
+	NULL
 };
 
 

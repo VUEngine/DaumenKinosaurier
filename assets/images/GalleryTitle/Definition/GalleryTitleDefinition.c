@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <libgccvb.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <BgmapAnimatedSprite.h>
 
 
@@ -210,6 +210,9 @@ TextureROMDef GALLERY_TITLE_L_TX =
 
 	// palette number (0-3)
 	1,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef GALLERY_TITLE_L_SPRITE =
@@ -229,7 +232,7 @@ BgmapSpriteROMDef GALLERY_TITLE_L_SPRITE =
 	},
 
 	// bgmap mode (__WORLD_BGMAP, __WORLD_AFFINE, __WORLD_OBJECT or __WORLD_HBIAS)
-	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or BgmapSprite)
+	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or ObjectSprite)
 	__WORLD_BGMAP,
 
 	// pointer to affine / hbias manipulation function
@@ -280,6 +283,9 @@ TextureROMDef GALLERY_TITLE_R_TX =
 
 	// palette number (0-3)
 	1,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef GALLERY_TITLE_R_SPRITE =
@@ -299,7 +305,7 @@ BgmapSpriteROMDef GALLERY_TITLE_R_SPRITE =
 	},
 
 	// bgmap mode (__WORLD_BGMAP, __WORLD_AFFINE, __WORLD_OBJECT or __WORLD_HBIAS)
-	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or BgmapSprite)
+	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or ObjectSprite)
 	__WORLD_BGMAP,
 
 	// pointer to affine / hbias manipulation function
@@ -318,30 +324,27 @@ BgmapSpriteROMDef* const GALLERY_TITLE_SPRITES[] =
 	NULL
 };
 
-AnimatedInGameEntityROMDef GALLERY_TITLE_AG =
+AnimatedEntityROMDef GALLERY_TITLE_AG =
 {
 	{
-		{
-			__TYPE(AnimatedInGameEntity),
-			(SpriteROMDef**)GALLERY_TITLE_SPRITES,
-		},
+		// class allocator
+		__TYPE(AnimatedEntity),
 
-		// collision detection gap (up, down, left, right)
-		{0, 0, 0, 0},
+		// sprites
+		(SpriteROMDef**)GALLERY_TITLE_SPRITES,
 
-		// in game type
+		// collision shapes
+		(ShapeDefinition*)NULL,
+
+		// size
+		// if 0, width and height will be inferred from the first sprite's texture's size
+		{0, 0, 0},
+
+		// gameworld's character's type
 		0,
 
-		// width
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// height
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// depth
-		4
+		// physical specification
+		(PhysicalSpecification*)NULL,
 	},
 
 	// pointer to the animation definition for the item

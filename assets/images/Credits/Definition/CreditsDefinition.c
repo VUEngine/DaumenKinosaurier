@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <libgccvb.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <BgmapAnimatedSprite.h>
 
 
@@ -117,6 +117,9 @@ TextureROMDef CREDITS_L_TX =
 
 	// palette number (0-3)
 	0,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef CREDITS_L_SPRITE =
@@ -188,6 +191,9 @@ TextureROMDef CREDITS_R_TX =
 
 	// palette number (0-3)
 	0,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef CREDITS_R_SPRITE =
@@ -227,30 +233,27 @@ BgmapSpriteROMDef* const CREDITS_SPRITES[] =
 	NULL
 };
 
-AnimatedInGameEntityROMDef CREDITS_AG =
+AnimatedEntityROMDef CREDITS_AG =
 {
 	{
-		{
-			__TYPE(AnimatedInGameEntity),
-			(SpriteROMDef**)CREDITS_SPRITES,
-		},
+		// class allocator
+		__TYPE(AnimatedEntity),
 
-		// collision detection gap (up, down, left, right)
-		{0, 0, 0, 0},
+		// sprites
+		(SpriteROMDef**)CREDITS_SPRITES,
 
-		// in game type
+		// collision shapes
+		(ShapeDefinition*)NULL,
+
+		// size
+		// if 0, width and height will be inferred from the first sprite's texture's size
+		{0, 0, 0},
+
+		// gameworld's character's type
 		0,
 
-		// width
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// height
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// depth
-		1,
+		// physical specification
+		(PhysicalSpecification*)NULL,
 	},
 
 	// pointer to the animation definition for the item

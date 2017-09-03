@@ -29,7 +29,7 @@
 #include <SoundManager.h>
 #include <CreditsState.h>
 #include <KeypadManager.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <MessageDispatcher.h>
 #include <TitleScreenState.h>
 
@@ -109,17 +109,17 @@ static void CreditsState_enter(CreditsState this, void* owner __attribute__ ((un
 	this->fadeInComplete = false;
 
 	// get entities
-	this->pauseButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->pauseButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Pause",
 		false
 	));
-	this->resumeButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->resumeButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Resume",
 		false
 	));
-	this->backButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->backButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Back",
 		false
@@ -158,7 +158,7 @@ void CreditsState_processUserInput(CreditsState this, UserInput userInput)
 			);
 
 			// pause/resume animation
-			AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, imageEntity), this->isPaused);
+			AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, imageEntity), this->isPaused);
 
 			// update ui
 			if (this->isPaused)

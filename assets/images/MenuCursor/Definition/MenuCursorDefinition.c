@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <libgccvb.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <BgmapAnimatedSprite.h>
 
 
@@ -112,6 +112,9 @@ TextureROMDef MENU_CURSOR_TX =
 
 	// palette number (0-3)
 	1,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef MENU_CURSOR_SPRITE =
@@ -131,7 +134,7 @@ BgmapSpriteROMDef MENU_CURSOR_SPRITE =
 	},
 
 	// bgmap mode (__WORLD_BGMAP, __WORLD_AFFINE, __WORLD_OBJECT or __WORLD_HBIAS)
-	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or BgmapSprite)
+	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or ObjectSprite)
 	__WORLD_BGMAP,
 
 	// pointer to affine / hbias manipulation function
@@ -147,30 +150,27 @@ BgmapSpriteROMDef* const MENU_CURSOR_SPRITES[] =
 	NULL
 };
 
-AnimatedInGameEntityROMDef MENU_CURSOR_AG =
+AnimatedEntityROMDef MENU_CURSOR_AG =
 {
 	{
-		{
-			__TYPE(AnimatedInGameEntity),
-			(SpriteROMDef**)MENU_CURSOR_SPRITES,
-		},
+		// class allocator
+		__TYPE(AnimatedEntity),
 
-		// collision detection gap (up, down, left, right)
-		{0, 0, 0, 0},
+		// sprites
+		(SpriteROMDef**)MENU_CURSOR_SPRITES,
 
-		// in game type
+		// collision shapes
+		(ShapeDefinition*)NULL,
+
+		// size
+		// if 0, width and height will be inferred from the first sprite's texture's size
+		{0, 0, 0},
+
+		// gameworld's character's type
 		0,
 
-		// width
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// height
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// depth
-		4
+		// physical specification
+		(PhysicalSpecification*)NULL,
 	},
 
 	// pointer to the animation definition for the item

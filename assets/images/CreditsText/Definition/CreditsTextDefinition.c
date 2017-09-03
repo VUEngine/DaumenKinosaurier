@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <libgccvb.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <BgmapAnimatedSprite.h>
 #include <AnimationState.h>
 #include <TitleScreenState.h>
@@ -139,6 +139,9 @@ TextureROMDef CREDITS_TEXT_TX =
 
 	// palette number (0-3)
 	1,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef CREDITS_TEXT_SPRITE =
@@ -158,7 +161,7 @@ BgmapSpriteROMDef CREDITS_TEXT_SPRITE =
 	},
 
 	// bgmap mode (__WORLD_BGMAP, __WORLD_AFFINE, __WORLD_OBJECT or __WORLD_HBIAS)
-	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or BgmapSprite)
+	// make sure to use the proper corresponding sprite type throughout the definition (BgmapSprite or ObjectSprite)
 	__WORLD_BGMAP,
 
 	// pointer to affine / hbias manipulation function
@@ -174,30 +177,27 @@ BgmapSpriteROMDef* const CREDITS_TEXT_SPRITES[] =
 	NULL
 };
 
-AnimatedInGameEntityROMDef CREDITS_TEXT_AG =
+AnimatedEntityROMDef CREDITS_TEXT_AG =
 {
 	{
-		{
-			__TYPE(AnimatedInGameEntity),
-			(SpriteROMDef**)CREDITS_TEXT_SPRITES,
-		},
+		// class allocator
+		__TYPE(AnimatedEntity),
 
-		// collision detection gap (up, down, left, right)
-		{0, 0, 0, 0},
+		// sprites
+		(SpriteROMDef**)CREDITS_TEXT_SPRITES,
 
-		// in game type
+		// collision shapes
+		(ShapeDefinition*)NULL,
+
+		// size
+		// if 0, width and height will be inferred from the first sprite's texture's size
+		{0, 0, 0},
+
+		// gameworld's character's type
 		0,
 
-		// width
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// height
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// depth
-		4
+		// physical specification
+		(PhysicalSpecification*)NULL,
 	},
 
 	// pointer to the animation definition for the item
@@ -207,30 +207,27 @@ AnimatedInGameEntityROMDef CREDITS_TEXT_AG =
 	"Default",
 };
 
-AnimatedInGameEntityROMDef CREDITS_TEXT_ALTERNATIVE_AG =
+AnimatedEntityROMDef CREDITS_TEXT_ALTERNATIVE_AG =
 {
 	{
-		{
-			__TYPE(AnimatedInGameEntity),
-			(SpriteROMDef**)CREDITS_TEXT_SPRITES,
-		},
+		// class allocator
+		__TYPE(AnimatedEntity),
 
-		// collision detection gap (up, down, left, right)
-		{0, 0, 0, 0},
+		// sprites
+		(SpriteROMDef**)CREDITS_TEXT_SPRITES,
 
-		// in game type
+		// collision shapes
+		(ShapeDefinition*)NULL,
+
+		// size
+		// if 0, width and height will be inferred from the first sprite's texture's size
+		{0, 0, 0},
+
+		// gameworld's character's type
 		0,
 
-		// width
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// height
-		// if 0, width and height will be inferred from the texture's size
-		0,
-
-		// depth
-		4
+		// physical specification
+		(PhysicalSpecification*)NULL,
 	},
 
 	// pointer to the animation definition for the item

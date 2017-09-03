@@ -64,8 +64,8 @@ __CLASS(AnimationState);
 
 #define AnimationState_ATTRIBUTES							        									\
         GameState_ATTRIBUTES																			\
-		AnimatedInGameEntity resumeButtonEntity;														\
-		AnimatedInGameEntity backButtonEntity;															\
+		AnimatedEntity resumeButtonEntity;														\
+		AnimatedEntity backButtonEntity;															\
 		bool isPaused;																					\
 		u8 currentSequence;																				\
 

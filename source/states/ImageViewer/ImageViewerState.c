@@ -33,7 +33,7 @@
 #include <KeypadManager.h>
 #include <MessageDispatcher.h>
 #include <TitleScreenState.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -134,32 +134,32 @@ static void ImageViewerState_enter(ImageViewerState this, void* owner __attribut
 	this->fadeInComplete = false;
 
 	// get entities
-	this->imageEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->imageEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Image",
 		false
 	));
-	this->titleEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->titleEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Title",
 		false
 	));
-	this->pauseButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->pauseButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Pause",
 		false
 	));
-	this->resumeButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->resumeButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Resume",
 		false
 	));
-	this->backButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->backButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Back",
 		false
 	));
-	this->framesButtonEntity = __SAFE_CAST(AnimatedInGameEntity, Container_getChildByName(
+	this->framesButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
 		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
 		"Frames",
 		false
@@ -193,12 +193,12 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			Game_disableKeypad(Game_getInstance());
 
 			// pause/resume animation
-			AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, this->imageEntity), true);
-			AnimatedInGameEntity_pauseAnimation(this->titleEntity, true);
-			AnimatedInGameEntity_pauseAnimation(this->pauseButtonEntity, true);
-			AnimatedInGameEntity_pauseAnimation(this->resumeButtonEntity, true);
-			AnimatedInGameEntity_pauseAnimation(this->backButtonEntity, true);
-			AnimatedInGameEntity_pauseAnimation(this->framesButtonEntity, true);
+			AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, this->imageEntity), true);
+			AnimatedEntity_pauseAnimation(this->titleEntity, true);
+			AnimatedEntity_pauseAnimation(this->pauseButtonEntity, true);
+			AnimatedEntity_pauseAnimation(this->resumeButtonEntity, true);
+			AnimatedEntity_pauseAnimation(this->backButtonEntity, true);
+			AnimatedEntity_pauseAnimation(this->framesButtonEntity, true);
 
 			// play sound
 			VBVec3D position = {192, 112, 0};
@@ -237,8 +237,8 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			}
 
 			// pause/resume animation
-			AnimatedInGameEntity_pauseAnimation(__SAFE_CAST(AnimatedInGameEntity, this->imageEntity), this->isPaused);
-			//AnimatedInGameEntity_pauseAnimation(this->titleEntity, this->isPaused);
+			AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, this->imageEntity), this->isPaused);
+			//AnimatedEntity_pauseAnimation(this->titleEntity, this->isPaused);
 
 			// play sound
 			VBVec3D position = {192, 112, 0};
@@ -276,7 +276,7 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 		}
 		else if(this->isPaused && (K_LL & userInput.pressedKey || K_RL & userInput.pressedKey))
 		{
-			AnimatedInGameEntity_previousFrame(this->imageEntity);
+			AnimatedEntity_previousFrame(this->imageEntity);
 			ImageViewerState_printFrameNumber(this);
 
 			// play sound
@@ -285,7 +285,7 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 		}
 		else if(this->isPaused && (K_LR & userInput.pressedKey || K_RR & userInput.pressedKey))
 		{
-			AnimatedInGameEntity_nextFrame(this->imageEntity);
+			AnimatedEntity_nextFrame(this->imageEntity);
 			ImageViewerState_printFrameNumber(this);
 
 			// play sound
@@ -301,19 +301,19 @@ void ImageViewerState_printAnimationName(ImageViewerState this)
 	{
 		case 0:
 		default:
-			AnimatedInGameEntity_playAnimation(this->titleEntity, "Volcano");
+			AnimatedEntity_playAnimation(this->titleEntity, "Volcano");
 			break;
 		case 1:
-			AnimatedInGameEntity_playAnimation(this->titleEntity, "Roooar");
+			AnimatedEntity_playAnimation(this->titleEntity, "Roooar");
 			break;
 		case 2:
-			AnimatedInGameEntity_playAnimation(this->titleEntity, "WalkCycle");
+			AnimatedEntity_playAnimation(this->titleEntity, "WalkCycle");
 			break;
 		case 3:
-			AnimatedInGameEntity_playAnimation(this->titleEntity, "Banana");
+			AnimatedEntity_playAnimation(this->titleEntity, "Banana");
 			break;
 		case 4:
-			AnimatedInGameEntity_playAnimation(this->titleEntity, "Extinction");
+			AnimatedEntity_playAnimation(this->titleEntity, "Extinction");
 			break;
 	}
 }
@@ -342,8 +342,8 @@ void ImageViewerState_playAnimation(ImageViewerState this)
 	CharSetManager_defragment(CharSetManager_getInstance());
 
 	// rewrite animation description and play loop animation
-	AnimatedInGameEntity_setAnimationDescription(this->imageEntity, ImageViewerState_getAnimationDescription(this));
-	AnimatedInGameEntity_playAnimation(this->imageEntity, ImageViewerState_getAnimationName(this));
+	AnimatedEntity_setAnimationDescription(this->imageEntity, ImageViewerState_getAnimationDescription(this));
+	AnimatedEntity_playAnimation(this->imageEntity, ImageViewerState_getAnimationName(this));
 
 	// force unpaused
 	this->isPaused = false;
@@ -443,8 +443,8 @@ void ImageViewerState_printFrameNumber(ImageViewerState this)
 {
 	ASSERT(this, "ImageViewerState::printFrameNumber: null this");
 
-	s8 actualFrame = AnimatedInGameEntity_getActualFrame(this->imageEntity) + 1;
-	int numberOfFrames = AnimatedInGameEntity_getNumberOfFrames(this->imageEntity);
+	s8 actualFrame = AnimatedEntity_getActualFrame(this->imageEntity) + 1;
+	int numberOfFrames = AnimatedEntity_getNumberOfFrames(this->imageEntity);
 
 	Printing_text(Printing_getInstance(), "00/00", 40, 7, NULL);
 	Printing_int(Printing_getInstance(), actualFrame, (actualFrame < 10) ? 41 : 40, 7, NULL);

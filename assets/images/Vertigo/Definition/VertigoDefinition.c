@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <libgccvb.h>
-#include <AnimatedInGameEntity.h>
+#include <AnimatedEntity.h>
 #include <BgmapAnimatedSprite.h>
 #include <AnimationState.h>
 
@@ -144,6 +144,9 @@ TextureROMDef VERTIGO_L_TX =
 
 	// palette number (0-3)
 	0,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef VERTIGO_L_SPRITE =
@@ -215,6 +218,9 @@ TextureROMDef VERTIGO_R_TX =
 
 	// palette number (0-3)
 	0,
+
+	// recyclable
+	false,
 };
 
 BgmapSpriteROMDef VERTIGO_R_SPRITE =
@@ -254,11 +260,11 @@ BgmapSpriteROMDef* const VERTIGO_SPRITES[] =
 	NULL
 };
 
-AnimatedInGameEntityROMDef VERTIGO_AG =
+AnimatedEntityROMDef VERTIGO_AG =
 {
 	{
 		{
-			__TYPE(AnimatedInGameEntity),
+			__TYPE(AnimatedEntity),
 			(SpriteROMDef**)VERTIGO_SPRITES,
 		},
 

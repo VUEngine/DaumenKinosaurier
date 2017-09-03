@@ -55,12 +55,12 @@ __CLASS(ImageViewerState);
 
 #define ImageViewerState_ATTRIBUTES							        									\
         GameState_ATTRIBUTES																			\
-		AnimatedInGameEntity imageEntity;																\
-		AnimatedInGameEntity titleEntity;																\
-		AnimatedInGameEntity pauseButtonEntity;															\
-		AnimatedInGameEntity resumeButtonEntity;														\
-		AnimatedInGameEntity backButtonEntity;															\
-		AnimatedInGameEntity framesButtonEntity;														\
+		AnimatedEntity imageEntity;																\
+		AnimatedEntity titleEntity;																\
+		AnimatedEntity pauseButtonEntity;															\
+		AnimatedEntity resumeButtonEntity;														\
+		AnimatedEntity backButtonEntity;															\
+		AnimatedEntity framesButtonEntity;														\
 		bool isPaused;																					\
 		bool fadeInComplete;																			\
 		u8 currentAnimation;																			\

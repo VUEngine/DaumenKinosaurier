@@ -47,7 +47,7 @@ const UserObject _userObjects[] =
 	{NULL, ""},
 };
 
-const UserAnimatedInGameEntity _userAnimatedInGameEntities[] =
+const UserAnimatedEntity _userAnimatedEntities[] =
 {
 	{NULL, ""},
 };
