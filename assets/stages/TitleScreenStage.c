@@ -83,15 +83,15 @@ extern EntityDefinition GALLERY_BUTTON_NEXT_AG;
 
 PositionedEntityROMDef TITLE_SCREEN_ST_CHILDREN[] =
 {
-	{&GALLERY_BUTTON_BACK_AG,	{FTOFIX19_13(354),  FTOFIX19_13(30), 	FTOFIX19_13(-0.001f)},  0, "Back", NULL, NULL, true},
-	{&GALLERY_BUTTON_NEXT_AG,	{FTOFIX19_13(354),  FTOFIX19_13(12), 	FTOFIX19_13(-0.001f)},  0, "Next", NULL, NULL, true},
-	{&GALLERY_BUTTON_PAUSE_AG,	{FTOFIX19_13(350),  FTOFIX19_13(12), 	FTOFIX19_13(-0.001f)},  0, "Pause", NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_AG,	{FTOFIX19_13(346),  FTOFIX19_13(12), 	FTOFIX19_13(-0.001f)},  0, "Resume", NULL, NULL, true},
-	{&COPYRIGHT_IM,				{FTOFIX19_13(192),  FTOFIX19_13(192), 	FTOFIX19_13(-0.001f)},	0, "Copyright", NULL, NULL, true},
-	{&LOGO_AG,					{FTOFIX19_13(86),  	FTOFIX19_13(54), 	FTOFIX19_13(-0.001f)},	0, "Logo", NULL, NULL, true},
-	{&MENU_IM,					{FTOFIX19_13(76),  	FTOFIX19_13(100), 	FTOFIX19_13(-0.001f)},	0, "Menu", NULL, NULL, true},
-	{&MENU_CURSOR_AG,			{FTOFIX19_13(18),  	FTOFIX19_13(108), 	FTOFIX19_13(-0.001f)},	0, "Cursor", NULL, NULL, true},
-	{&VOLCANO_AG,				{FTOFIX19_13(192),  FTOFIX19_13(112), 	FTOFIX19_13(0)},		0, "Image", NULL, NULL, true},
+	{&GALLERY_BUTTON_BACK_AG,	{__F_TO_FIX19_13(354),  __F_TO_FIX19_13(30), 	__F_TO_FIX19_13(-0.001f)},  0, "Back", NULL, NULL, true},
+	{&GALLERY_BUTTON_NEXT_AG,	{__F_TO_FIX19_13(354),  __F_TO_FIX19_13(12), 	__F_TO_FIX19_13(-0.001f)},  0, "Next", NULL, NULL, true},
+	{&GALLERY_BUTTON_PAUSE_AG,	{__F_TO_FIX19_13(350),  __F_TO_FIX19_13(12), 	__F_TO_FIX19_13(-0.001f)},  0, "Pause", NULL, NULL, true},
+	{&GALLERY_BUTTON_RESUME_AG,	{__F_TO_FIX19_13(346),  __F_TO_FIX19_13(12), 	__F_TO_FIX19_13(-0.001f)},  0, "Resume", NULL, NULL, true},
+	{&COPYRIGHT_IM,				{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(192), 	__F_TO_FIX19_13(-0.001f)},	0, "Copyright", NULL, NULL, true},
+	{&LOGO_AG,					{__F_TO_FIX19_13(86),  	__F_TO_FIX19_13(54), 	__F_TO_FIX19_13(-0.001f)},	0, "Logo", NULL, NULL, true},
+	{&MENU_IM,					{__F_TO_FIX19_13(76),  	__F_TO_FIX19_13(100), 	__F_TO_FIX19_13(-0.001f)},	0, "Menu", NULL, NULL, true},
+	{&MENU_CURSOR_AG,			{__F_TO_FIX19_13(18),  	__F_TO_FIX19_13(108), 	__F_TO_FIX19_13(-0.001f)},	0, "Cursor", NULL, NULL, true},
+	{&VOLCANO_AG,				{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},		0, "Image", NULL, NULL, true},
 
 	{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 };
@@ -172,11 +172,11 @@ StageROMDef TITLE_SCREEN_ST =
 		// screen's initial position inside the game world
         {
             // x
-            ITOFIX19_13(0),
+            __I_TO_FIX19_13(0),
             // y
-            ITOFIX19_13(0),
+            __I_TO_FIX19_13(0),
             // z
-            ITOFIX19_13(0)
+            __I_TO_FIX19_13(0)
         },
 	},
 
@@ -269,10 +269,10 @@ StageROMDef TITLE_SCREEN_ST =
         // since the VIP renders OBJ Worlds in reverse order (__SPT3 to __SPT0)
         {
             // __spt0
-        	ITOFIX19_13(0),
-    		ITOFIX19_13(0),
-    		ITOFIX19_13(0),
-    		ITOFIX19_13(0)
+        	__I_TO_FIX19_13(0),
+    		__I_TO_FIX19_13(0),
+    		__I_TO_FIX19_13(0),
+    		__I_TO_FIX19_13(0)
         },
 
         // optical configuration values
@@ -280,13 +280,13 @@ StageROMDef TITLE_SCREEN_ST =
     		// maximum view distance's power into the horizon
     		__MAXIMUM_VIEW_DISTANCE_POWER,
     		// distance of the eyes to the screen
-        	ITOFIX19_13(__DISTANCE_EYE_SCREEN),
+        	__I_TO_FIX19_13(__DISTANCE_EYE_SCREEN),
     		// distance from left to right eye (depth sensation)
-    		ITOFIX19_13(__BASE_FACTOR),
+    		__I_TO_FIX19_13(__BASE_FACTOR),
     		// horizontal view point center
-    		ITOFIX19_13(__HORIZONTAL_VIEW_POINT_CENTER),
+    		__I_TO_FIX19_13(__HORIZONTAL_VIEW_POINT_CENTER),
     		// vertical view point center
-    		ITOFIX19_13(__VERTICAL_VIEW_POINT_CENTER),
+    		__I_TO_FIX19_13(__VERTICAL_VIEW_POINT_CENTER),
         },
 	},
 
@@ -294,13 +294,13 @@ StageROMDef TITLE_SCREEN_ST =
     {
         // gravity
         {
-    	    ITOFIX19_13(0),
-    	    ITOFIX19_13(0),
-    	    ITOFIX19_13(0)
+    	    __I_TO_FIX19_13(0),
+    	    __I_TO_FIX19_13(0),
+    	    __I_TO_FIX19_13(0)
         },
 
         // friction
-        FTOFIX19_13(0),
+        __F_TO_FIX19_13(0),
     },
 
     // assets

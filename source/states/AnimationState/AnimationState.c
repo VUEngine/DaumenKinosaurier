@@ -222,7 +222,7 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			}
 
 			// play sound
-			VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+			VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 		}
 		else if(this->isPaused && (K_B & userInput.pressedKey))
@@ -231,7 +231,7 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			Game_disableKeypad(Game_getInstance());
 
 			// play sound
-			VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+			VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
 
 			// start fade out effect
@@ -277,19 +277,19 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// scream
 			if (currentFrame == 9)
 			{
-				VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), ROAR_SND, position);
 			}
 			// right step
 			else if (currentFrame == 27 || currentFrame == 35 || currentFrame == 43)
 			{
-				VBVec3D position = {FTOFIX19_13(44), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(44), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 31 || currentFrame == 39 || currentFrame == 47)
 			{
-				VBVec3D position = {FTOFIX19_13(344), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(344), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			break;
@@ -299,13 +299,13 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// right step
 			if (currentFrame == 3 || currentFrame == 11 || currentFrame == 19)
 			{
-				VBVec3D position = {FTOFIX19_13(44), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(44), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 7 || currentFrame == 15 || currentFrame == 23)
 			{
-				VBVec3D position = {FTOFIX19_13(344), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(344), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			break;
@@ -315,13 +315,13 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// right step
 			if (currentFrame == 2 || currentFrame == 10)
 			{
-				VBVec3D position = {FTOFIX19_13(44), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(44), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 6 || currentFrame == 14)
 			{
-				VBVec3D position = {FTOFIX19_13(344), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(344), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			break;
@@ -331,13 +331,13 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// right step
 			if (currentFrame == 0 || currentFrame == 8)
 			{
-				VBVec3D position = {FTOFIX19_13(44), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(44), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 4 || currentFrame == 12)
 			{
-				VBVec3D position = {FTOFIX19_13(344), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(344), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
 			}
 			break;
@@ -373,7 +373,7 @@ void AnimationState_playBanana(AnimationState this __attribute__ ((unused)))
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
-		{&BANANA_AG,	{FTOFIX19_13(192),  FTOFIX19_13(112), 	FTOFIX19_13(0)},    0, "Image", NULL, NULL, true},
+		{&BANANA_AG,	{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    0, "Image", NULL, NULL, true},
 		{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
@@ -397,7 +397,7 @@ void AnimationState_playRexRun(AnimationState this __attribute__ ((unused)))
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
-		{&REX_RUN_AG,	{FTOFIX19_13(192),  FTOFIX19_13(112), 	FTOFIX19_13(0)},    0, "Image", NULL, NULL, true},
+		{&REX_RUN_AG,	{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    0, "Image", NULL, NULL, true},
 		{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
@@ -421,7 +421,7 @@ void AnimationState_playVertigo(AnimationState this __attribute__ ((unused)))
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
-		{&VERTIGO_AG,	{FTOFIX19_13(192),  FTOFIX19_13(112), 	FTOFIX19_13(0)},    0, "Image", NULL, NULL, true},
+		{&VERTIGO_AG,	{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    0, "Image", NULL, NULL, true},
 		{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
@@ -445,7 +445,7 @@ void AnimationState_playVolcanoEnd(AnimationState this __attribute__ ((unused)))
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
-		{&VOLCANO_AG,	{FTOFIX19_13(192),  FTOFIX19_13(112), 	FTOFIX19_13(0)},    0, "Image", NULL, NULL, true},
+		{&VOLCANO_AG,	{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    0, "Image", NULL, NULL, true},
 		{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
@@ -457,13 +457,13 @@ void AnimationState_playVolcanoEnd(AnimationState this __attribute__ ((unused)))
 	Screen_startEffect(Screen_getInstance(), kShake, 800);
 
 	// play sound
-	VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+	VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 	SoundManager_playFxSound(SoundManager_getInstance(), CRASH_SND, position);
 
 	// play "ende" fade in animation
 	PositionedEntityROMDef endeEntity[] =
 	{
-		{&ENDE_AG,	{FTOFIX19_13(86), FTOFIX19_13(54), FTOFIX19_13(-0.001f)},	0, "Ende", NULL, NULL, true},
+		{&ENDE_AG,	{__F_TO_FIX19_13(86), __F_TO_FIX19_13(54), __F_TO_FIX19_13(-0.001f)},	0, "Ende", NULL, NULL, true},
 		{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage_addChildEntity(Game_getStage(Game_getInstance()), endeEntity, false);
@@ -483,7 +483,7 @@ void AnimationState_playCreditsText(AnimationState this __attribute__ ((unused))
 	// add credits entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
-		{&CREDITS_TEXT_AG,	{FTOFIX19_13(80),  FTOFIX19_13(74), 	FTOFIX19_13(0)},    0, "Credits", NULL, NULL, true},
+		{&CREDITS_TEXT_AG,	{__F_TO_FIX19_13(80),  __F_TO_FIX19_13(74), 	__F_TO_FIX19_13(0)},    0, "Credits", NULL, NULL, true},
 		{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);

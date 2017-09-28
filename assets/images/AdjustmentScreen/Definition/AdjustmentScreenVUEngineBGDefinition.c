@@ -198,6 +198,22 @@ BgmapSpriteROMDef* const ADJUSTMENT_SCREEN_VUENGINE_BG_IM_SPRITES[] =
 
 EntityROMDef ADJUSTMENT_SCREEN_VUENGINE_BG_IM =
 {
+	// class allocator
 	__TYPE(Entity),
-	(SpriteROMDef**) ADJUSTMENT_SCREEN_VUENGINE_BG_IM_SPRITES,
+
+	// sprites
+	(SpriteROMDef**)ADJUSTMENT_SCREEN_VUENGINE_BG_IM_SPRITES,
+
+	// collision shapes
+	(ShapeDefinition*)NULL,
+
+	// size
+	// if 0, width and height will be inferred from the first sprite's texture's size
+	{0, 0, 0},
+
+	// gameworld's character's type
+	0,
+
+	// physical specification
+	(PhysicalSpecification*)NULL,
 };

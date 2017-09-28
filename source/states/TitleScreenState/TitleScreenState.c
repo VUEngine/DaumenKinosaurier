@@ -180,7 +180,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					Game_disableKeypad(Game_getInstance());
 
 					// play sound
-					VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+					VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 					SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 
 					// start fade out effect
@@ -231,7 +231,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					));
 
 					// play sound
-					VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+					VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 					SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 
 					// play logo's fade out anim
@@ -296,7 +296,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				}
 
 				// play sound
-				VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 			}
 			else if((this->isPaused || (this->mode == kModePlaying && this->currentSelection == kMenuOptionCredits)) && (K_B & userInput.pressedKey))
@@ -305,7 +305,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				Game_disableKeypad(Game_getInstance());
 
 				// play sound
-				VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
 
 				// start fade out effect
@@ -343,7 +343,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				}
 
 				// play sound
-				VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+				VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 			}
 		}
@@ -355,7 +355,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				: (TITLE_SCREEN_MENU_OPTIONS - 1);
 
 			// adjust cursor position
-			VBVec3D position = {FTOFIX19_13(18), FTOFIX19_13(108 + (this->currentSelection * 12)), 0};
+			VBVec3D position = {__F_TO_FIX19_13(18), __F_TO_FIX19_13(108 + (this->currentSelection * 12)), 0};
 			Actor_setPosition(__SAFE_CAST(Actor, this->cursorEntity), &position);
 
 			// play sound
@@ -369,7 +369,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				: 0;
 
 			// adjust cursor position
-			VBVec3D position = {FTOFIX19_13(18), FTOFIX19_13(108 + (this->currentSelection * 12)), 0};
+			VBVec3D position = {__F_TO_FIX19_13(18), __F_TO_FIX19_13(108 + (this->currentSelection * 12)), 0};
 			Actor_setPosition(__SAFE_CAST(Actor, this->cursorEntity), &position);
 
 			// play sound
@@ -440,7 +440,7 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 			extern EntityDefinition CREDITS_TEXT_ALTERNATIVE_AG;
 			PositionedEntityROMDef positionedEntity[] =
 			{
-				{&CREDITS_TEXT_ALTERNATIVE_AG,	{FTOFIX19_13(80),  FTOFIX19_13(74), 	FTOFIX19_13(-0.003f)},    0, "CredText", NULL, NULL, true},
+				{&CREDITS_TEXT_ALTERNATIVE_AG,	{__F_TO_FIX19_13(80),  __F_TO_FIX19_13(74), 	__F_TO_FIX19_13(-0.003f)},    0, "CredText", NULL, NULL, true},
 				{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 			};
 			Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
@@ -488,7 +488,7 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 			// add image entity
 			PositionedEntityROMDef positionedEntity[] =
 			{
-				{&CREDITS_AG,	{FTOFIX19_13(192),  FTOFIX19_13(112), 	FTOFIX19_13(0)},    0, "Image", NULL, NULL, true},
+				{&CREDITS_AG,	{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    0, "Image", NULL, NULL, true},
 				{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 			};
 			Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);

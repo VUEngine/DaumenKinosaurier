@@ -175,7 +175,7 @@ void CreditsState_processUserInput(CreditsState this, UserInput userInput)
 			}
 
 			// play sound
-			VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+			VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 		}
 		else if(this->fadeInComplete && this->isPaused)
@@ -184,7 +184,7 @@ void CreditsState_processUserInput(CreditsState this, UserInput userInput)
 			Game_disableKeypad(Game_getInstance());
 
 			// play sound
-			VBVec3D position = {FTOFIX19_13(192), FTOFIX19_13(112), 0};
+			VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
 
 			// start fade out effect

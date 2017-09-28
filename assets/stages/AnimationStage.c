@@ -59,9 +59,9 @@ extern EntityDefinition GALLERY_BUTTON_BACK_AG;
 
 PositionedEntityROMDef ANIMATION_ST_CHILDREN[] =
 {
-	{&GALLERY_BUTTON_BACK_AG,	{FTOFIX19_13(354),  FTOFIX19_13(30), 	FTOFIX19_13(-0.001f)},  0, "Back", NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_AG,	{FTOFIX19_13(346),  FTOFIX19_13(12), 	FTOFIX19_13(-0.001f)},  0, "Resume", NULL, NULL, true},
-	{&REX_AG,					{FTOFIX19_13(192),  FTOFIX19_13(112), 	FTOFIX19_13(0)},    	0, "Image", NULL, NULL, true},
+	{&GALLERY_BUTTON_BACK_AG,	{__F_TO_FIX19_13(354),  __F_TO_FIX19_13(30), 	__F_TO_FIX19_13(-0.001f)},  0, "Back", NULL, NULL, true},
+	{&GALLERY_BUTTON_RESUME_AG,	{__F_TO_FIX19_13(346),  __F_TO_FIX19_13(12), 	__F_TO_FIX19_13(-0.001f)},  0, "Resume", NULL, NULL, true},
+	{&REX_AG,					{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    	0, "Image", NULL, NULL, true},
 
 	{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
 };
@@ -123,11 +123,11 @@ StageROMDef ANIMATION_ST =
 		// screen's initial position inside the game world
         {
             // x
-            ITOFIX19_13(0),
+            __I_TO_FIX19_13(0),
             // y
-            ITOFIX19_13(0),
+            __I_TO_FIX19_13(0),
             // z
-            ITOFIX19_13(0)
+            __I_TO_FIX19_13(0)
         },
 	},
 
@@ -220,10 +220,10 @@ StageROMDef ANIMATION_ST =
         // since the VIP renders OBJ Worlds in reverse order (__SPT3 to __SPT0)
         {
             // __spt0
-        	ITOFIX19_13(0),
-    		ITOFIX19_13(0),
-    		ITOFIX19_13(0),
-    		ITOFIX19_13(0)
+        	__I_TO_FIX19_13(0),
+    		__I_TO_FIX19_13(0),
+    		__I_TO_FIX19_13(0),
+    		__I_TO_FIX19_13(0)
         },
 
         // optical configuration values
@@ -231,13 +231,13 @@ StageROMDef ANIMATION_ST =
     		// maximum view distance's power into the horizon
     		__MAXIMUM_VIEW_DISTANCE_POWER,
     		// distance of the eyes to the screen
-        	ITOFIX19_13(__DISTANCE_EYE_SCREEN),
+        	__I_TO_FIX19_13(__DISTANCE_EYE_SCREEN),
     		// distance from left to right eye (depth sensation)
-    		ITOFIX19_13(__BASE_FACTOR),
+    		__I_TO_FIX19_13(__BASE_FACTOR),
     		// horizontal view point center
-    		ITOFIX19_13(__HORIZONTAL_VIEW_POINT_CENTER),
+    		__I_TO_FIX19_13(__HORIZONTAL_VIEW_POINT_CENTER),
     		// vertical view point center
-    		ITOFIX19_13(__VERTICAL_VIEW_POINT_CENTER),
+    		__I_TO_FIX19_13(__VERTICAL_VIEW_POINT_CENTER),
         },
 	},
 
@@ -245,13 +245,13 @@ StageROMDef ANIMATION_ST =
     {
         // gravity
         {
-    	    ITOFIX19_13(0),
-    	    ITOFIX19_13(0),
-    	    ITOFIX19_13(0)
+    	    __I_TO_FIX19_13(0),
+    	    __I_TO_FIX19_13(0),
+    	    __I_TO_FIX19_13(0)
         },
 
         // friction
-        FTOFIX19_13(0),
+        __F_TO_FIX19_13(0),
     },
 
     // assets

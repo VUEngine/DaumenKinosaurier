@@ -97,7 +97,7 @@ BgmapSpriteROMDef MENU_IM_SPRITE =
 		false,
 
 		// displacement
-		{0, FTOFIX19_13(20), 0, 0},
+		{0, __F_TO_FIX19_13(20), 0, 0},
 	},
 
 	// bgmap mode (__WORLD_BGMAP, __WORLD_AFFINE, __WORLD_OBJECT or __WORLD_HBIAS)
@@ -119,6 +119,22 @@ BgmapSpriteROMDef* const MENU_IM_SPRITES[] =
 
 EntityROMDef MENU_IM =
 {
+	// class allocator
 	__TYPE(Entity),
+
+	// sprites
 	(SpriteROMDef**)MENU_IM_SPRITES,
+
+	// collision shapes
+	(ShapeDefinition*)NULL,
+
+	// size
+	// if 0, width and height will be inferred from the first sprite's texture's size
+	{0, 0, 0},
+
+	// gameworld's character's type
+	0,
+
+	// physical specification
+	(PhysicalSpecification*)NULL,
 };
