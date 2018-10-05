@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <Game.h>
-#include <Screen.h>
+#include <Camera.h>
 #include <SoundManager.h>
 #include <CreditsState.h>
 #include <KeypadManager.h>
@@ -131,7 +131,7 @@ static void CreditsState_enter(CreditsState this, void* owner __attribute__ ((un
 	Entity_hide(__SAFE_CAST(Entity, this->backButtonEntity));
 
 	// show image
-	Screen_startEffect(Screen_getInstance(),
+	Camera_startEffect(Camera_getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
 		NULL, // target brightness
@@ -175,7 +175,7 @@ void CreditsState_processUserInput(CreditsState this, UserInput userInput)
 			}
 
 			// play sound
-			VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
+			Vector3D position = {192, 112, 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 		}
 		else if(this->fadeInComplete && this->isPaused)
@@ -184,12 +184,12 @@ void CreditsState_processUserInput(CreditsState this, UserInput userInput)
 			Game_disableKeypad(Game_getInstance());
 
 			// play sound
-			VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
+			Vector3D position = {192, 112, 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
 
 			// start fade out effect
 			Brightness brightness = (Brightness){0, 0, 0};
-			Screen_startEffect(Screen_getInstance(),
+			Camera_startEffect(Camera_getInstance(),
 				kFadeTo, // effect type
 				0, // initial delay (in ms)
 				&brightness, // target brightness
@@ -222,7 +222,7 @@ void CreditsState_execute(CreditsState this, void* owner __attribute__ ((unused)
 
 			// start fade out effect
 			Brightness brightness = (Brightness){0, 0, 0};
-			Screen_startEffect(Screen_getInstance(),
+			Camera_startEffect(Camera_getInstance(),
 				kFadeTo, // effect type
 				0, // initial delay (in ms)
 				&brightness, // target brightness

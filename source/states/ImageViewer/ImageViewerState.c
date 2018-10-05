@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <Game.h>
-#include <Screen.h>
+#include <Camera.h>
 #include <CharSetManager.h>
 #include <SoundManager.h>
 #include <Printing.h>
@@ -173,7 +173,7 @@ static void ImageViewerState_enter(ImageViewerState this, void* owner __attribut
 	Entity_hide(__SAFE_CAST(Entity, this->framesButtonEntity));
 
 	// start fade in effect
-	Screen_startEffect(Screen_getInstance(),
+	Camera_startEffect(Camera_getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
 		NULL, // target brightness
@@ -201,12 +201,12 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			AnimatedEntity_pauseAnimation(this->framesButtonEntity, true);
 
 			// play sound
-			VBVec3D position = {192, 112, 0};
+			Vector3D position = {192, 112, 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
 
 			// start fade out effect
 			Brightness brightness = (Brightness){0, 0, 0};
-			Screen_startEffect(Screen_getInstance(),
+			Camera_startEffect(Camera_getInstance(),
 				kFadeTo, // effect type
 				0, // initial delay (in ms)
 				&brightness, // target brightness
@@ -241,7 +241,7 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			//AnimatedEntity_pauseAnimation(this->titleEntity, this->isPaused);
 
 			// play sound
-			VBVec3D position = {192, 112, 0};
+			Vector3D position = {192, 112, 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 		}
 		else if(K_LT & userInput.pressedKey)
@@ -256,7 +256,7 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			ImageViewerState_playAnimation(this);
 
 			// play sound
-			VBVec3D position = {192, 112, 0};
+			Vector3D position = {192, 112, 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), BLIP_SND, position);
 		}
 		else if(K_RT & userInput.pressedKey)
@@ -271,7 +271,7 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			ImageViewerState_playAnimation(this);
 
 			// play sound
-			VBVec3D position = {192, 112, 0};
+			Vector3D position = {192, 112, 0};
 			SoundManager_playFxSound(SoundManager_getInstance(), BLIP_SND, position);
 		}
 		else if(this->isPaused && (K_LL & userInput.pressedKey || K_RL & userInput.pressedKey))
@@ -280,7 +280,7 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			ImageViewerState_printFrameNumber(this);
 
 			// play sound
-			//VBVec3D position = {192, 112, 0};
+			//Vector3D position = {192, 112, 0};
 			//SoundManager_playFxSound(SoundManager_getInstance(), BLIP_SND, position);
 		}
 		else if(this->isPaused && (K_LR & userInput.pressedKey || K_RR & userInput.pressedKey))
@@ -289,7 +289,7 @@ void ImageViewerState_processUserInput(ImageViewerState this, UserInput userInpu
 			ImageViewerState_printFrameNumber(this);
 
 			// play sound
-			//VBVec3D position = {192, 112, 0};
+			//Vector3D position = {192, 112, 0};
 			//SoundManager_playFxSound(SoundManager_getInstance(), BLIP_SND, position);
 		}
 	}
@@ -321,7 +321,7 @@ void ImageViewerState_printAnimationName(ImageViewerState this)
 void ImageViewerState_playAnimation(ImageViewerState this)
 {
 	// hide screen during transition
-	//Screen_startEffect(Screen_getInstance(), kHide);
+	//Camera_startEffect(Camera_getInstance(), kHide);
 
 	// get image entity sprites
 	VirtualList entitySprites = Entity_getSprites(__SAFE_CAST(Entity, this->imageEntity));
@@ -353,7 +353,7 @@ void ImageViewerState_playAnimation(ImageViewerState this)
 	ImageViewerState_clearFrameNumber(this);
 
 	// show screen again
-	//Screen_startEffect(Screen_getInstance(), kShow);
+	//Camera_startEffect(Camera_getInstance(), kShow);
 }
 
 TextureDefinition* ImageViewerState_getTexture(ImageViewerState this, u8 textureNumber)

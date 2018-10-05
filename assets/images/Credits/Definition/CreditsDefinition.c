@@ -113,7 +113,7 @@ TextureROMDef CREDITS_L_TX =
 	// number of frames, depending on charset's allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*, __NOT_ANIMATED: 1
 	// __ANIMATED_MULTI: total number of frames
-	__ANIMATED_SINGLE_OPTIMIZED,
+	1,
 
 	// palette number (0-3)
 	0,
@@ -187,7 +187,7 @@ TextureROMDef CREDITS_R_TX =
 	// number of frames, depending on charset's allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*, __NOT_ANIMATED: 1
 	// __ANIMATED_MULTI: total number of frames
-	__ANIMATED_SINGLE_OPTIMIZED,
+	1,
 
 	// palette number (0-3)
 	0,

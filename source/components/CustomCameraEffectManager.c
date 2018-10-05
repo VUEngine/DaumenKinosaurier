@@ -24,8 +24,8 @@
 //												INCLUDES
 //---------------------------------------------------------------------------------------------------------
 
-#include <CustomScreenEffectManager.h>
-#include <Screen.h>
+#include <CustomCameraEffectManager.h>
+#include <Camera.h>
 #include <MessageDispatcher.h>
 #include <Actor.h>
 #include <Game.h>
@@ -40,25 +40,25 @@
 //											CLASS'S DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-__CLASS_DEFINITION(CustomScreenEffectManager, ScreenEffectManager);
-__CLASS_FRIEND_DEFINITION(Screen);
+__CLASS_DEFINITION(CustomCameraEffectManager, CameraEffectManager);
+__CLASS_FRIEND_DEFINITION(Camera);
 
 
 //---------------------------------------------------------------------------------------------------------
 //												PROTOTYPES
 //---------------------------------------------------------------------------------------------------------
 
-static void CustomScreenEffectManager_constructor(CustomScreenEffectManager this);
-static void CustomScreenEffectManager_FXShakeStart(CustomScreenEffectManager this, u16 duration);
-void CustomScreenEffectManager_FXShakeStop(CustomScreenEffectManager this);
-static void CustomScreenEffectManager_onScreenShake(CustomScreenEffectManager this);
+static void CustomCameraEffectManager_constructor(CustomCameraEffectManager this);
+static void CustomCameraEffectManager_FXShakeStart(CustomCameraEffectManager this, u16 duration);
+void CustomCameraEffectManager_FXShakeStop(CustomCameraEffectManager this);
+static void CustomCameraEffectManager_onCameraShake(CustomCameraEffectManager this);
 
 
 //---------------------------------------------------------------------------------------------------------
 //												GLOBALS
 //---------------------------------------------------------------------------------------------------------
 
-static Screen _screen = NULL;
+static Camera _camera = NULL;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -66,15 +66,15 @@ static Screen _screen = NULL;
 //---------------------------------------------------------------------------------------------------------
 
 // it's a singleton
-__SINGLETON(CustomScreenEffectManager);
+__SINGLETON(CustomCameraEffectManager);
 
 // class's constructor
-static void __attribute__ ((noinline)) CustomScreenEffectManager_constructor(CustomScreenEffectManager this)
+static void __attribute__ ((noinline)) CustomCameraEffectManager_constructor(CustomCameraEffectManager this)
 {
-	ASSERT(this, "CustomScreenEffectManager::constructor: null this");
+	ASSERT(this, "CustomCameraEffectManager::constructor: null this");
 
 	// construct base object
-	__CONSTRUCT_BASE(ScreenEffectManager);
+	__CONSTRUCT_BASE(CameraEffectManager);
 
 	this->lastShakeOffset.x = 0;
 	this->lastShakeOffset.y = 0;
@@ -82,80 +82,80 @@ static void __attribute__ ((noinline)) CustomScreenEffectManager_constructor(Cus
 
 	this->shakeTimeLeft = 0;
 
-	_screen = Screen_getInstance();
+	_camera = Camera_getInstance();
 
-	NM_ASSERT(_screen, "CustomScreenEffectManager::constructor: null _screen");
+	NM_ASSERT(_camera, "CustomCameraEffectManager::constructor: null _camera");
 }
 
 // class's destructor
-void CustomScreenEffectManager_destructor(CustomScreenEffectManager this)
+void CustomCameraEffectManager_destructor(CustomCameraEffectManager this)
 {
-	ASSERT(this, "CustomScreenEffectManager::destructor: null this");
+	ASSERT(this, "CustomCameraEffectManager::destructor: null this");
 
 	// destroy base
 	__SINGLETON_DESTROY;
 }
 
-void CustomScreenEffectManager_startEffect(CustomScreenEffectManager this, int effect, va_list args)
+void CustomCameraEffectManager_startEffect(CustomCameraEffectManager this, int effect, va_list args)
 {
-	ASSERT(this, "CustomScreenEffectManager::startEffect: null this");
+	ASSERT(this, "CustomCameraEffectManager::startEffect: null this");
 
 	switch(effect)
 	{
 		case kShake:
 
-			CustomScreenEffectManager_FXShakeStart(this, va_arg(args, int));
+			CustomCameraEffectManager_FXShakeStart(this, va_arg(args, int));
 			break;
 
 		default:
 
-			ScreenEffectManager_startEffect(ScreenEffectManager_getInstance(), effect, args);
+			CameraEffectManager_startEffect(CameraEffectManager_getInstance(), effect, args);
 			break;
 	}
 }
 
-void CustomScreenEffectManager_stopEffect(CustomScreenEffectManager this, int effect)
+void CustomCameraEffectManager_stopEffect(CustomCameraEffectManager this, int effect)
 {
-	ASSERT(this, "CustomScreenEffectManager::stopEffect: null this");
+	ASSERT(this, "CustomCameraEffectManager::stopEffect: null this");
 
 	switch(effect)
 	{
 		case kShake:
 
-			CustomScreenEffectManager_FXShakeStop(this);
+			CustomCameraEffectManager_FXShakeStop(this);
 			break;
 
 		default:
 
-			__CALL_BASE_METHOD(ScreenEffectManager, stopEffect, this, effect);
+			__CALL_BASE_METHOD(CameraEffectManager, stopEffect, this, effect);
 			break;
 	}
 }
 
-bool CustomScreenEffectManager_handleMessage(CustomScreenEffectManager this, Telegram telegram)
+bool CustomCameraEffectManager_handleMessage(CustomCameraEffectManager this, Telegram telegram)
 {
-	ASSERT(this, "CustomScreenEffectManager::handleMessage: null this");
+	ASSERT(this, "CustomCameraEffectManager::handleMessage: null this");
 
 	switch(Telegram_getMessage(telegram))
 	{
 		case kShake:
 
-			CustomScreenEffectManager_onScreenShake(this);
+			CustomCameraEffectManager_onCameraShake(this);
 			break;
 	}
 
 	return false;
 }
 
-// start shaking the screen
-static void CustomScreenEffectManager_FXShakeStart(CustomScreenEffectManager this, u16 duration)
+// start shaking the camera
+static void CustomCameraEffectManager_FXShakeStart(CustomCameraEffectManager this, u16 duration)
 {
-	ASSERT(this, "CustomScreenEffectManager::FXShakeStart: null this");
+	ASSERT(this, "CustomCameraEffectManager::FXShakeStart: null this");
 
 	// set desired fx duration
 	this->shakeTimeLeft = duration;
 
-	this->lastShakeOffset.x = __I_TO_FIX19_13(SHAKE_OFFSET);
+	this->lastShakeOffset.x = __PIXELS_TO_METERS(SHAKE_OFFSET);
 
 	// discard pending messages from previously started fx
 	MessageDispatcher_discardDelayedMessagesFromSender(MessageDispatcher_getInstance(), __SAFE_CAST(Object, this), kShake);
@@ -164,18 +164,18 @@ static void CustomScreenEffectManager_FXShakeStart(CustomScreenEffectManager thi
 	MessageDispatcher_dispatchMessage(0, __SAFE_CAST(Object, this), __SAFE_CAST(Object, this), kShake, NULL);
 }
 
-// stop shaking the _screen
-void CustomScreenEffectManager_FXShakeStop(CustomScreenEffectManager this)
+// stop shaking the _camera
+void CustomCameraEffectManager_FXShakeStop(CustomCameraEffectManager this)
 {
-	ASSERT(this, "CustomScreenEffectManager::FXShakeStop: null this");
+	ASSERT(this, "CustomCameraEffectManager::FXShakeStop: null this");
 
 	this->shakeTimeLeft = 0;
 }
 
-// shake the _screen
-static void CustomScreenEffectManager_onScreenShake(CustomScreenEffectManager this)
+// shake the camera
+static void CustomCameraEffectManager_onCameraShake(CustomCameraEffectManager this)
 {
-	ASSERT(this, "CustomScreenEffectManager::onScreenShake: null this");
+	ASSERT(this, "CustomCameraEffectManager::onCameraShake: null this");
 
 	// stop if no shaking time left
 	if(this->shakeTimeLeft == 0)
@@ -186,9 +186,9 @@ static void CustomScreenEffectManager_onScreenShake(CustomScreenEffectManager th
 			this->lastShakeOffset.x = 0;
 		}
 
-		// center screen
-		VBVec3D position = {0, 0, 0};
-		Screen_setPosition(_screen, position);
+		// center camera
+		Vector3D position = {0, 0, 0};
+		Camera_setPosition(_camera, position);
 
 		return;
 	}
@@ -203,9 +203,9 @@ static void CustomScreenEffectManager_onScreenShake(CustomScreenEffectManager th
 	// new offset
 	this->lastShakeOffset.x = -this->lastShakeOffset.x;
 
-	// move screen a bit
-	Screen_move(_screen, this->lastShakeOffset, false);
+	// move camera a bit
+	Camera_move(_camera, this->lastShakeOffset, false);
 
-	// send message for next screen movement
+	// send message for next camera movement
 	MessageDispatcher_dispatchMessage(nextShakeDelay, __SAFE_CAST(Object, this), __SAFE_CAST(Object, this), kShake, NULL);
 }

@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include <Game.h>
-#include <Screen.h>
+#include <Camera.h>
 #include <Actor.h>
 #include <SoundManager.h>
 #include <MessageDispatcher.h>
@@ -155,7 +155,7 @@ static void TitleScreenState_enter(TitleScreenState this, void* owner __attribut
 	Entity_hide(__SAFE_CAST(Entity, this->nextButtonEntity));
 
 	// start fade in effect
-	Screen_startEffect(Screen_getInstance(),
+	Camera_startEffect(Camera_getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
 		NULL, // target brightness
@@ -180,12 +180,12 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					Game_disableKeypad(Game_getInstance());
 
 					// play sound
-					VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
+					Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
 					SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 
 					// start fade out effect
 					Brightness brightness = (Brightness){0, 0, 0};
-					Screen_startEffect(Screen_getInstance(),
+					Camera_startEffect(Camera_getInstance(),
 						kFadeTo, // effect type
 						0, // initial delay (in ms)
 						&brightness, // target brightness
@@ -206,7 +206,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 						false
 					));
 
-					Entity_releaseSprites(copyright, true);
+					Entity_releaseSprites(copyright);
 					Container_deleteMyself(__SAFE_CAST(Container, copyright));
 
 					// delete menu
@@ -216,7 +216,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 						false
 					));
 
-					Entity_releaseSprites(menu, true);
+					Entity_releaseSprites(menu);
 					Container_deleteMyself(__SAFE_CAST(Container, menu));
 
 					// delete cursor
@@ -231,7 +231,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 					));
 
 					// play sound
-					VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
+					Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
 					SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 
 					// play logo's fade out anim
@@ -296,7 +296,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				}
 
 				// play sound
-				VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
+				Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 			}
 			else if((this->isPaused || (this->mode == kModePlaying && this->currentSelection == kMenuOptionCredits)) && (K_B & userInput.pressedKey))
@@ -305,12 +305,12 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				Game_disableKeypad(Game_getInstance());
 
 				// play sound
-				VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
+				Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
 
 				// start fade out effect
 				Brightness brightness = (Brightness){0, 0, 0};
-				Screen_startEffect(Screen_getInstance(),
+				Camera_startEffect(Camera_getInstance(),
 					kFadeTo, // effect type
 					0, // initial delay (in ms)
 					&brightness, // target brightness
@@ -343,7 +343,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				}
 
 				// play sound
-				VBVec3D position = {__F_TO_FIX19_13(192), __F_TO_FIX19_13(112), 0};
+				Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
 				SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
 			}
 		}
@@ -355,7 +355,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				: (TITLE_SCREEN_MENU_OPTIONS - 1);
 
 			// adjust cursor position
-			VBVec3D position = {__F_TO_FIX19_13(18), __F_TO_FIX19_13(108 + (this->currentSelection * 12)), 0};
+			Vector3D position = {__PIXELS_TO_METERS(18), __PIXELS_TO_METERS(108 + (this->currentSelection * 12)), 0};
 			Actor_setPosition(__SAFE_CAST(Actor, this->cursorEntity), &position);
 
 			// play sound
@@ -369,7 +369,7 @@ void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInpu
 				: 0;
 
 			// adjust cursor position
-			VBVec3D position = {__F_TO_FIX19_13(18), __F_TO_FIX19_13(108 + (this->currentSelection * 12)), 0};
+			Vector3D position = {__PIXELS_TO_METERS(18), __PIXELS_TO_METERS(108 + (this->currentSelection * 12)), 0};
 			Actor_setPosition(__SAFE_CAST(Actor, this->cursorEntity), &position);
 
 			// play sound
@@ -418,7 +418,7 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 						false
 					));
 
-					Entity_releaseSprites(logo, true);
+					Entity_releaseSprites(logo);
 					Container_deleteMyself(__SAFE_CAST(Container, logo));
 
 					// delayed adding of credits text entity
@@ -440,8 +440,8 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 			extern EntityDefinition CREDITS_TEXT_ALTERNATIVE_AG;
 			PositionedEntityROMDef positionedEntity[] =
 			{
-				{&CREDITS_TEXT_ALTERNATIVE_AG,	{__F_TO_FIX19_13(80),  __F_TO_FIX19_13(74), 	__F_TO_FIX19_13(-0.003f)},    0, "CredText", NULL, NULL, true},
-				{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
+				{&CREDITS_TEXT_ALTERNATIVE_AG, {80, 74, -0.003f, 0}, 0, "CredText", NULL, NULL, true},
+				{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
 			};
 			Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
 
@@ -472,7 +472,7 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 				false
 			));
 
-			Entity_releaseSprites(image, true);
+			Entity_releaseSprites(image);
 			Container_deleteMyself(__SAFE_CAST(Container, image));
 
 			// delete credits entity
@@ -482,14 +482,14 @@ bool TitleScreenState_handleMessage(TitleScreenState this __attribute__ ((unused
 				false
 			));
 
-			Entity_releaseSprites(creditsText, true);
+			Entity_releaseSprites(creditsText);
 			Container_deleteMyself(__SAFE_CAST(Container, creditsText));
 
 			// add image entity
 			PositionedEntityROMDef positionedEntity[] =
 			{
-				{&CREDITS_AG,	{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    0, "Image", NULL, NULL, true},
-				{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
+				{&CREDITS_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
+				{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
 			};
 			Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
 
@@ -546,7 +546,7 @@ void TitleScreenState_onAFlipbookByComplete(TitleScreenState this)
 
 	// start fade out effect
 	Brightness brightness = (Brightness){0, 0, 0};
-	Screen_startEffect(Screen_getInstance(),
+	Camera_startEffect(Camera_getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
 		&brightness, // target brightness

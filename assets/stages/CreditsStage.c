@@ -64,12 +64,12 @@ extern EntityDefinition GALLERY_BUTTON_BACK_AG;
 
 PositionedEntityROMDef CREDITS_ST_CHILDREN[] =
 {
-	{&GALLERY_BUTTON_BACK_AG,	{__F_TO_FIX19_13(354),  __F_TO_FIX19_13(30), 	__F_TO_FIX19_13(-0.001f)},  0, "Back", NULL, NULL, true},
-	{&GALLERY_BUTTON_PAUSE_AG,	{__F_TO_FIX19_13(350),  __F_TO_FIX19_13(12), 	__F_TO_FIX19_13(-0.001f)},  0, "Pause", NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_AG,	{__F_TO_FIX19_13(346),  __F_TO_FIX19_13(12), 	__F_TO_FIX19_13(-0.001f)},  0, "Resume", NULL, NULL, true},
-	{&CREDITS_AG,				{__F_TO_FIX19_13(192),  __F_TO_FIX19_13(112), 	__F_TO_FIX19_13(0)},    	0, "Image", NULL, NULL, true},
+	{&GALLERY_BUTTON_BACK_AG,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
+	{&GALLERY_BUTTON_PAUSE_AG,	{350,  12, -0.001f, 0}, 0, "Pause",  NULL, NULL, true},
+	{&GALLERY_BUTTON_RESUME_AG,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
+	{&CREDITS_AG,				{192, 112,       0, 0},	0, "Image",  NULL, NULL, true},
 
-	{NULL,{0,0,0}, 0, NULL, NULL, NULL, false},
+	{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
 };
 
 
@@ -118,6 +118,9 @@ TextureDefinition* const CREDITS_ST_TEXTURES[] =
 
 StageROMDef CREDITS_ST =
 {
+	// allocator
+	__TYPE(Stage),
+
 	// level
 	{
         // size
@@ -130,15 +133,33 @@ StageROMDef CREDITS_ST =
             __SCREEN_DEPTH,
         },
 
-		// screen's initial position inside the game world
+		// camera's initial position inside the game world
         {
             // x
-            __I_TO_FIX19_13(0),
+            0,
             // y
-            __I_TO_FIX19_13(0),
+            0,
             // z
-            __I_TO_FIX19_13(0)
+            0,
+			// p
+			0,
         },
+
+		// camera's frustum
+		{
+			// x0
+			0,
+			// y0
+			0,
+			// z0
+			-10,
+			// x1
+			__SCREEN_WIDTH,
+			// y1
+			__SCREEN_HEIGHT,
+			// z1
+			__SCREEN_WIDTH * 5,
+		},
 	},
 
     // streaming
@@ -151,6 +172,8 @@ StageROMDef CREDITS_ST =
 		24,
 		// particle removal delay cycles
 		0,
+		// deferred
+		false,
 	},
 
 	// rendering
@@ -229,25 +252,31 @@ StageROMDef CREDITS_ST =
         // Note that each SPT's z coordinate much be larger than or equal to the previous one's,
         // since the VIP renders OBJ Worlds in reverse order (__SPT3 to __SPT0)
         {
-            // __spt0
-        	__I_TO_FIX19_13(0),
-    		__I_TO_FIX19_13(0),
-    		__I_TO_FIX19_13(0),
-    		__I_TO_FIX19_13(0)
+			// __spt0
+			__F_TO_FIX10_6(0),
+			// __spt1
+			__F_TO_FIX10_6(0),
+			// __spt2
+			__F_TO_FIX10_6(0),
+			// __spt3
+			__F_TO_FIX10_6(0),
         },
 
         // optical configuration values
         {
-    		// maximum view distance's power into the horizon
-    		__MAXIMUM_VIEW_DISTANCE_POWER,
-    		// distance of the eyes to the screen
-        	__I_TO_FIX19_13(__DISTANCE_EYE_SCREEN),
-    		// distance from left to right eye (depth sensation)
-    		__I_TO_FIX19_13(__BASE_FACTOR),
-    		// horizontal view point center
-    		__I_TO_FIX19_13(__HORIZONTAL_VIEW_POINT_CENTER),
-    		// vertical view point center
-    		__I_TO_FIX19_13(__VERTICAL_VIEW_POINT_CENTER),
+			// maximum view distance's power
+			__MAXIMUM_X_VIEW_DISTANCE,
+			__MAXIMUM_Y_VIEW_DISTANCE,
+			// distance of the eyes to the screen
+			__DISTANCE_EYE_SCREEN,
+			// distance from left to right eye (depth sensation)
+			__BASE_FACTOR,
+			// horizontal view point center
+			__HORIZONTAL_VIEW_POINT_CENTER,
+			// vertical view point center
+			__VERTICAL_VIEW_POINT_CENTER,
+			// scaling factor
+			__SCALING_MODIFIER_FACTOR,
         },
 	},
 
@@ -255,13 +284,13 @@ StageROMDef CREDITS_ST =
     {
         // gravity
         {
-    	    __I_TO_FIX19_13(0),
-    	    __I_TO_FIX19_13(0),
-    	    __I_TO_FIX19_13(0)
+    	    __F_TO_FIX10_6(0),
+    	    __F_TO_FIX10_6(0),
+    	    __F_TO_FIX10_6(0),
         },
 
         // friction
-        __F_TO_FIX19_13(0),
+        __F_TO_FIX10_6(0),
     },
 
     // assets
