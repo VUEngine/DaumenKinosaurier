@@ -1,7 +1,7 @@
 /* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev<jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -28,6 +28,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <GameState.h>
+#include <AnimatedEntity.h>
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -61,42 +62,25 @@ enum TitleScreenStateModes
 // 											CLASS'S DECLARATION
 //---------------------------------------------------------------------------------------------------------
 
-// declare the virtual methods
-#define TitleScreenState_METHODS(ClassName)																\
-		GameState_METHODS(ClassName)																	\
+singleton class TitleScreenState : GameState
+{
+	AnimatedEntity cursorEntity;
+	AnimatedEntity pauseButtonEntity;
+	AnimatedEntity resumeButtonEntity;
+	AnimatedEntity backButtonEntity;
+	AnimatedEntity nextButtonEntity;
+	bool fadeInComplete;
+	bool isPaused;
+	u8 currentSelection;
+	u8 currentCreditsFrame;
+	u8 mode;
 
-// declare the virtual methods which are redefined
-#define TitleScreenState_SET_VTABLE(ClassName)															\
-		GameState_SET_VTABLE(ClassName)																	\
-		__VIRTUAL_SET(ClassName, TitleScreenState, enter);												\
-		__VIRTUAL_SET(ClassName, TitleScreenState, handleMessage);										\
-		__VIRTUAL_SET(ClassName, TitleScreenState, processUserInput);									\
-
-__CLASS(TitleScreenState);
-
-#define TitleScreenState_ATTRIBUTES																		\
-		GameState_ATTRIBUTES																			\
-		AnimatedEntity cursorEntity;																\
-		AnimatedEntity pauseButtonEntity;															\
-		AnimatedEntity resumeButtonEntity;														\
-		AnimatedEntity backButtonEntity;															\
-		AnimatedEntity nextButtonEntity;															\
-		bool fadeInComplete;																			\
-		bool isPaused;																					\
-		u8 currentSelection;																			\
-		u8 currentCreditsFrame;																			\
-		u8 mode;																						\
-
-
-//---------------------------------------------------------------------------------------------------------
-// 										PUBLIC INTERFACE
-//---------------------------------------------------------------------------------------------------------
-
-TitleScreenState TitleScreenState_getInstance(void);
-void TitleScreenState_processUserInput(TitleScreenState this, UserInput userInput);
-bool TitleScreenState_handleMessage(TitleScreenState this, Telegram telegram);
-void TitleScreenState_onAFlipbookByComplete(TitleScreenState this);
-void TitleScreenState_playCreditsAnimation(TitleScreenState this);
+	static TitleScreenState getInstance();
+	override void processUserInput(UserInput userInput);
+	override bool handleMessage(Telegram telegram);
+	void onAFlipbookByComplete();
+	void playCreditsAnimation();
+}
 
 
 #endif

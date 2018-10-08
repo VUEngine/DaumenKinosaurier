@@ -1,7 +1,7 @@
 /* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev<jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -33,25 +33,12 @@
 #include <Utilities.h>
 #include <VIPManager.h>
 
-#include <debugConfig.h>
-
 
 //---------------------------------------------------------------------------------------------------------
 //											CLASS'S DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-__CLASS_DEFINITION(CustomCameraEffectManager, CameraEffectManager);
-__CLASS_FRIEND_DEFINITION(Camera);
-
-
-//---------------------------------------------------------------------------------------------------------
-//												PROTOTYPES
-//---------------------------------------------------------------------------------------------------------
-
-static void CustomCameraEffectManager_constructor(CustomCameraEffectManager this);
-static void CustomCameraEffectManager_FXShakeStart(CustomCameraEffectManager this, u16 duration);
-void CustomCameraEffectManager_FXShakeStop(CustomCameraEffectManager this);
-static void CustomCameraEffectManager_onCameraShake(CustomCameraEffectManager this);
+friend class Camera;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -65,16 +52,11 @@ static Camera _camera = NULL;
 //												CLASS'S METHODS
 //---------------------------------------------------------------------------------------------------------
 
-// it's a singleton
-__SINGLETON(CustomCameraEffectManager);
-
 // class's constructor
-static void __attribute__ ((noinline)) CustomCameraEffectManager_constructor(CustomCameraEffectManager this)
+void CustomCameraEffectManager::constructor()
 {
-	ASSERT(this, "CustomCameraEffectManager::constructor: null this");
-
 	// construct base object
-	__CONSTRUCT_BASE(CameraEffectManager);
+	Base::constructor();
 
 	this->lastShakeOffset.x = 0;
 	this->lastShakeOffset.y = 0;
@@ -82,65 +64,56 @@ static void __attribute__ ((noinline)) CustomCameraEffectManager_constructor(Cus
 
 	this->shakeTimeLeft = 0;
 
-	_camera = Camera_getInstance();
+	_camera = Camera::getInstance();
 
 	NM_ASSERT(_camera, "CustomCameraEffectManager::constructor: null _camera");
 }
 
 // class's destructor
-void CustomCameraEffectManager_destructor(CustomCameraEffectManager this)
+void CustomCameraEffectManager::destructor()
 {
-	ASSERT(this, "CustomCameraEffectManager::destructor: null this");
-
-	// destroy base
-	__SINGLETON_DESTROY;
+	Base::destructor();
 }
 
-void CustomCameraEffectManager_startEffect(CustomCameraEffectManager this, int effect, va_list args)
+void CustomCameraEffectManager::startEffect(int effect, va_list args)
 {
-	ASSERT(this, "CustomCameraEffectManager::startEffect: null this");
-
 	switch(effect)
 	{
 		case kShake:
 
-			CustomCameraEffectManager_FXShakeStart(this, va_arg(args, int));
+			CustomCameraEffectManager::fxShakeStart(this, va_arg(args, int));
 			break;
 
 		default:
 
-			CameraEffectManager_startEffect(CameraEffectManager_getInstance(), effect, args);
+			CameraEffectManager::startEffect(CameraEffectManager::getInstance(), effect, args);
 			break;
 	}
 }
 
-void CustomCameraEffectManager_stopEffect(CustomCameraEffectManager this, int effect)
+void CustomCameraEffectManager::stopEffect(int effect)
 {
-	ASSERT(this, "CustomCameraEffectManager::stopEffect: null this");
-
 	switch(effect)
 	{
 		case kShake:
 
-			CustomCameraEffectManager_FXShakeStop(this);
+			CustomCameraEffectManager::fxShakeStop(this);
 			break;
 
 		default:
 
-			__CALL_BASE_METHOD(CameraEffectManager, stopEffect, this, effect);
+			CameraEffectManager::stopEffect(this, effect);
 			break;
 	}
 }
 
-bool CustomCameraEffectManager_handleMessage(CustomCameraEffectManager this, Telegram telegram)
+bool CustomCameraEffectManager::handleMessage(Telegram telegram)
 {
-	ASSERT(this, "CustomCameraEffectManager::handleMessage: null this");
-
-	switch(Telegram_getMessage(telegram))
+	switch(Telegram::getMessage(telegram))
 	{
 		case kShake:
 
-			CustomCameraEffectManager_onCameraShake(this);
+			CustomCameraEffectManager::onCameraShake(this);
 			break;
 	}
 
@@ -148,35 +121,29 @@ bool CustomCameraEffectManager_handleMessage(CustomCameraEffectManager this, Tel
 }
 
 // start shaking the camera
-static void CustomCameraEffectManager_FXShakeStart(CustomCameraEffectManager this, u16 duration)
+void CustomCameraEffectManager::fxShakeStart(u16 duration)
 {
-	ASSERT(this, "CustomCameraEffectManager::FXShakeStart: null this");
-
 	// set desired fx duration
 	this->shakeTimeLeft = duration;
 
 	this->lastShakeOffset.x = __PIXELS_TO_METERS(SHAKE_OFFSET);
 
 	// discard pending messages from previously started fx
-	MessageDispatcher_discardDelayedMessagesFromSender(MessageDispatcher_getInstance(), __SAFE_CAST(Object, this), kShake);
+	MessageDispatcher::discardDelayedMessagesFromSender(MessageDispatcher::getInstance(), Object::safeCast(this), kShake);
 
 	// instantly send message to self to start fx
-	MessageDispatcher_dispatchMessage(0, __SAFE_CAST(Object, this), __SAFE_CAST(Object, this), kShake, NULL);
+	MessageDispatcher::dispatchMessage(0, Object::safeCast(this), Object::safeCast(this), kShake, NULL);
 }
 
 // stop shaking the _camera
-void CustomCameraEffectManager_FXShakeStop(CustomCameraEffectManager this)
+void CustomCameraEffectManager::fxShakeStop()
 {
-	ASSERT(this, "CustomCameraEffectManager::FXShakeStop: null this");
-
 	this->shakeTimeLeft = 0;
 }
 
 // shake the camera
-static void CustomCameraEffectManager_onCameraShake(CustomCameraEffectManager this)
+void CustomCameraEffectManager::onCameraShake()
 {
-	ASSERT(this, "CustomCameraEffectManager::onCameraShake: null this");
-
 	// stop if no shaking time left
 	if(this->shakeTimeLeft == 0)
 	{
@@ -188,7 +155,7 @@ static void CustomCameraEffectManager_onCameraShake(CustomCameraEffectManager th
 
 		// center camera
 		Vector3D position = {0, 0, 0};
-		Camera_setPosition(_camera, position);
+		Camera::setPosition(_camera, position);
 
 		return;
 	}
@@ -204,8 +171,8 @@ static void CustomCameraEffectManager_onCameraShake(CustomCameraEffectManager th
 	this->lastShakeOffset.x = -this->lastShakeOffset.x;
 
 	// move camera a bit
-	Camera_move(_camera, this->lastShakeOffset, false);
+	Camera::move(_camera, this->lastShakeOffset, false);
 
 	// send message for next camera movement
-	MessageDispatcher_dispatchMessage(nextShakeDelay, __SAFE_CAST(Object, this), __SAFE_CAST(Object, this), kShake, NULL);
+	MessageDispatcher::dispatchMessage(nextShakeDelay, Object::safeCast(this), Object::safeCast(this), kShake, NULL);
 }

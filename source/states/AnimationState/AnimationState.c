@@ -1,7 +1,7 @@
 /* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev<jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -59,33 +59,13 @@ extern EntityDefinition CREDITS_AG;
 
 
 //---------------------------------------------------------------------------------------------------------
-// 												PROTOTYPES
-//---------------------------------------------------------------------------------------------------------
-
-static void AnimationState_destructor(AnimationState this);
-static void AnimationState_constructor(AnimationState this);
-static void AnimationState_enter(AnimationState this, void* owner);
-static void AnimationState_onFadeOutToTitleComplete(AnimationState this, Object eventFirer);
-static void AnimationState_onFadeOutToCreditsComplete(AnimationState this, Object eventFirer);
-
-
-//---------------------------------------------------------------------------------------------------------
-// 											CLASS'S DEFINITION
-//---------------------------------------------------------------------------------------------------------
-
-__CLASS_DEFINITION(AnimationState, GameState);
-__SINGLETON_DYNAMIC(AnimationState);
-
-
-//---------------------------------------------------------------------------------------------------------
 // 												CLASS'S METHODS
 //---------------------------------------------------------------------------------------------------------
 
 // class's constructor
-static void __attribute__ ((noinline)) AnimationState_constructor(AnimationState this)
+void AnimationState::constructor()
 {
-	// construct base
-	__CONSTRUCT_BASE(GameState);
+	Base::constructor();
 
 	// init state
 	this->currentSequence = kAnimationSequenceRexScream;
@@ -96,60 +76,59 @@ static void __attribute__ ((noinline)) AnimationState_constructor(AnimationState
 }
 
 // class's destructor
-static void AnimationState_destructor(AnimationState this)
+void AnimationState::destructor()
 {
-	// destroy base
-	__SINGLETON_DESTROY;
+	Base::destructor();
 }
 
 // state's enter
-static void AnimationState_enter(AnimationState this, void* owner __attribute__ ((unused)))
+void AnimationState::enter(void* owner)
 {
 	// call base
-	GameState_enter(__SAFE_CAST(GameState, this), owner);
+	GameState::enter(this, owner);
 
 	// set the custom screen effect manager
-	Camera_setCameraEffectManager(Camera_getInstance(), __SAFE_CAST(CameraEffectManager, CustomCameraEffectManager_getInstance()));
+	Camera::setCameraEffectManager(Camera::getInstance(), CameraEffectManager::safeCast(CustomCameraEffectManager_getInstance()));
 
 	// load stage
-	GameState_loadStage(__SAFE_CAST(GameState, this), (StageDefinition*)&ANIMATION_ST, NULL, true);
+	GameState::loadStage(this, (StageDefinition*)&ANIMATION_ST, NULL, true);
 
 	// enable user input
-    Game_enableKeypad(Game_getInstance());
+    Game::enableKeypad(Game::getInstance());
 
 	// start clocks to start animations
-	GameState_startClocks(__SAFE_CAST(GameState, this));
+	GameState::startClocks(this);
 
 	// reset state
 	this->currentSequence = kAnimationSequenceRexScream;
 	this->isPaused = false;
 
 	// get entities from stage
-	this->resumeButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Resume",
 		false
 	));
-	this->backButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Back",
 		false
 	));
 	/*
-	this->framesButtonEntity = __SAFE_CAST(Entity, Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	this->framesButtonEntity = Entity::safeCast(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Frames",
 		false
 	));
 	*/
 
 	// initially hide buttons
-	Entity_hide(__SAFE_CAST(Entity, this->resumeButtonEntity));
-	Entity_hide(__SAFE_CAST(Entity, this->backButtonEntity));
-	//Entity_hide(this->framesButtonEntity);
+	Entity::hide(Entity::safeCast(this->resumeButtonEntity));
+	Entity::hide(Entity::safeCast(this->backButtonEntity));
+	//Entity::hide(this->framesButtonEntity);
 
 	// show image
-	Camera_startEffect(Camera_getInstance(),
+	Camera::startEffect(Camera::getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
 		NULL, // target brightness
@@ -159,15 +138,15 @@ static void AnimationState_enter(AnimationState this, void* owner __attribute__ 
 	);
 }
 
-void AnimationState_processUserInput(AnimationState this, UserInput userInput)
+void AnimationState::processUserInput(UserInput userInput)
 {
 	if(userInput.pressedKey & ~K_PWR)
 	{
 		if(K_A & userInput.pressedKey)
 		{
 			// get image entity from stage
-			AnimatedEntity imageEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
-				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+			AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
+				Container::safeCast(Game::getStage(Game::getInstance())),
 				"Image",
 				false
 			));
@@ -176,14 +155,14 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			this->isPaused = !this->isPaused;
 
 			// pause/resume animation
-			AnimatedEntity_pauseAnimation(imageEntity, this->isPaused);
+			AnimatedEntity::pauseAnimation(imageEntity, this->isPaused);
 
 			// stop all sound playback
-			SoundManager_stopAllSound(SoundManager_getInstance());
+			SoundManager::stopAllSound(SoundManager::getInstance());
 
 			// get ende entity from stage
-			Container endeEntity = Container_getChildByName(
-				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+			Container endeEntity = Container::getChildByName(
+				Container::safeCast(Game::getStage(Game::getInstance())),
 				"Ende",
 				false
 			);
@@ -191,12 +170,12 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			if(endeEntity)
 			{
 				// pause/resume animation
-				AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, endeEntity), this->isPaused);
+				AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(endeEntity), this->isPaused);
 			}
 
 			// get ende entity from stage
-			Container creditsEntity = Container_getChildByName(
-				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+			Container creditsEntity = Container::getChildByName(
+				Container::safeCast(Game::getStage(Game::getInstance())),
 				"Credits",
 				false
 			);
@@ -204,51 +183,51 @@ void AnimationState_processUserInput(AnimationState this, UserInput userInput)
 			if(creditsEntity)
 			{
 				// pause/resume animation
-				AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, creditsEntity), this->isPaused);
+				AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(creditsEntity), this->isPaused);
 			}
 
 			// update ui
 			if (this->isPaused)
 			{
-				Entity_show(__SAFE_CAST(Entity, this->resumeButtonEntity));
-				Entity_show(__SAFE_CAST(Entity, this->backButtonEntity));
-				//Entity_show(this->framesButtonEntity);
+				Entity::show(Entity::safeCast(this->resumeButtonEntity));
+				Entity::show(Entity::safeCast(this->backButtonEntity));
+				//Entity::show(this->framesButtonEntity);
 			}
 			else
 			{
-				Entity_hide(__SAFE_CAST(Entity, this->resumeButtonEntity));
-				Entity_hide(__SAFE_CAST(Entity, this->backButtonEntity));
-				//Entity_hide(this->framesButtonEntity);
+				Entity::hide(Entity::safeCast(this->resumeButtonEntity));
+				Entity::hide(Entity::safeCast(this->backButtonEntity));
+				//Entity::hide(this->framesButtonEntity);
 			}
 
 			// play sound
-			Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
-			SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
+			Vector3D position = {192, 112, 0};
+			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 		}
 		else if(this->isPaused && (K_B & userInput.pressedKey))
 		{
 			// disable user input
-			Game_disableKeypad(Game_getInstance());
+			Game::disableKeypad(Game::getInstance());
 
 			// play sound
-			Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
-			SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
+			Vector3D position = {192, 112, 0};
+			SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
 
 			// start fade out effect
 			Brightness brightness = (Brightness){0, 0, 0};
-			Camera_startEffect(Camera_getInstance(),
+			Camera::startEffect(Camera::getInstance(),
 				kFadeTo, // effect type
 				0, // initial delay (in ms)
 				&brightness, // target brightness
 				__FADE_DELAY, // delay between fading steps (in ms)
-				(void (*)(Object, Object))AnimationState_onFadeOutToTitleComplete, // callback function
-				__SAFE_CAST(Object, this) // callback scope
+				(void (*)(Object, Object))AnimationState::onFadeOutToTitleComplete, // callback function
+				Object::safeCast(this) // callback scope
 			);
 		}
 	}
 }
 
-void AnimationState_execute(AnimationState this, void* owner)
+void AnimationState::execute(void* owner)
 {
 	// do not play any sound when paused
 	if (this->isPaused)
@@ -257,17 +236,17 @@ void AnimationState_execute(AnimationState this, void* owner)
 	}
 
 	// call base
-	GameState_execute(__SAFE_CAST(GameState, this), owner);
+	GameState::execute(this, owner);
 
 	// get image entity from stage
-	AnimatedEntity imageEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Image",
 		false
 	));
 
 	// get current animation frame
-	s8 currentFrame = AnimatedEntity_getActualFrame(imageEntity);
+	s8 currentFrame = AnimatedEntity::getActualFrame(imageEntity);
 
 	// play sounds according to current animation sequence and current animation frame
 	switch (this->currentSequence)
@@ -277,20 +256,20 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// scream
 			if (currentFrame == 9)
 			{
-				Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), ROAR_SND, position);
+				Vector3D position = {192, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), ROAR_SND, position);
 			}
 			// right step
 			else if (currentFrame == 27 || currentFrame == 35 || currentFrame == 43)
 			{
-				Vector3D position = {__F_TO_FIX10_6(44), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {44, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 31 || currentFrame == 39 || currentFrame == 47)
 			{
-				Vector3D position = {__F_TO_FIX10_6(344), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {344, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -299,14 +278,14 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// right step
 			if (currentFrame == 3 || currentFrame == 11 || currentFrame == 19)
 			{
-				Vector3D position = {__F_TO_FIX10_6(44), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {44, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 7 || currentFrame == 15 || currentFrame == 23)
 			{
-				Vector3D position = {__F_TO_FIX10_6(344), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {344, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -315,14 +294,14 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// right step
 			if (currentFrame == 2 || currentFrame == 10)
 			{
-				Vector3D position = {__F_TO_FIX10_6(44), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {44, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 6 || currentFrame == 14)
 			{
-				Vector3D position = {__F_TO_FIX10_6(344), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {344, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -331,14 +310,14 @@ void AnimationState_execute(AnimationState this, void* owner)
 			// right step
 			if (currentFrame == 0 || currentFrame == 8)
 			{
-				Vector3D position = {__F_TO_FIX10_6(44), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {44, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 4 || currentFrame == 12)
 			{
-				Vector3D position = {__F_TO_FIX10_6(344), __F_TO_FIX10_6(112), 0};
-				SoundManager_playFxSound(SoundManager_getInstance(), STEP_SND, position);
+				Vector3D position = {344, 112, 0};
+				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -353,129 +332,119 @@ void AnimationState_execute(AnimationState this, void* owner)
 	}
 }
 
-void AnimationState_setCurrentAnimationSequence(AnimationState this, u8 currentSequence)
+void AnimationState::setCurrentAnimationSequence(u8 currentSequence)
 {
 	this->currentSequence = currentSequence;
 }
 
-void AnimationState_playBanana(AnimationState this __attribute__ ((unused)))
+void AnimationState::playBanana()
 {
-	ASSERT(this, "AnimationState::playBanana: null this");
-
 	// delete image entity
-	Container imageEntity = Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	Container imageEntity = Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Image",
 		false
 	);
-	Container_deleteMyself(imageEntity);
+	Container::deleteMyself(imageEntity);
 
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
 		{&BANANA_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
-	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
 
 	// update current animation sequence
-	AnimationState_setCurrentAnimationSequence(AnimationState_getInstance(), kAnimationSequenceBanana);
+	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceBanana);
 }
 
-void AnimationState_playRexRun(AnimationState this __attribute__ ((unused)))
+void AnimationState::playRexRun()
 {
-	ASSERT(this, "AnimationState::playRexRun: null this");
-
 	// delete image entity
-	Container imageEntity = Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	Container imageEntity = Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Image",
 		false
 	);
-	Container_deleteMyself(imageEntity);
+	Container::deleteMyself(imageEntity);
 
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
 		{&REX_RUN_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
-	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
 
 	// update current animation sequence
-	AnimationState_setCurrentAnimationSequence(AnimationState_getInstance(), kAnimationSequenceRexRun);
+	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceRexRun);
 }
 
-void AnimationState_playVertigo(AnimationState this __attribute__ ((unused)))
+void AnimationState::playVertigo()
 {
-	ASSERT(this, "AnimationState::playVertigo: null this");
-
 	// delete image entity
-	Container imageEntity = Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	Container imageEntity = Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Image",
 		false
 	);
-	Container_deleteMyself(imageEntity);
+	Container::deleteMyself(imageEntity);
 
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
 		{&VERTIGO_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
-	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
 
 	// update current animation sequence
-	AnimationState_setCurrentAnimationSequence(AnimationState_getInstance(), kAnimationSequenceVertigo);
+	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVertigo);
 }
 
-void AnimationState_playVolcanoEnd(AnimationState this __attribute__ ((unused)))
+void AnimationState::playVolcanoEnd()
 {
-	ASSERT(this, "AnimationState::playVolcanoEnd: null this");
-
 	// delete image entity
-	Container imageEntity = Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	Container imageEntity = Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Image",
 		false
 	);
-	Container_deleteMyself(imageEntity);
+	Container::deleteMyself(imageEntity);
 
 	// add new image entity
 	PositionedEntityROMDef positionedEntity[] =
 	{
 		{&VOLCANO_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
-	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
 
 	// update current animation sequence
-	AnimationState_setCurrentAnimationSequence(AnimationState_getInstance(), kAnimationSequenceVolcano);
+	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVolcano);
 
 	// screen shake
-	Camera_startEffect(Camera_getInstance(), kShake, 800);
+	Camera::startEffect(Camera::getInstance(), kShake, 800);
 
 	// play sound
-	Vector3D position = {__F_TO_FIX10_6(192), __F_TO_FIX10_6(112), 0};
-	SoundManager_playFxSound(SoundManager_getInstance(), CRASH_SND, position);
+	Vector3D position = {192, 112, 0};
+	SoundManager::playFxSound(SoundManager::getInstance(), CRASH_SND, position);
 
 	// play "ende" fade in animation
 	PositionedEntityROMDef endeEntity[] =
 	{
 		{&ENDE_AG, {86, 54, -0.001f, 0}, 0, "Ende", NULL, NULL, true},
-		{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
-	Stage_addChildEntity(Game_getStage(Game_getInstance()), endeEntity, false);
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), endeEntity, false);
 }
 
-void AnimationState_playCreditsText(AnimationState this __attribute__ ((unused)))
+void AnimationState::playCreditsText()
 {
-	ASSERT(this, "AnimationState::playCreditsText: null this");
-
 	// delete ende entity
-	Container_deleteMyself(Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	Container::deleteMyself(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Ende",
 		false
 	));
@@ -484,44 +453,38 @@ void AnimationState_playCreditsText(AnimationState this __attribute__ ((unused))
 	PositionedEntityROMDef positionedEntity[] =
 	{
 		{&CREDITS_TEXT_AG, {80, 74, 0, 0}, 0, "Credits", NULL, NULL, true},
-		{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
-	Stage_addChildEntity(Game_getStage(Game_getInstance()), positionedEntity, false);
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
 
 	// update current animation sequence
-	AnimationState_setCurrentAnimationSequence(AnimationState_getInstance(), kAnimationSequenceCredits);
+	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceCredits);
 }
 
-void AnimationState_playCreditsAnimation(AnimationState this __attribute__ ((unused)))
+void AnimationState::playCreditsAnimation()
 {
-	ASSERT(this, "AnimationState::playCreditsAnimation: null this");
-
 	// start delayed fade out effect
 	Brightness brightness = (Brightness){0, 0, 0};
-	Camera_startEffect(Camera_getInstance(),
+	Camera::startEffect(Camera::getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
 		&brightness, // target brightness
 		__FADE_DELAY, // delay between fading steps (in ms)
-		(void (*)(Object, Object))AnimationState_onFadeOutToCreditsComplete, // callback function
-		__SAFE_CAST(Object, this) // callback scope
+		(void (*)(Object, Object))AnimationState::onFadeOutToCreditsComplete, // callback function
+		Object::safeCast(this) // callback scope
 	);
 }
 
 // handle event
-static void AnimationState_onFadeOutToTitleComplete(AnimationState this __attribute__ ((unused)), Object eventFirer __attribute__ ((unused)))
+void AnimationState::onFadeOutToTitleComplete(Object eventFirer __attribute__ ((unused)))
 {
-	ASSERT(this, "AnimationState::onFadeOutToTitleComplete: null this");
-
 	// change to next stage
-	Game_changeState(Game_getInstance(), __SAFE_CAST(GameState, TitleScreenState_getInstance()));
+	Game::changeState(Game::getInstance(), GameState::safeCast(TitleScreenState::getInstance()));
 }
 
 // handle event
-static void AnimationState_onFadeOutToCreditsComplete(AnimationState this __attribute__ ((unused)), Object eventFirer __attribute__ ((unused)))
+void AnimationState::onFadeOutToCreditsComplete(Object eventFirer __attribute__ ((unused)))
 {
-	ASSERT(this, "AnimationState::onFadeOutToCreditsComplete: null this");
-
 	// change to next stage
-	Game_changeState(Game_getInstance(), __SAFE_CAST(GameState, CreditsState_getInstance()));
+	Game::changeState(Game::getInstance(), GameState::safeCast(CreditsState::getInstance()));
 }

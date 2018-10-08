@@ -1,7 +1,7 @@
 /* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev<jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -28,6 +28,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <GameState.h>
+#include <AnimatedEntity.h>
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -41,36 +42,19 @@
 // 											CLASS'S DECLARATION
 //---------------------------------------------------------------------------------------------------------
 
-// declare the virtual methods
-#define CreditsState_METHODS(ClassName)																	\
-    	GameState_METHODS(ClassName)											    				    \
+singleton class CreditsState : GameState
+{
+	AnimatedEntity pauseButtonEntity;
+	AnimatedEntity resumeButtonEntity;
+	AnimatedEntity backButtonEntity;
+	u16 remaining;
+	bool isPaused;
+	bool fadeInComplete;
 
-// declare the virtual methods which are redefined
-#define CreditsState_SET_VTABLE(ClassName)																\
-        GameState_SET_VTABLE(ClassName)								    								\
-        __VIRTUAL_SET(ClassName, CreditsState, enter);													\
-        __VIRTUAL_SET(ClassName, CreditsState, execute);												\
-        __VIRTUAL_SET(ClassName, CreditsState, processUserInput);										\
-
-__CLASS(CreditsState);
-
-#define CreditsState_ATTRIBUTES							        										\
-        GameState_ATTRIBUTES																			\
-		AnimatedEntity pauseButtonEntity;															\
-		AnimatedEntity resumeButtonEntity;														\
-		AnimatedEntity backButtonEntity;															\
-		u16 remaining;																					\
-		bool isPaused;																					\
-		bool fadeInComplete;																			\
-
-
-//---------------------------------------------------------------------------------------------------------
-// 										PUBLIC INTERFACE
-//---------------------------------------------------------------------------------------------------------
-
-CreditsState CreditsState_getInstance(void);
-void CreditsState_processUserInput(CreditsState this, UserInput userInput);
-void CreditsState_execute(CreditsState this, void* owner);
+	static CreditsState getInstance();
+	override void processUserInput(UserInput userInput);
+	override void execute(void* owner);
+}
 
 
 #endif

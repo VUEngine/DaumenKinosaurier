@@ -1,7 +1,7 @@
 /* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev<jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -28,6 +28,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <GameState.h>
+#include <AnimatedEntity.h>
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -49,41 +50,24 @@ enum AnimationSequences
 // 											CLASS'S DECLARATION
 //---------------------------------------------------------------------------------------------------------
 
-// declare the virtual methods
-#define AnimationState_METHODS(ClassName)																\
-    	GameState_METHODS(ClassName)											    				    \
+singleton class AnimationState : GameState
+{
+	AnimatedEntity resumeButtonEntity;
+	AnimatedEntity backButtonEntity;
+	bool isPaused;
+	u8 currentSequence;
 
-// declare the virtual methods which are redefined
-#define AnimationState_SET_VTABLE(ClassName)															\
-        GameState_SET_VTABLE(ClassName)								    								\
-        __VIRTUAL_SET(ClassName, AnimationState, enter);												\
-		__VIRTUAL_SET(ClassName, AnimationState, execute);												\
-		__VIRTUAL_SET(ClassName, AnimationState, processUserInput);										\
-
-__CLASS(AnimationState);
-
-#define AnimationState_ATTRIBUTES							        									\
-        GameState_ATTRIBUTES																			\
-		AnimatedEntity resumeButtonEntity;														\
-		AnimatedEntity backButtonEntity;															\
-		bool isPaused;																					\
-		u8 currentSequence;																				\
-
-
-//---------------------------------------------------------------------------------------------------------
-// 										PUBLIC INTERFACE
-//---------------------------------------------------------------------------------------------------------
-
-AnimationState AnimationState_getInstance(void);
-
-void AnimationState_processUserInput(AnimationState this, UserInput userInput);
-void AnimationState_execute(AnimationState this, void* owner);
-void AnimationState_playBanana(AnimationState this);
-void AnimationState_playRexRun(AnimationState this);
-void AnimationState_playVertigo(AnimationState this);
-void AnimationState_playVolcanoEnd(AnimationState this);
-void AnimationState_playCreditsAnimation(AnimationState this);
-void AnimationState_playCreditsText(AnimationState this);
+	static AnimationState getInstance();
+	override void enter(void* owner);
+	override void processUserInput(UserInput userInput);
+    override void execute(void* owner);
+    void playBanana();
+    void playRexRun();
+    void playVertigo();
+    void playVolcanoEnd();
+    void playCreditsAnimation();
+    void playCreditsText();
+}
 
 
 #endif

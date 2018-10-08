@@ -1,7 +1,7 @@
 /* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev<jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -243,13 +243,13 @@ StageROMDef ANIMATION_ST =
         // since the VIP renders OBJ Worlds in reverse order (__SPT3 to __SPT0)
         {
 			// __spt0
-			__F_TO_FIX10_6(0),
+			0,
 			// __spt1
-			__F_TO_FIX10_6(0),
+			0,
 			// __spt2
-			__F_TO_FIX10_6(0),
+			0,
 			// __spt3
-			__F_TO_FIX10_6(0),
+			0,
         },
 
         // optical configuration values
@@ -274,13 +274,13 @@ StageROMDef ANIMATION_ST =
     {
         // gravity
         {
-    	    __F_TO_FIX10_6(0),
-    	    __F_TO_FIX10_6(0),
-    	    __F_TO_FIX10_6(0),
+    	    0,
+    	    0,
+    	    0,
         },
 
         // friction
-        __F_TO_FIX10_6(0),
+        0,
     },
 
     // assets

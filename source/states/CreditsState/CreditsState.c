@@ -1,7 +1,7 @@
 /* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev<jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -44,33 +44,13 @@ extern const u16 BACK_SND[];
 
 
 //---------------------------------------------------------------------------------------------------------
-// 												PROTOTYPES
-//---------------------------------------------------------------------------------------------------------
-
-static void CreditsState_destructor(CreditsState this);
-static void CreditsState_constructor(CreditsState this);
-static void CreditsState_enter(CreditsState this, void* owner);
-static void CreditsState_onFadeInComplete(CreditsState this, Object eventFirer);
-static void CreditsState_onFadeOutComplete(CreditsState this, Object eventFirer);
-
-
-//---------------------------------------------------------------------------------------------------------
-// 											CLASS'S DEFINITION
-//---------------------------------------------------------------------------------------------------------
-
-__CLASS_DEFINITION(CreditsState, GameState);
-__SINGLETON(CreditsState);
-
-
-//---------------------------------------------------------------------------------------------------------
 // 												CLASS'S METHODS
 //---------------------------------------------------------------------------------------------------------
 
 // class's constructor
-static void __attribute__ ((noinline)) CreditsState_constructor(CreditsState this)
+void CreditsState::constructor()
 {
-	// construct base
-	__CONSTRUCT_BASE(GameState);
+	Base::constructor();
 
 	// init state
 	this->remaining = __CREDITS_LENGTH;
@@ -82,26 +62,25 @@ static void __attribute__ ((noinline)) CreditsState_constructor(CreditsState thi
 }
 
 // class's destructor
-static void CreditsState_destructor(CreditsState this)
+void CreditsState::destructor()
 {
-	// destroy base
-	__SINGLETON_DESTROY;
+	Base::destructor();
 }
 
 // state's enter
-static void CreditsState_enter(CreditsState this, void* owner __attribute__ ((unused)))
+void CreditsState::enter(void* owner)
 {
 	// call base
-	GameState_enter(__SAFE_CAST(GameState, this), owner);
+	GameState::enter(this, owner);
 
 	// load stage
-	GameState_loadStage(__SAFE_CAST(GameState, this), (StageDefinition*)&CREDITS_ST, NULL, true);
+	GameState::loadStage(this, (StageDefinition*)&CREDITS_ST, NULL, true);
 
 	// enable user input
-    Game_enableKeypad(Game_getInstance());
+    Game::enableKeypad(Game::getInstance());
 
 	// start clocks to start animations
-	GameState_startClocks(__SAFE_CAST(GameState, this));
+	GameState::startClocks(this);
 
 	// reset state
 	this->remaining = __CREDITS_LENGTH;
@@ -109,39 +88,39 @@ static void CreditsState_enter(CreditsState this, void* owner __attribute__ ((un
 	this->fadeInComplete = false;
 
 	// get entities
-	this->pauseButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	this->pauseButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Pause",
 		false
 	));
-	this->resumeButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Resume",
 		false
 	));
-	this->backButtonEntity = __SAFE_CAST(AnimatedEntity, Container_getChildByName(
-		__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
+		Container::safeCast(Game::getStage(Game::getInstance())),
 		"Back",
 		false
 	));
 
 	// initially hide buttons
-	Entity_hide(__SAFE_CAST(Entity, this->pauseButtonEntity));
-	Entity_hide(__SAFE_CAST(Entity, this->resumeButtonEntity));
-	Entity_hide(__SAFE_CAST(Entity, this->backButtonEntity));
+	Entity::hide(Entity::safeCast(this->pauseButtonEntity));
+	Entity::hide(Entity::safeCast(this->resumeButtonEntity));
+	Entity::hide(Entity::safeCast(this->backButtonEntity));
 
 	// show image
-	Camera_startEffect(Camera_getInstance(),
+	Camera::startEffect(Camera::getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
 		NULL, // target brightness
 		__FADE_DELAY, // delay between fading steps (in ms)
-		(void (*)(Object, Object))CreditsState_onFadeInComplete, // callback function
-		__SAFE_CAST(Object, this) // callback scope
+		(void (*)(Object, Object))CreditsState::onFadeInComplete, // callback function
+		Object::safeCast(this) // callback scope
 	);
 }
 
-void CreditsState_processUserInput(CreditsState this, UserInput userInput)
+void CreditsState::processUserInput(UserInput userInput)
 {
 	if(userInput.pressedKey & ~K_PWR)
 	{
@@ -151,61 +130,59 @@ void CreditsState_processUserInput(CreditsState this, UserInput userInput)
 			this->isPaused = !this->isPaused;
 
 			// get image entity from stage
-			Container imageEntity = Container_getChildByName(
-				__SAFE_CAST(Container, Game_getStage(Game_getInstance())),
+			Container imageEntity = Container::getChildByName(
+				Container::safeCast(Game::getStage(Game::getInstance())),
 				"Image",
 				false
 			);
 
 			// pause/resume animation
-			AnimatedEntity_pauseAnimation(__SAFE_CAST(AnimatedEntity, imageEntity), this->isPaused);
+			AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(imageEntity), this->isPaused);
 
 			// update ui
 			if (this->isPaused)
 			{
-				Entity_hide(__SAFE_CAST(Entity, this->pauseButtonEntity));
-				Entity_show(__SAFE_CAST(Entity, this->resumeButtonEntity));
-				Entity_show(__SAFE_CAST(Entity, this->backButtonEntity));
+				Entity::hide(Entity::safeCast(this->pauseButtonEntity));
+				Entity::show(Entity::safeCast(this->resumeButtonEntity));
+				Entity::show(Entity::safeCast(this->backButtonEntity));
 			}
 			else
 			{
-				Entity_hide(__SAFE_CAST(Entity, this->pauseButtonEntity));
-				Entity_hide(__SAFE_CAST(Entity, this->resumeButtonEntity));
-				Entity_hide(__SAFE_CAST(Entity, this->backButtonEntity));
+				Entity::hide(Entity::safeCast(this->pauseButtonEntity));
+				Entity::hide(Entity::safeCast(this->resumeButtonEntity));
+				Entity::hide(Entity::safeCast(this->backButtonEntity));
 			}
 
 			// play sound
 			Vector3D position = {192, 112, 0};
-			SoundManager_playFxSound(SoundManager_getInstance(), SELECT_SND, position);
+			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 		}
 		else if(this->fadeInComplete && this->isPaused)
 		{
 			// disable user input
-			Game_disableKeypad(Game_getInstance());
+			Game::disableKeypad(Game::getInstance());
 
 			// play sound
 			Vector3D position = {192, 112, 0};
-			SoundManager_playFxSound(SoundManager_getInstance(), BACK_SND, position);
+			SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
 
 			// start fade out effect
 			Brightness brightness = (Brightness){0, 0, 0};
-			Camera_startEffect(Camera_getInstance(),
+			Camera::startEffect(Camera::getInstance(),
 				kFadeTo, // effect type
 				0, // initial delay (in ms)
 				&brightness, // target brightness
 				__FADE_DELAY, // delay between fading steps (in ms)
-				(void (*)(Object, Object))CreditsState_onFadeOutComplete, // callback function
-				__SAFE_CAST(Object, this) // callback scope
+				(void (*)(Object, Object))CreditsState::onFadeOutComplete, // callback function
+				Object::safeCast(this) // callback scope
 			);
 		}
 	}
 }
 
-void CreditsState_execute(CreditsState this, void* owner __attribute__ ((unused)))
+void CreditsState::execute(void* owner)
 {
-	ASSERT(this, "CreditsState::execute: null this");
-
-	GameState_execute(__SAFE_CAST(GameState, this), owner);
+	GameState::execute(this, owner);
 
 	if(!this->isPaused)
 	{
@@ -218,35 +195,31 @@ void CreditsState_execute(CreditsState this, void* owner __attribute__ ((unused)
 			this->remaining = __CREDITS_LENGTH;
 
 			// disable user input
-			Game_disableKeypad(Game_getInstance());
+			Game::disableKeypad(Game::getInstance());
 
 			// start fade out effect
 			Brightness brightness = (Brightness){0, 0, 0};
-			Camera_startEffect(Camera_getInstance(),
+			Camera::startEffect(Camera::getInstance(),
 				kFadeTo, // effect type
 				0, // initial delay (in ms)
 				&brightness, // target brightness
 				__FADE_DELAY, // delay between fading steps (in ms)
-				(void (*)(Object, Object))CreditsState_onFadeOutComplete, // callback function
-				__SAFE_CAST(Object, this) // callback scope
+				(void (*)(Object, Object))CreditsState::onFadeOutComplete, // callback function
+				Object::safeCast(this) // callback scope
 			);
 		}
 	}
 }
 
 // handle event
-static void CreditsState_onFadeInComplete(CreditsState this, Object eventFirer __attribute__ ((unused)))
+void CreditsState::onFadeInComplete(Object eventFirer __attribute__ ((unused)))
 {
-	ASSERT(this, "CreditsState::onFadeInComplete: null this");
-
 	this->fadeInComplete = true;
 }
 
 // handle event
-static void CreditsState_onFadeOutComplete(CreditsState this __attribute__ ((unused)), Object eventFirer __attribute__ ((unused)))
+void CreditsState::onFadeOutComplete(Object eventFirer __attribute__ ((unused)))
 {
-	ASSERT(this, "CreditsState::onFadeOutComplete: null this");
-
 	// change to next stage
-	Game_changeState(Game_getInstance(), __SAFE_CAST(GameState, TitleScreenState_getInstance()));
+	Game::changeState(Game::getInstance(), GameState::safeCast(TitleScreenState::getInstance()));
 }
