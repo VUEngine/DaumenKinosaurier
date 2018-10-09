@@ -76,6 +76,7 @@ singleton class TitleScreenState : GameState
 	u8 mode;
 
 	static TitleScreenState getInstance();
+	override void enter(void* owner);
 	override void processUserInput(UserInput userInput);
 	override bool handleMessage(Telegram telegram);
 	void onAFlipbookByComplete();

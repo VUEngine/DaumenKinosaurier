@@ -55,6 +55,7 @@ singleton class ImageViewerState : GameState
 	u8 currentAnimation;
 
 	static ImageViewerState getInstance();
+	override void enter(void* owner);
 	override void processUserInput(UserInput userInput);
 }
 

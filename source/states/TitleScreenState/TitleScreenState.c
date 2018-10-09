@@ -80,7 +80,7 @@ void TitleScreenState::destructor()
 void TitleScreenState::enter(void* owner)
 {
 	// call base
-	GameState::enter(this, owner);
+	Base::enter(this, owner);
 
 	// enable user input
 	Game::enableKeypad(Game::getInstance());

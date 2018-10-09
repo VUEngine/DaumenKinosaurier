@@ -71,7 +71,7 @@ void CreditsState::destructor()
 void CreditsState::enter(void* owner)
 {
 	// call base
-	GameState::enter(this, owner);
+	Base::enter(this, owner);
 
 	// load stage
 	GameState::loadStage(this, (StageDefinition*)&CREDITS_ST, NULL, true);
@@ -182,7 +182,7 @@ void CreditsState::processUserInput(UserInput userInput)
 
 void CreditsState::execute(void* owner)
 {
-	GameState::execute(this, owner);
+	Base::execute(this, owner);
 
 	if(!this->isPaused)
 	{

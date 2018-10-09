@@ -52,8 +52,9 @@ singleton class CreditsState : GameState
 	bool fadeInComplete;
 
 	static CreditsState getInstance();
-	override void processUserInput(UserInput userInput);
+	override void enter(void* owner);
 	override void execute(void* owner);
+	override void processUserInput(UserInput userInput);
 }
 
 

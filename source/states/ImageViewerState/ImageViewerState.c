@@ -89,7 +89,7 @@ void ImageViewerState::destructor()
 void ImageViewerState::enter(void* owner)
 {
 	// call base
-	GameState::enter(this, owner);
+	Base::enter(this, owner);
 
 	// load stage
 	GameState::loadStage(this, (StageDefinition*)&IMAGE_VIEWER_ST, NULL, true);
