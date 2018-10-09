@@ -85,7 +85,7 @@ void AnimationState::destructor()
 void AnimationState::enter(void* owner)
 {
 	// call base
-	GameState::enter(this, owner);
+	Base::enter(this, owner);
 
 	// set the custom screen effect manager
 	Camera::setCameraEffectManager(Camera::getInstance(), CameraEffectManager::safeCast(CustomCameraEffectManager_getInstance()));
@@ -236,7 +236,7 @@ void AnimationState::execute(void* owner)
 	}
 
 	// call base
-	GameState::execute(this, owner);
+	Base::execute(this, owner);
 
 	// get image entity from stage
 	AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(

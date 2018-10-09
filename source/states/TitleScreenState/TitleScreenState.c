@@ -148,7 +148,6 @@ void TitleScreenState::processUserInput(UserInput userInput)
 {
 	if(userInput.pressedKey & ~K_PWR)
 	{
-
 		if((K_A & userInput.pressedKey) || (K_B & userInput.pressedKey) || (K_STA & userInput.pressedKey))
 		{
 			if(this->mode == kModeMenu && this->fadeInComplete && (K_A & userInput.pressedKey || K_STA & userInput.pressedKey))
