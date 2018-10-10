@@ -84,7 +84,7 @@ TextureROMDef COPYRIGHT_TX =
 	false,
 };
 
-BgmapSpriteROMDef COPYRIGHT_IM_SPRITE =
+BgmapSpriteROMDef COPYRIGHT_SPRITE =
 {
 	{
 		// sprite's type
@@ -111,19 +111,19 @@ BgmapSpriteROMDef COPYRIGHT_IM_SPRITE =
 	__WORLD_ON,
 };
 
-BgmapSpriteROMDef* const COPYRIGHT_IM_SPRITES[] =
+BgmapSpriteROMDef* const COPYRIGHT_SPRITES[] =
 {
-	&COPYRIGHT_IM_SPRITE,
+	&COPYRIGHT_SPRITE,
 	NULL
 };
 
-EntityROMDef COPYRIGHT_IM =
+EntityROMDef COPYRIGHT_EN =
 {
 	// class allocator
 	__TYPE(Entity),
 
 	// sprites
-	(SpriteROMDef**)COPYRIGHT_IM_SPRITES,
+	(SpriteROMDef**)COPYRIGHT_SPRITES,
 
 	// collision shapes
 	(ShapeDefinition*)NULL,

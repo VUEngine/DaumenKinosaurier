@@ -260,7 +260,7 @@ BgmapSpriteROMDef* const VERTIGO_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef VERTIGO_AG =
+AnimatedEntityROMDef VERTIGO_EN =
 {
 	{
 		// class allocator

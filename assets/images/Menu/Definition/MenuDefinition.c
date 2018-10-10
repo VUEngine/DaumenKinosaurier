@@ -84,7 +84,7 @@ TextureROMDef MENU_TX =
 	false,
 };
 
-BgmapSpriteROMDef MENU_IM_SPRITE =
+BgmapSpriteROMDef MENU_SPRITE =
 {
 	{
 		// sprite's type
@@ -111,19 +111,19 @@ BgmapSpriteROMDef MENU_IM_SPRITE =
 	__WORLD_ON,
 };
 
-BgmapSpriteROMDef* const MENU_IM_SPRITES[] =
+BgmapSpriteROMDef* const MENU_SPRITES[] =
 {
-	&MENU_IM_SPRITE,
+	&MENU_SPRITE,
 	NULL
 };
 
-EntityROMDef MENU_IM =
+EntityROMDef MENU_EN =
 {
 	// class allocator
 	__TYPE(Entity),
 
 	// sprites
-	(SpriteROMDef**)MENU_IM_SPRITES,
+	(SpriteROMDef**)MENU_SPRITES,
 
 	// collision shapes
 	(ShapeDefinition*)NULL,

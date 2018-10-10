@@ -260,7 +260,7 @@ BgmapSpriteROMDef* const BANANA_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef BANANA_AG =
+AnimatedEntityROMDef BANANA_EN =
 {
 	{
 		// class allocator

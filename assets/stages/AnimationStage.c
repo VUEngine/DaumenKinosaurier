@@ -48,9 +48,9 @@ extern TextureDefinition GALLERY_BUTTON_RESUME_R_TX;
 extern TextureDefinition GALLERY_BUTTON_BACK_L_TX;
 extern TextureDefinition GALLERY_BUTTON_BACK_R_TX;
 
-extern EntityDefinition REX_AG;
-extern EntityDefinition GALLERY_BUTTON_RESUME_AG;
-extern EntityDefinition GALLERY_BUTTON_BACK_AG;
+extern EntityDefinition REX_EN;
+extern EntityDefinition GALLERY_BUTTON_RESUME_EN;
+extern EntityDefinition GALLERY_BUTTON_BACK_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -59,11 +59,11 @@ extern EntityDefinition GALLERY_BUTTON_BACK_AG;
 
 PositionedEntityROMDef ANIMATION_ST_CHILDREN[] =
 {
-	{&GALLERY_BUTTON_BACK_AG,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_AG,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
-	{&REX_AG,					{192, 112,       0, 0}, 0, "Image",  NULL, NULL, true},
+	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
+	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
+	{&REX_EN,					{192, 112,       0, 0}, 0, "Image",  NULL, NULL, true},
 
-	{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+	{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 };
 
 
@@ -84,8 +84,6 @@ CharSetROMDef* const ANIMATION_ST_CHARSETS[] =
 	&GALLERY_BUTTON_BACK_R_CH,
 	&GALLERY_BUTTON_RESUME_L_CH,
 	&GALLERY_BUTTON_RESUME_R_CH,
-	&REX_L_CH,
-	&REX_R_CH,
 
 	NULL
 };
@@ -96,8 +94,7 @@ TextureDefinition* const ANIMATION_ST_TEXTURES[] =
 	&GALLERY_BUTTON_BACK_R_TX,
 	&GALLERY_BUTTON_RESUME_L_TX,
 	&GALLERY_BUTTON_RESUME_R_TX,
-	&REX_L_TX,
-	&REX_R_TX,
+
 	NULL
 };
 

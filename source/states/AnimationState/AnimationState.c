@@ -48,14 +48,14 @@ extern const u16 ROAR_SND[];
 extern const u16 STEP_SND[];
 extern const u16 CRASH_SND[];
 
-extern EntityDefinition REX_AG;
-extern EntityDefinition BANANA_AG;
-extern EntityDefinition REX_RUN_AG;
-extern EntityDefinition VERTIGO_AG;
-extern EntityDefinition VOLCANO_AG;
-extern EntityDefinition ENDE_AG;
-extern EntityDefinition CREDITS_TEXT_AG;
-extern EntityDefinition CREDITS_AG;
+extern EntityDefinition REX_EN;
+extern EntityDefinition BANANA_EN;
+extern EntityDefinition REX_RUN_EN;
+extern EntityDefinition VERTIGO_EN;
+extern EntityDefinition VOLCANO_EN;
+extern EntityDefinition ENDE_EN;
+extern EntityDefinition CREDITS_TEXT_EN;
+extern EntityDefinition CREDITS_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -105,26 +105,26 @@ void AnimationState::enter(void* owner)
 
 	// get entities from stage
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Back",
 		false
 	));
 	/*
 	this->framesButtonEntity = Entity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Frames",
 		false
 	));
 	*/
 
 	// initially hide buttons
-	Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-	Entity::hide(Entity::safeCast(this->backButtonEntity));
+	Entity::hide(this->resumeButtonEntity);
+	Entity::hide(this->backButtonEntity);
 	//Entity::hide(this->framesButtonEntity);
 
 	// show image
@@ -140,90 +140,87 @@ void AnimationState::enter(void* owner)
 
 void AnimationState::processUserInput(UserInput userInput)
 {
-	if(userInput.pressedKey & ~K_PWR)
+	if(K_A & userInput.pressedKey)
 	{
-		if(K_A & userInput.pressedKey)
+		// get image entity from stage
+		AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
+			Game::getStage(Game::getInstance()),
+			"Image",
+			false
+		));
+
+		// update internal state
+		this->isPaused = !this->isPaused;
+
+		// pause/resume animation
+		AnimatedEntity::pauseAnimation(imageEntity, this->isPaused);
+
+		// stop all sound playback
+		SoundManager::stopAllSound(SoundManager::getInstance());
+
+		// get ende entity from stage
+		Container endeEntity = Container::getChildByName(
+			Game::getStage(Game::getInstance()),
+			"Ende",
+			false
+		);
+
+		if(endeEntity)
 		{
-			// get image entity from stage
-			AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
-				Container::safeCast(Game::getStage(Game::getInstance())),
-				"Image",
-				false
-			));
-
-			// update internal state
-			this->isPaused = !this->isPaused;
-
 			// pause/resume animation
-			AnimatedEntity::pauseAnimation(imageEntity, this->isPaused);
-
-			// stop all sound playback
-			SoundManager::stopAllSound(SoundManager::getInstance());
-
-			// get ende entity from stage
-			Container endeEntity = Container::getChildByName(
-				Container::safeCast(Game::getStage(Game::getInstance())),
-				"Ende",
-				false
-			);
-
-			if(endeEntity)
-			{
-				// pause/resume animation
-				AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(endeEntity), this->isPaused);
-			}
-
-			// get ende entity from stage
-			Container creditsEntity = Container::getChildByName(
-				Container::safeCast(Game::getStage(Game::getInstance())),
-				"Credits",
-				false
-			);
-
-			if(creditsEntity)
-			{
-				// pause/resume animation
-				AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(creditsEntity), this->isPaused);
-			}
-
-			// update ui
-			if (this->isPaused)
-			{
-				Entity::show(Entity::safeCast(this->resumeButtonEntity));
-				Entity::show(Entity::safeCast(this->backButtonEntity));
-				//Entity::show(this->framesButtonEntity);
-			}
-			else
-			{
-				Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-				Entity::hide(Entity::safeCast(this->backButtonEntity));
-				//Entity::hide(this->framesButtonEntity);
-			}
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+			AnimatedEntity::pauseAnimation(endeEntity, this->isPaused);
 		}
-		else if(this->isPaused && (K_B & userInput.pressedKey))
+
+		// get ende entity from stage
+		Container creditsEntity = Container::getChildByName(
+			Game::getStage(Game::getInstance()),
+			"Credits",
+			false
+		);
+
+		if(creditsEntity)
 		{
-			// disable user input
-			Game::disableKeypad(Game::getInstance());
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
-
-			// start fade out effect
-			Brightness brightness = (Brightness){0, 0, 0};
-			Camera::startEffect(Camera::getInstance(),
-				kFadeTo, // effect type
-				0, // initial delay (in ms)
-				&brightness, // target brightness
-				__FADE_DELAY, // delay between fading steps (in ms)
-				(void (*)(Object, Object))AnimationState::onFadeOutToTitleComplete, // callback function
-				Object::safeCast(this) // callback scope
-			);
+			// pause/resume animation
+			AnimatedEntity::pauseAnimation(creditsEntity, this->isPaused);
 		}
+
+		// update ui
+		if (this->isPaused)
+		{
+			Entity::show(this->resumeButtonEntity);
+			Entity::show(this->backButtonEntity);
+			//Entity::show(this->framesButtonEntity);
+		}
+		else
+		{
+			Entity::hide(this->resumeButtonEntity);
+			Entity::hide(this->backButtonEntity);
+			//Entity::hide(this->framesButtonEntity);
+		}
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+	}
+	else if(this->isPaused && (K_B & userInput.pressedKey))
+	{
+		// disable user input
+		Game::disableKeypad(Game::getInstance());
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+
+		// start fade out effect
+		Brightness brightness = (Brightness){0, 0, 0};
+		Camera::startEffect(Camera::getInstance(),
+			kFadeTo, // effect type
+			0, // initial delay (in ms)
+			&brightness, // target brightness
+			__FADE_DELAY, // delay between fading steps (in ms)
+			(void (*)(Object, Object))AnimationState::onFadeOutToTitleComplete, // callback function
+			Object::safeCast(this) // callback scope
+		);
 	}
 }
 
@@ -240,7 +237,7 @@ void AnimationState::execute(void* owner)
 
 	// get image entity from stage
 	AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Image",
 		false
 	));
@@ -341,19 +338,15 @@ void AnimationState::playBanana()
 {
 	// delete image entity
 	Container imageEntity = Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Image",
 		false
 	);
 	Container::deleteMyself(imageEntity);
 
 	// add new image entity
-	PositionedEntityROMDef positionedEntity[] =
-	{
-		{&BANANA_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
-	};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
+	PositionedEntity POSITIONED_ENTITY = {&BANANA_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceBanana);
@@ -363,19 +356,15 @@ void AnimationState::playRexRun()
 {
 	// delete image entity
 	Container imageEntity = Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Image",
 		false
 	);
 	Container::deleteMyself(imageEntity);
 
 	// add new image entity
-	PositionedEntityROMDef positionedEntity[] =
-	{
-		{&REX_RUN_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
-	};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
+	PositionedEntity POSITIONED_ENTITY = {&REX_RUN_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceRexRun);
@@ -385,19 +374,15 @@ void AnimationState::playVertigo()
 {
 	// delete image entity
 	Container imageEntity = Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Image",
 		false
 	);
 	Container::deleteMyself(imageEntity);
 
 	// add new image entity
-	PositionedEntityROMDef positionedEntity[] =
-	{
-		{&VERTIGO_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
-	};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
+	PositionedEntity POSITIONED_ENTITY = {&VERTIGO_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVertigo);
@@ -407,19 +392,15 @@ void AnimationState::playVolcanoEnd()
 {
 	// delete image entity
 	Container imageEntity = Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Image",
 		false
 	);
 	Container::deleteMyself(imageEntity);
 
 	// add new image entity
-	PositionedEntityROMDef positionedEntity[] =
-	{
-		{&VOLCANO_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
-	};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
+	PositionedEntity POSITIONED_ENTITY = {&VOLCANO_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVolcano);
@@ -434,7 +415,7 @@ void AnimationState::playVolcanoEnd()
 	// play "ende" fade in animation
 	PositionedEntityROMDef endeEntity[] =
 	{
-		{&ENDE_AG, {86, 54, -0.001f, 0}, 0, "Ende", NULL, NULL, true},
+		{&ENDE_EN, {86, 54, -0.001f, 0}, 0, "Ende", NULL, NULL, true},
 		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage::addChildEntity(Game::getStage(Game::getInstance()), endeEntity, false);
@@ -444,18 +425,14 @@ void AnimationState::playCreditsText()
 {
 	// delete ende entity
 	Container::deleteMyself(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Ende",
 		false
 	));
 
 	// add credits entity
-	PositionedEntityROMDef positionedEntity[] =
-	{
-		{&CREDITS_TEXT_AG, {80, 74, 0, 0}, 0, "Credits", NULL, NULL, true},
-		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
-	};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
+	PositionedEntity POSITIONED_ENTITY = {&CREDITS_TEXT_EN, {80, 74, 0, 0}, 0, "Credits", NULL, NULL, true};
+	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceCredits);

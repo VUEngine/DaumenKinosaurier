@@ -324,7 +324,7 @@ BgmapSpriteROMDef* const GALLERY_TITLE_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef GALLERY_TITLE_AG =
+AnimatedEntityROMDef GALLERY_TITLE_EN =
 {
 	{
 		// class allocator

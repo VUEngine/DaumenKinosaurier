@@ -233,7 +233,7 @@ BgmapSpriteROMDef* const VOLCANO_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef VOLCANO_AG =
+AnimatedEntityROMDef VOLCANO_EN =
 {
 	{
 		// class allocator

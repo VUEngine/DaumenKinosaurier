@@ -89,25 +89,25 @@ void CreditsState::enter(void* owner)
 
 	// get entities
 	this->pauseButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Pause",
 		false
 	));
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Back",
 		false
 	));
 
 	// initially hide buttons
-	Entity::hide(Entity::safeCast(this->pauseButtonEntity));
-	Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-	Entity::hide(Entity::safeCast(this->backButtonEntity));
+	Entity::hide(this->pauseButtonEntity);
+	Entity::hide(this->resumeButtonEntity);
+	Entity::hide(this->backButtonEntity);
 
 	// show image
 	Camera::startEffect(Camera::getInstance(),
@@ -122,61 +122,58 @@ void CreditsState::enter(void* owner)
 
 void CreditsState::processUserInput(UserInput userInput)
 {
-	if(userInput.pressedKey & ~K_PWR)
+	if(K_A & userInput.pressedKey)
 	{
-		if(K_A & userInput.pressedKey)
+		// update internal state
+		this->isPaused = !this->isPaused;
+
+		// get image entity from stage
+		Container imageEntity = Container::getChildByName(
+			Game::getStage(Game::getInstance()),
+			"Image",
+			false
+		);
+
+		// pause/resume animation
+		AnimatedEntity::pauseAnimation(imageEntity, this->isPaused);
+
+		// update ui
+		if (this->isPaused)
 		{
-			// update internal state
-			this->isPaused = !this->isPaused;
-
-			// get image entity from stage
-			Container imageEntity = Container::getChildByName(
-				Container::safeCast(Game::getStage(Game::getInstance())),
-				"Image",
-				false
-			);
-
-			// pause/resume animation
-			AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(imageEntity), this->isPaused);
-
-			// update ui
-			if (this->isPaused)
-			{
-				Entity::hide(Entity::safeCast(this->pauseButtonEntity));
-				Entity::show(Entity::safeCast(this->resumeButtonEntity));
-				Entity::show(Entity::safeCast(this->backButtonEntity));
-			}
-			else
-			{
-				Entity::hide(Entity::safeCast(this->pauseButtonEntity));
-				Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-				Entity::hide(Entity::safeCast(this->backButtonEntity));
-			}
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+			Entity::hide(this->pauseButtonEntity);
+			Entity::show(this->resumeButtonEntity);
+			Entity::show(this->backButtonEntity);
 		}
-		else if(this->fadeInComplete && this->isPaused)
+		else
 		{
-			// disable user input
-			Game::disableKeypad(Game::getInstance());
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
-
-			// start fade out effect
-			Brightness brightness = (Brightness){0, 0, 0};
-			Camera::startEffect(Camera::getInstance(),
-				kFadeTo, // effect type
-				0, // initial delay (in ms)
-				&brightness, // target brightness
-				__FADE_DELAY, // delay between fading steps (in ms)
-				(void (*)(Object, Object))CreditsState::onFadeOutComplete, // callback function
-				Object::safeCast(this) // callback scope
-			);
+			Entity::hide(this->pauseButtonEntity);
+			Entity::hide(this->resumeButtonEntity);
+			Entity::hide(this->backButtonEntity);
 		}
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+	}
+	else if(this->fadeInComplete && this->isPaused)
+	{
+		// disable user input
+		Game::disableKeypad(Game::getInstance());
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+
+		// start fade out effect
+		Brightness brightness = (Brightness){0, 0, 0};
+		Camera::startEffect(Camera::getInstance(),
+			kFadeTo, // effect type
+			0, // initial delay (in ms)
+			&brightness, // target brightness
+			__FADE_DELAY, // delay between fading steps (in ms)
+			(void (*)(Object, Object))CreditsState::onFadeOutComplete, // callback function
+			Object::safeCast(this) // callback scope
+		);
 	}
 }
 

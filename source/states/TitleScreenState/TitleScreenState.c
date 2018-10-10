@@ -43,7 +43,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 extern StageROMDef TITLE_SCREEN_ST;
-extern EntityDefinition CREDITS_AG;
+extern EntityDefinition CREDITS_EN;
 extern const u16 BLIP_SND[];
 extern const u16 SELECT_SND[];
 extern const u16 BACK_SND[];
@@ -64,7 +64,6 @@ void TitleScreenState::constructor()
 	this->fadeInComplete = false;
 	this->isPaused = false;
 	this->cursorEntity = NULL;
-	this->pauseButtonEntity = NULL;
 	this->resumeButtonEntity = NULL;
 	this->backButtonEntity = NULL;
 	this->nextButtonEntity = NULL;
@@ -102,36 +101,30 @@ void TitleScreenState::enter(void* owner)
 
 	// get entities
 	this->cursorEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Cursor",
 		false
 	));
-	this->pauseButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
-		"Pause",
-		false
-	));
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Back",
 		false
 	));
 	this->nextButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Next",
 		false
 	));
 
 	// initially hide buttons
-	Entity::hide(Entity::safeCast(this->pauseButtonEntity));
-	Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-	Entity::hide(Entity::safeCast(this->backButtonEntity));
-	Entity::hide(Entity::safeCast(this->nextButtonEntity));
+	Entity::hide(this->resumeButtonEntity);
+	Entity::hide(this->backButtonEntity);
+	Entity::hide(this->nextButtonEntity);
 
 	// start fade in effect
 	Camera::startEffect(Camera::getInstance(),
@@ -146,146 +139,18 @@ void TitleScreenState::enter(void* owner)
 
 void TitleScreenState::processUserInput(UserInput userInput)
 {
-	if(userInput.pressedKey & ~K_PWR)
+	if((K_A & userInput.pressedKey) || (K_B & userInput.pressedKey) || (K_STA & userInput.pressedKey))
 	{
-		if((K_A & userInput.pressedKey) || (K_B & userInput.pressedKey) || (K_STA & userInput.pressedKey))
+		if(this->mode == kModeMenu && this->fadeInComplete && (K_A & userInput.pressedKey || K_STA & userInput.pressedKey))
 		{
-			if(this->mode == kModeMenu && this->fadeInComplete && (K_A & userInput.pressedKey || K_STA & userInput.pressedKey))
-			{
-				if(this->currentSelection == kMenuOptionAnimationGallery)
-				{
-					// disable user input
-					Game::disableKeypad(Game::getInstance());
-
-					// play sound
-					Vector3D position = {192, 112, 0};
-					SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
-
-					// start fade out effect
-					Brightness brightness = (Brightness){0, 0, 0};
-					Camera::startEffect(Camera::getInstance(),
-						kFadeTo, // effect type
-						0, // initial delay (in ms)
-						&brightness, // target brightness
-						__FADE_DELAY, // delay between fading steps (in ms)
-						(void (*)(Object, Object))TitleScreenState::onFadeOutComplete, // callback function
-						Object::safeCast(this) // callback scope
-					);
-				}
-				else
-				{
-					// disable user input
-					Game::disableKeypad(Game::getInstance());
-
-					// delete copyright
-					Entity copyright = Entity::safeCast(Container::getChildByName(
-						Container::safeCast(Game::getStage(Game::getInstance())),
-						"Copyright",
-						false
-					));
-
-					Entity::releaseSprites(copyright);
-					Container::deleteMyself(Container::safeCast(copyright));
-
-					// delete menu
-					Entity menu = Entity::safeCast(Container::getChildByName(
-						Container::safeCast(Game::getStage(Game::getInstance())),
-						"Menu",
-						false
-					));
-
-					Entity::releaseSprites(menu);
-					Container::deleteMyself(Container::safeCast(menu));
-
-					// delete cursor
-					Container::deleteMyself(Container::safeCast(this->cursorEntity));
-					this->cursorEntity = NULL;
-
-					// get logo entity from stage
-					AnimatedEntity logoEntity = AnimatedEntity::safeCast(Container::getChildByName(
-						Container::safeCast(Game::getStage(Game::getInstance())),
-						"Logo",
-						false
-					));
-
-					// play sound
-					Vector3D position = {192, 112, 0};
-					SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
-
-					// play logo's fade out anim
-					AnimatedEntity::playAnimation(logoEntity, "FadeOut");
-
-					// after a short delay, handle menu selection
-					MessageDispatcher::dispatchMessage(750, Object::safeCast(this), Object::safeCast(this), kMenuSelection, NULL);
-				}
-			}
-			else if(this->mode == kModePlaying && this->currentSelection == kMenuOptionPlayMovie && (K_A & userInput.pressedKey))
-			{
-				// update internal state
-				this->isPaused = !this->isPaused;
-
-				// get image entity from stage
-				Container imageEntity = Container::getChildByName(
-					Container::safeCast(Game::getStage(Game::getInstance())),
-					"Image",
-					false
-				);
-				if(imageEntity)
-				{
-					// pause/resume animation
-					AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(imageEntity), this->isPaused);
-				}
-
-				// get logo entity from stage
-				Container logoEntity = Container::getChildByName(
-					Container::safeCast(Game::getStage(Game::getInstance())),
-					"Logo",
-					false
-				);
-				if(logoEntity)
-				{
-					// pause/resume animation
-					AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(logoEntity), this->isPaused);
-				}
-
-				// get ende entity from stage
-				Container creditsEntity = Container::getChildByName(
-					Container::safeCast(Game::getStage(Game::getInstance())),
-					"CredText",
-					false
-				);
-				if(creditsEntity)
-				{
-					// pause/resume animation
-					AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(creditsEntity), this->isPaused);
-				}
-
-				// update ui
-				if (this->isPaused)
-				{
-					Entity::hide(Entity::safeCast(this->pauseButtonEntity));
-					Entity::show(Entity::safeCast(this->resumeButtonEntity));
-					Entity::show(Entity::safeCast(this->backButtonEntity));
-				}
-				else
-				{
-					Entity::hide(Entity::safeCast(this->pauseButtonEntity));
-					Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-					Entity::hide(Entity::safeCast(this->backButtonEntity));
-				}
-
-				// play sound
-				Vector3D position = {192, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
-			}
-			else if((this->isPaused || (this->mode == kModePlaying && this->currentSelection == kMenuOptionCredits)) && (K_B & userInput.pressedKey))
+			if(this->currentSelection == kMenuOptionAnimationGallery)
 			{
 				// disable user input
 				Game::disableKeypad(Game::getInstance());
 
 				// play sound
 				Vector3D position = {192, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+				SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 
 				// start fade out effect
 				Brightness brightness = (Brightness){0, 0, 0};
@@ -294,66 +159,189 @@ void TitleScreenState::processUserInput(UserInput userInput)
 					0, // initial delay (in ms)
 					&brightness, // target brightness
 					__FADE_DELAY, // delay between fading steps (in ms)
-					(void (*)(Object, Object))TitleScreenState::onFadeOutToTitleComplete, // callback function
+					(void (*)(Object, Object))TitleScreenState::onFadeOutComplete, // callback function
 					Object::safeCast(this) // callback scope
 				);
 			}
-			else if(this->mode == kModePlaying && this->currentSelection == kMenuOptionCredits && (K_A & userInput.pressedKey))
+			else
 			{
-				switch(this->currentCreditsFrame++)
-				{
-					case 4:
-					{
-						Entity::hide(Entity::safeCast(this->nextButtonEntity));
-					}
-					case 0:
-					case 1:
-					case 2:
-					case 3:
-					{
-						AnimatedEntity creditsEntity = AnimatedEntity::safeCast(Container::getChildByName(
-							Container::safeCast(Game::getStage(Game::getInstance())),
-							"CredText",
-							false
-						));
-						AnimatedEntity::nextFrame(creditsEntity);
-						break;
-					}
-				}
+				// disable user input
+				Game::disableKeypad(Game::getInstance());
+
+				// delete copyright
+				Entity copyright = Entity::safeCast(Container::getChildByName(
+					Game::getStage(Game::getInstance()),
+					"Copyright",
+					false
+				));
+
+				Entity::releaseSprites(copyright);
+				Container::deleteMyself(copyright);
+
+				// delete menu
+				Entity menu = Entity::safeCast(Container::getChildByName(
+					Game::getStage(Game::getInstance()),
+					"Menu",
+					false
+				));
+
+				Entity::releaseSprites(menu);
+				Container::deleteMyself(menu);
+
+				// delete cursor
+				Container::deleteMyself(this->cursorEntity);
+				this->cursorEntity = NULL;
+
+				// get logo entity from stage
+				AnimatedEntity logoEntity = AnimatedEntity::safeCast(Container::getChildByName(
+					Game::getStage(Game::getInstance()),
+					"Logo",
+					false
+				));
 
 				// play sound
 				Vector3D position = {192, 112, 0};
 				SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+
+				// play logo's fade out anim
+				AnimatedEntity::playAnimation(logoEntity, "FadeOut");
+
+				// after a short delay, handle menu selection
+				MessageDispatcher::dispatchMessage(750, Object::safeCast(this), Object::safeCast(this), kMenuSelection, NULL);
 			}
 		}
-		else if(this->mode == kModeMenu && (K_LU & userInput.pressedKey || K_RU & userInput.pressedKey || K_LT & userInput.pressedKey))
+		else if(this->mode == kModePlaying && this->currentSelection == kMenuOptionPlayMovie && (K_A & userInput.pressedKey))
 		{
-			// increment/wrap menu selection
-			this->currentSelection = (this->currentSelection > 0)
-				? this->currentSelection - 1
-				: (TITLE_SCREEN_MENU_OPTIONS - 1);
+			// update internal state
+			this->isPaused = !this->isPaused;
 
-			// adjust cursor position
-			Vector3D position = {__PIXELS_TO_METERS(18), __PIXELS_TO_METERS(108 + (this->currentSelection * 12)), 0};
-			Actor::setPosition(Actor::safeCast(this->cursorEntity), &position);
+			// get image entity from stage
+			Container imageEntity = Container::getChildByName(
+				Game::getStage(Game::getInstance()),
+				"Image",
+				false
+			);
+			if(imageEntity)
+			{
+				// pause/resume animation
+				AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(imageEntity), this->isPaused);
+			}
+
+			// get logo entity from stage
+			Container logoEntity = Container::getChildByName(
+				Game::getStage(Game::getInstance()),
+				"Logo",
+				false
+			);
+			if(logoEntity)
+			{
+				// pause/resume animation
+				AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(logoEntity), this->isPaused);
+			}
+
+			// get ende entity from stage
+			Container creditsEntity = Container::getChildByName(
+				Game::getStage(Game::getInstance()),
+				"CredText",
+				false
+			);
+			if(creditsEntity)
+			{
+				// pause/resume animation
+				AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(creditsEntity), this->isPaused);
+			}
+
+			// update ui
+			if (this->isPaused)
+			{
+				Entity::show(this->resumeButtonEntity);
+				Entity::show(this->backButtonEntity);
+			}
+			else
+			{
+				Entity::hide(this->resumeButtonEntity);
+				Entity::hide(this->backButtonEntity);
+			}
 
 			// play sound
-			SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+			Vector3D position = {192, 112, 0};
+			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 		}
-		else if(this->mode == kModeMenu && (K_LD & userInput.pressedKey || K_RD & userInput.pressedKey || K_RT & userInput.pressedKey))
+		else if((this->isPaused || (this->mode == kModePlaying && this->currentSelection == kMenuOptionCredits)) && (K_B & userInput.pressedKey))
 		{
-			// decrement/wrap menu selection
-			this->currentSelection = (this->currentSelection < (TITLE_SCREEN_MENU_OPTIONS - 1))
-				? this->currentSelection + 1
-				: 0;
-
-			// adjust cursor position
-			Vector3D position = {__PIXELS_TO_METERS(18), __PIXELS_TO_METERS(108 + (this->currentSelection * 12)), 0};
-			Actor::setPosition(Actor::safeCast(this->cursorEntity), &position);
+			// disable user input
+			Game::disableKeypad(Game::getInstance());
 
 			// play sound
-			SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+			Vector3D position = {192, 112, 0};
+			SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+
+			// start fade out effect
+			Brightness brightness = (Brightness){0, 0, 0};
+			Camera::startEffect(Camera::getInstance(),
+				kFadeTo, // effect type
+				0, // initial delay (in ms)
+				&brightness, // target brightness
+				__FADE_DELAY, // delay between fading steps (in ms)
+				(void (*)(Object, Object))TitleScreenState::onFadeOutToTitleComplete, // callback function
+				Object::safeCast(this) // callback scope
+			);
 		}
+		else if(this->mode == kModePlaying && this->currentSelection == kMenuOptionCredits && (K_A & userInput.pressedKey))
+		{
+			switch(this->currentCreditsFrame++)
+			{
+				case 4:
+				{
+					Entity::hide(this->nextButtonEntity);
+				}
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+				{
+					AnimatedEntity creditsEntity = AnimatedEntity::safeCast(Container::getChildByName(
+						Game::getStage(Game::getInstance()),
+						"CredText",
+						false
+					));
+					AnimatedEntity::nextFrame(creditsEntity);
+					break;
+				}
+			}
+
+			// play sound
+			Vector3D position = {192, 112, 0};
+			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+		}
+	}
+	else if(this->mode == kModeMenu && (K_LU & userInput.pressedKey || K_RU & userInput.pressedKey || K_LT & userInput.pressedKey))
+	{
+		// increment/wrap menu selection
+		this->currentSelection = (this->currentSelection > 0)
+			? this->currentSelection - 1
+			: (TITLE_SCREEN_MENU_OPTIONS - 1);
+
+		// adjust cursor position
+		Vector3D position = {__PIXELS_TO_METERS(18), __PIXELS_TO_METERS(108 + (this->currentSelection * 12)), 0};
+		Entity::setLocalPosition(this->cursorEntity, &position);
+
+		// play sound
+		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+	}
+	else if(this->mode == kModeMenu && (K_LD & userInput.pressedKey || K_RD & userInput.pressedKey || K_RT & userInput.pressedKey))
+	{
+		// decrement/wrap menu selection
+		this->currentSelection = (this->currentSelection < (TITLE_SCREEN_MENU_OPTIONS - 1))
+			? this->currentSelection + 1
+			: 0;
+
+		// adjust cursor position
+		Vector3D position = {__PIXELS_TO_METERS(18), __PIXELS_TO_METERS(108 + (this->currentSelection * 12)), 0};
+		Entity::setLocalPosition(this->cursorEntity, &position);
+
+		// play sound
+		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
 	}
 }
 
@@ -376,7 +364,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 
 					// get logo entity from stage
 					AnimatedEntity logoEntity = AnimatedEntity::safeCast(Container::getChildByName(
-						Container::safeCast(Game::getStage(Game::getInstance())),
+						Game::getStage(Game::getInstance()),
 						"Logo",
 						false
 					));
@@ -389,17 +377,18 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 
 				case kMenuOptionCredits:
 				{
+					// remove logo
 					Entity logo = Entity::safeCast(Container::getChildByName(
-						Container::safeCast(Game::getStage(Game::getInstance())),
+						Game::getStage(Game::getInstance()),
 						"Logo",
 						false
 					));
 
 					Entity::releaseSprites(logo);
-					Container::deleteMyself(Container::safeCast(logo));
+					Container::deleteMyself(logo);
 
 					// delayed adding of credits text entity
-					MessageDispatcher::dispatchMessage(1, Object::safeCast(this), Object::safeCast(this), kShowCreditsText, NULL);
+					MessageDispatcher::dispatchMessage(120, Object::safeCast(this), Object::safeCast(this), kShowCreditsText, NULL);
 
 					break;
 				}
@@ -414,25 +403,21 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 			Game::enableKeypad(Game::getInstance());
 
 			// add new image entity
-			extern EntityDefinition CREDITS_TEXT_ALTERNATIVE_AG;
-			PositionedEntityROMDef positionedEntity[] =
-			{
-				{&CREDITS_TEXT_ALTERNATIVE_AG, {80, 74, -0.003f, 0}, 0, "CredText", NULL, NULL, true},
-				{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
-			};
-			Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
+			extern EntityDefinition CREDITS_TEXT_ALTERNATIVE_EN;
+			PositionedEntity POSITIONED_ENTITY = {&CREDITS_TEXT_ALTERNATIVE_EN, {80, 74, -0.003f, 0}, 0, "CredText", NULL, NULL, true};
+			Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
 			// pause credits animation
 			AnimatedEntity creditsEntity = AnimatedEntity::safeCast(Container::getChildByName(
-				Container::safeCast(Game::getStage(Game::getInstance())),
+				Game::getStage(Game::getInstance()),
 				"CredText",
 				false
 			));
 			AnimatedEntity::pauseAnimation(creditsEntity, true);
 
 			// show buttons
-			Entity::show(Entity::safeCast(this->nextButtonEntity));
-			Entity::show(Entity::safeCast(this->backButtonEntity));
+			Entity::show(this->nextButtonEntity);
+			Entity::show(this->backButtonEntity);
 
 			// reset current credits frame
 			this->currentCreditsFrame = 0;
@@ -442,33 +427,9 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 
 		case kShowCreditsAnimation:
 		{
-			// delete image entity
-			Entity image = Entity::safeCast(Container::getChildByName(
-				Container::safeCast(Game::getStage(Game::getInstance())),
-				"Image",
-				false
-			));
-
-			Entity::releaseSprites(image);
-			Container::deleteMyself(Container::safeCast(image));
-
-			// delete credits entity
-			Entity creditsText = Entity::safeCast(Container::getChildByName(
-				Container::safeCast(Game::getStage(Game::getInstance())),
-				"CredText",
-				false
-			));
-
-			Entity::releaseSprites(creditsText);
-			Container::deleteMyself(Container::safeCast(creditsText));
-
 			// add image entity
-			PositionedEntityROMDef positionedEntity[] =
-			{
-				{&CREDITS_AG, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true},
-				{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
-			};
-			Stage::addChildEntity(Game::getStage(Game::getInstance()), positionedEntity, false);
+			PositionedEntity POSITIONED_ENTITY = {&CREDITS_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
+			Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
 			break;
 		}
@@ -527,6 +488,26 @@ void TitleScreenState::onAFlipbookByComplete()
 
 void TitleScreenState::playCreditsAnimation()
 {
+	// delete image entity
+	Entity image = Entity::safeCast(Container::getChildByName(
+		Game::getStage(Game::getInstance()),
+		"Image",
+		false
+	));
+
+	Entity::releaseSprites(image);
+	Container::deleteMyself(Container::safeCast(image));
+
+	// delete credits entity
+	Entity creditsText = Entity::safeCast(Container::getChildByName(
+		Game::getStage(Game::getInstance()),
+		"CredText",
+		false
+	));
+
+	Entity::releaseSprites(creditsText);
+	Container::deleteMyself(creditsText);
+
 	// delayed adding of credits animation entity
-	MessageDispatcher::dispatchMessage(1, Object::safeCast(TitleScreenState::getInstance()), Object::safeCast(TitleScreenState::getInstance()), kShowCreditsAnimation, NULL);
+	MessageDispatcher::dispatchMessage(120, Object::safeCast(TitleScreenState::getInstance()), Object::safeCast(TitleScreenState::getInstance()), kShowCreditsAnimation, NULL);
 }
