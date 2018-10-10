@@ -86,7 +86,7 @@ void CustomCameraEffectManager::startEffect(int effect, va_list args)
 
 		default:
 
-			CameraEffectManager::startEffect(CameraEffectManager::getInstance(), effect, args);
+			Base::startEffect(CameraEffectManager::getInstance(), effect, args);
 			break;
 	}
 }
@@ -102,7 +102,7 @@ void CustomCameraEffectManager::stopEffect(int effect)
 
 		default:
 
-			CameraEffectManager::stopEffect(this, effect);
+			Base::stopEffect(this, effect);
 			break;
 	}
 }
