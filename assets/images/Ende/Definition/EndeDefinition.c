@@ -244,7 +244,7 @@ BgmapSpriteROMDef* const ENDE_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef ENDE_AG =
+AnimatedEntityROMDef ENDE_EN =
 {
 	{
 		// class allocator

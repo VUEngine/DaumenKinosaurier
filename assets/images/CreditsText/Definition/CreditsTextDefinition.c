@@ -177,7 +177,7 @@ BgmapSpriteROMDef* const CREDITS_TEXT_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef CREDITS_TEXT_AG =
+AnimatedEntityROMDef CREDITS_TEXT_EN =
 {
 	{
 		// class allocator
@@ -207,7 +207,7 @@ AnimatedEntityROMDef CREDITS_TEXT_AG =
 	"Default",
 };
 
-AnimatedEntityROMDef CREDITS_TEXT_ALTERNATIVE_AG =
+AnimatedEntityROMDef CREDITS_TEXT_ALTERNATIVE_EN =
 {
 	{
 		// class allocator

@@ -286,7 +286,7 @@ BgmapSpriteROMDef* const LOGO_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef LOGO_AG =
+AnimatedEntityROMDef LOGO_EN =
 {
 	{
 		// class allocator

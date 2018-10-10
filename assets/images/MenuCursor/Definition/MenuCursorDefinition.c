@@ -150,7 +150,7 @@ BgmapSpriteROMDef* const MENU_CURSOR_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef MENU_CURSOR_AG =
+AnimatedEntityROMDef MENU_CURSOR_EN =
 {
 	{
 		// class allocator

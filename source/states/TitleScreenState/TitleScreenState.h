@@ -65,7 +65,6 @@ enum TitleScreenStateModes
 singleton class TitleScreenState : GameState
 {
 	AnimatedEntity cursorEntity;
-	AnimatedEntity pauseButtonEntity;
 	AnimatedEntity resumeButtonEntity;
 	AnimatedEntity backButtonEntity;
 	AnimatedEntity nextButtonEntity;

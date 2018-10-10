@@ -66,15 +66,15 @@ extern TextureDefinition GALLERY_BUTTON_BACK_R_TX;
 extern TextureDefinition GALLERY_BUTTON_NEXT_L_TX;
 extern TextureDefinition GALLERY_BUTTON_NEXT_R_TX;
 
-extern EntityDefinition VOLCANO_AG;
-extern EntityDefinition COPYRIGHT_IM;
-extern EntityDefinition MENU_IM;
-extern EntityDefinition MENU_CURSOR_AG;
-extern EntityDefinition LOGO_AG;
-extern EntityDefinition GALLERY_BUTTON_PAUSE_AG;
-extern EntityDefinition GALLERY_BUTTON_RESUME_AG;
-extern EntityDefinition GALLERY_BUTTON_BACK_AG;
-extern EntityDefinition GALLERY_BUTTON_NEXT_AG;
+extern EntityDefinition VOLCANO_EN;
+extern EntityDefinition COPYRIGHT_EN;
+extern EntityDefinition MENU_EN;
+extern EntityDefinition MENU_CURSOR_EN;
+extern EntityDefinition LOGO_EN;
+extern EntityDefinition GALLERY_BUTTON_PAUSE_EN;
+extern EntityDefinition GALLERY_BUTTON_RESUME_EN;
+extern EntityDefinition GALLERY_BUTTON_BACK_EN;
+extern EntityDefinition GALLERY_BUTTON_NEXT_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -83,17 +83,16 @@ extern EntityDefinition GALLERY_BUTTON_NEXT_AG;
 
 PositionedEntityROMDef TITLE_SCREEN_ST_CHILDREN[] =
 {
-	{&GALLERY_BUTTON_BACK_AG,	{354,  30, -0.001f, 0}, 0, "Back",		NULL, NULL, true},
-	{&GALLERY_BUTTON_NEXT_AG,	{354,  12, -0.001f, 0}, 0, "Next",      NULL, NULL, true},
-	{&GALLERY_BUTTON_PAUSE_AG,	{350,  12, -0.001f, 0}, 0, "Pause",     NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_AG,	{346,  12, -0.001f, 0}, 0, "Resume",    NULL, NULL, true},
-	{&COPYRIGHT_IM,				{192, 192, -0.001f, 0},	0, "Copyright", NULL, NULL, true},
-	{&LOGO_AG,					{ 86,  54, -0.001f, 0},	0, "Logo",      NULL, NULL, true},
-	{&MENU_IM,					{ 76, 100, -0.001f, 0},	0, "Menu",      NULL, NULL, true},
-	{&MENU_CURSOR_AG,			{ 18, 108, -0.001f, 0},	0, "Cursor",    NULL, NULL, true},
-	{&VOLCANO_AG,				{192, 112,       0, 0},	0, "Image",     NULL, NULL, true},
+	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0},	0, "Back",		NULL, NULL, true},
+	{&GALLERY_BUTTON_NEXT_EN,	{354,  12, -0.001f, 0},	0, "Next",		NULL, NULL, true},
+	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, -0.001f, 0},	0, "Resume",	NULL, NULL, true},
+	{&COPYRIGHT_EN,				{192, 192, -0.001f, 0},	0, "Copyright",	NULL, NULL, true},
+	{&LOGO_EN,					{ 86,  54, -0.001f, 0},	0, "Logo",		NULL, NULL, true},
+	{&MENU_EN,					{ 76, 100, -0.001f, 0},	0, "Menu",		NULL, NULL, true},
+	{&MENU_CURSOR_EN,			{ 18, 108, -0.001f, 0},	0, "Cursor",	NULL, NULL, true},
+	{&VOLCANO_EN,				{192, 112,       0, 0},	0, "Image",		NULL, NULL, true},
 
-	{NULL,{0,0,0,0}, 0, NULL, NULL, NULL, false},
+	{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 };
 
 
@@ -110,43 +109,11 @@ FontROMDef* const TITLE_SCREEN_ST_FONTS[] =
 
 CharSetROMDef* const TITLE_SCREEN_ST_CHARSETS[] =
 {
-	&GALLERY_BUTTON_BACK_L_CH,
-	&GALLERY_BUTTON_BACK_R_CH,
-	&GALLERY_BUTTON_NEXT_L_CH,
-	&GALLERY_BUTTON_NEXT_R_CH,
-	&GALLERY_BUTTON_PAUSE_L_CH,
-	&GALLERY_BUTTON_PAUSE_R_CH,
-	&GALLERY_BUTTON_RESUME_L_CH,
-	&GALLERY_BUTTON_RESUME_R_CH,
-	&COPYRIGHT_CH,
-	&MENU_CH,
-	&MENU_CURSOR_CH,
-	&LOGO_L_CH,
-	&LOGO_R_CH,
-	&VOLCANO_L_CH,
-	&VOLCANO_R_CH,
-
 	NULL
 };
 
 TextureDefinition* const TITLE_SCREEN_ST_TEXTURES[] =
 {
-	&GALLERY_BUTTON_BACK_L_TX,
-	&GALLERY_BUTTON_BACK_R_TX,
-	&GALLERY_BUTTON_NEXT_L_TX,
-	&GALLERY_BUTTON_NEXT_R_TX,
-	&GALLERY_BUTTON_PAUSE_L_TX,
-	&GALLERY_BUTTON_PAUSE_R_TX,
-	&GALLERY_BUTTON_RESUME_L_TX,
-	&GALLERY_BUTTON_RESUME_R_TX,
-	&COPYRIGHT_TX,
-	&MENU_TX,
-	&MENU_CURSOR_TX,
-	&LOGO_L_TX,
-	&LOGO_R_TX,
-	&VOLCANO_L_TX,
-	&VOLCANO_R_TX,
-
 	NULL
 };
 

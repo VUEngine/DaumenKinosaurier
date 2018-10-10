@@ -107,32 +107,32 @@ void ImageViewerState::enter(void* owner)
 
 	// get entities
 	this->imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Image",
 		false
 	));
 	this->titleEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Title",
 		false
 	));
 	this->pauseButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Pause",
 		false
 	));
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Back",
 		false
 	));
 	this->framesButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Container::safeCast(Game::getStage(Game::getInstance())),
+		Game::getStage(Game::getInstance()),
 		"Frames",
 		false
 	));
@@ -141,8 +141,8 @@ void ImageViewerState::enter(void* owner)
 	ImageViewerState::printAnimationName(this);
 
 	// initially hide buttons
-	Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-	Entity::hide(Entity::safeCast(this->framesButtonEntity));
+	Entity::hide(this->resumeButtonEntity);
+	Entity::hide(this->framesButtonEntity);
 
 	// start fade in effect
 	Camera::startEffect(Camera::getInstance(),
@@ -157,113 +157,110 @@ void ImageViewerState::enter(void* owner)
 
 void ImageViewerState::processUserInput(UserInput userInput)
 {
-	if(userInput.pressedKey & ~K_PWR)
+	if(K_B & userInput.pressedKey)
 	{
-		if(K_B & userInput.pressedKey)
+		// disable user input
+		Game::disableKeypad(Game::getInstance());
+
+		// pause/resume animation
+		AnimatedEntity::pauseAnimation(this->imageEntity, true);
+		AnimatedEntity::pauseAnimation(this->titleEntity, true);
+		AnimatedEntity::pauseAnimation(this->pauseButtonEntity, true);
+		AnimatedEntity::pauseAnimation(this->resumeButtonEntity, true);
+		AnimatedEntity::pauseAnimation(this->backButtonEntity, true);
+		AnimatedEntity::pauseAnimation(this->framesButtonEntity, true);
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+
+		// start fade out effect
+		Brightness brightness = (Brightness){0, 0, 0};
+		Camera::startEffect(Camera::getInstance(),
+			kFadeTo, // effect type
+			0, // initial delay (in ms)
+			&brightness, // target brightness
+			__FADE_DELAY, // delay between fading steps (in ms)
+			(void (*)(Object, Object))ImageViewerState::onFadeOutComplete, // callback function
+			Object::safeCast(this) // callback scope
+		);
+	}
+	else if(K_A & userInput.pressedKey)
+	{
+		// update internal state
+		this->isPaused = !this->isPaused;
+
+		// update ui
+		if (this->isPaused)
 		{
-			// disable user input
-			Game::disableKeypad(Game::getInstance());
-
-			// pause/resume animation
-			AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(this->imageEntity), true);
-			AnimatedEntity::pauseAnimation(this->titleEntity, true);
-			AnimatedEntity::pauseAnimation(this->pauseButtonEntity, true);
-			AnimatedEntity::pauseAnimation(this->resumeButtonEntity, true);
-			AnimatedEntity::pauseAnimation(this->backButtonEntity, true);
-			AnimatedEntity::pauseAnimation(this->framesButtonEntity, true);
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
-
-			// start fade out effect
-			Brightness brightness = (Brightness){0, 0, 0};
-			Camera::startEffect(Camera::getInstance(),
-				kFadeTo, // effect type
-				0, // initial delay (in ms)
-				&brightness, // target brightness
-				__FADE_DELAY, // delay between fading steps (in ms)
-				(void (*)(Object, Object))ImageViewerState::onFadeOutComplete, // callback function
-				Object::safeCast(this) // callback scope
-			);
-		}
-		else if(K_A & userInput.pressedKey)
-		{
-			// update internal state
-			this->isPaused = !this->isPaused;
-
-			// update ui
-			if (this->isPaused)
-			{
-				Entity::hide(Entity::safeCast(this->pauseButtonEntity));
-				Entity::show(Entity::safeCast(this->resumeButtonEntity));
-				Entity::show(Entity::safeCast(this->framesButtonEntity));
-				ImageViewerState::printFrameNumber(this);
-			}
-			else
-			{
-				Entity::show(Entity::safeCast(this->pauseButtonEntity));
-				Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-				Entity::hide(Entity::safeCast(this->framesButtonEntity));
-				ImageViewerState::clearFrameNumber(this);
-			}
-
-			// pause/resume animation
-			AnimatedEntity::pauseAnimation(AnimatedEntity::safeCast(this->imageEntity), this->isPaused);
-			//AnimatedEntity::pauseAnimation(this->titleEntity, this->isPaused);
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
-		}
-		else if(K_LT & userInput.pressedKey)
-		{
-			// change current animation number
-			this->currentAnimation = (this->currentAnimation > 0)
-				? this->currentAnimation - 1
-				: (IMAGE_VIEWER_NUMBER_OF_ANIMATIONS - 1);
-
-			// show new animation and update ui
-			ImageViewerState::printAnimationName(this);
-			ImageViewerState::playAnimation(this);
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
-		}
-		else if(K_RT & userInput.pressedKey)
-		{
-			// change current animation number
-			this->currentAnimation = (this->currentAnimation < (IMAGE_VIEWER_NUMBER_OF_ANIMATIONS - 1))
-				? this->currentAnimation + 1
-				: 0;
-
-			// show new animation and update ui
-			ImageViewerState::printAnimationName(this);
-			ImageViewerState::playAnimation(this);
-
-			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
-		}
-		else if(this->isPaused && (K_LL & userInput.pressedKey || K_RL & userInput.pressedKey))
-		{
-			AnimatedEntity::previousFrame(this->imageEntity);
+			Entity::hide(this->pauseButtonEntity);
+			Entity::show(this->resumeButtonEntity);
+			Entity::show(this->framesButtonEntity);
 			ImageViewerState::printFrameNumber(this);
-
-			// play sound
-			//Vector3D position = {192, 112, 0};
-			//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
 		}
-		else if(this->isPaused && (K_LR & userInput.pressedKey || K_RR & userInput.pressedKey))
+		else
 		{
-			AnimatedEntity::nextFrame(this->imageEntity);
-			ImageViewerState::printFrameNumber(this);
-
-			// play sound
-			//Vector3D position = {192, 112, 0};
-			//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+			Entity::show(this->pauseButtonEntity);
+			Entity::hide(this->resumeButtonEntity);
+			Entity::hide(this->framesButtonEntity);
+			ImageViewerState::clearFrameNumber(this);
 		}
+
+		// pause/resume animation
+		AnimatedEntity::pauseAnimation(this->imageEntity, this->isPaused);
+		//AnimatedEntity::pauseAnimation(this->titleEntity, this->isPaused);
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+	}
+	else if(K_LT & userInput.pressedKey)
+	{
+		// change current animation number
+		this->currentAnimation = (this->currentAnimation > 0)
+			? this->currentAnimation - 1
+			: (IMAGE_VIEWER_NUMBER_OF_ANIMATIONS - 1);
+
+		// show new animation and update ui
+		ImageViewerState::printAnimationName(this);
+		ImageViewerState::playAnimation(this);
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+	}
+	else if(K_RT & userInput.pressedKey)
+	{
+		// change current animation number
+		this->currentAnimation = (this->currentAnimation < (IMAGE_VIEWER_NUMBER_OF_ANIMATIONS - 1))
+			? this->currentAnimation + 1
+			: 0;
+
+		// show new animation and update ui
+		ImageViewerState::printAnimationName(this);
+		ImageViewerState::playAnimation(this);
+
+		// play sound
+		Vector3D position = {192, 112, 0};
+		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+	}
+	else if(this->isPaused && (K_LL & userInput.pressedKey || K_RL & userInput.pressedKey))
+	{
+		AnimatedEntity::previousFrame(this->imageEntity);
+		ImageViewerState::printFrameNumber(this);
+
+		// play sound
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+	}
+	else if(this->isPaused && (K_LR & userInput.pressedKey || K_RR & userInput.pressedKey))
+	{
+		AnimatedEntity::nextFrame(this->imageEntity);
+		ImageViewerState::printFrameNumber(this);
+
+		// play sound
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
 	}
 }
 
@@ -296,7 +293,7 @@ void ImageViewerState::playAnimation()
 	//Camera::startEffect(Camera::getInstance(), kHide);
 
 	// get image entity sprites
-	VirtualList entitySprites = Entity::getSprites(Entity::safeCast(this->imageEntity));
+	VirtualList entitySprites = Entity::getSprites(this->imageEntity);
 
 	// cycle left and right sprites
 	VirtualNode node = VirtualList::begin(entitySprites);
@@ -304,7 +301,7 @@ void ImageViewerState::playAnimation()
 	for(i = 0; node; node = VirtualNode::getNext(node), i++)
 	{
 		// get image entity texture
-		Texture entityTexture = Sprite::getTexture(Sprite::safeCast(VirtualNode::getData(node)));
+		Texture entityTexture = Sprite::getTexture(VirtualNode::getData(node));
 
 		// rewrite texture definition
 		Texture::setDefinition(entityTexture, ImageViewerState::getTexture(this, i));
@@ -319,9 +316,9 @@ void ImageViewerState::playAnimation()
 
 	// force unpaused
 	this->isPaused = false;
-	Entity::show(Entity::safeCast(this->pauseButtonEntity));
-	Entity::hide(Entity::safeCast(this->resumeButtonEntity));
-	Entity::hide(Entity::safeCast(this->framesButtonEntity));
+	Entity::show(this->pauseButtonEntity);
+	Entity::hide(this->resumeButtonEntity);
+	Entity::hide(this->framesButtonEntity);
 	ImageViewerState::clearFrameNumber(this);
 
 	// show screen again

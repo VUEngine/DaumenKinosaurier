@@ -232,7 +232,7 @@ BgmapSpriteROMDef* const GALLERY_BUTTON_RESUME_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef GALLERY_BUTTON_RESUME_AG =
+AnimatedEntityROMDef GALLERY_BUTTON_RESUME_EN =
 {
 	{
 		// class allocator

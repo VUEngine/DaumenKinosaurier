@@ -233,7 +233,7 @@ BgmapSpriteROMDef* const CREDITS_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef CREDITS_AG =
+AnimatedEntityROMDef CREDITS_EN =
 {
 	{
 		// class allocator

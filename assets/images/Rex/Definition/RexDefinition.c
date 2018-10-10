@@ -317,7 +317,7 @@ BgmapSpriteROMDef* const REX_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMDef REX_AG =
+AnimatedEntityROMDef REX_EN =
 {
 	{
 		// class allocator
@@ -347,7 +347,7 @@ AnimatedEntityROMDef REX_AG =
 	"Default",
 };
 
-AnimatedEntityROMDef REX_RUN_AG =
+AnimatedEntityROMDef REX_RUN_EN =
 {
 	{
 		// class allocator
