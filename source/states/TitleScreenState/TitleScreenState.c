@@ -42,8 +42,8 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern StageROMDef TITLE_SCREEN_ST;
-extern EntityDefinition CREDITS_EN;
+extern StageROMSpec TITLE_SCREEN_ST;
+extern EntitySpec CREDITS_EN;
 extern const u16 BLIP_SND[];
 extern const u16 SELECT_SND[];
 extern const u16 BACK_SND[];
@@ -88,7 +88,7 @@ void TitleScreenState::enter(void* owner)
 	KeypadManager::registerInput(KeypadManager::getInstance(), __KEY_PRESSED | __KEY_RELEASED | __KEY_HOLD);
 
 	// load stage
-	GameState::loadStage(this, (StageDefinition*)&TITLE_SCREEN_ST, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&TITLE_SCREEN_ST, NULL, true);
 
 	// start clocks to start animations
 	GameState::startClocks(this);
@@ -403,7 +403,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 			Game::enableKeypad(Game::getInstance());
 
 			// add new image entity
-			extern EntityDefinition CREDITS_TEXT_ALTERNATIVE_EN;
+			extern EntitySpec CREDITS_TEXT_ALTERNATIVE_EN;
 			PositionedEntity POSITIONED_ENTITY = {&CREDITS_TEXT_ALTERNATIVE_EN, {80, 74, -0.003f, 0}, 0, "CredText", NULL, NULL, true};
 			Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
 
@@ -441,6 +441,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 void TitleScreenState::onFadeInComplete(Object eventFirer __attribute__ ((unused)))
 {
 	this->fadeInComplete = true;
+	Game::enableKeypad(Game::getInstance());
 }
 
 // handle event

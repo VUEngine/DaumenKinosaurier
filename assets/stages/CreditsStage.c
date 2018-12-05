@@ -32,37 +32,37 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern FontROMDef VUENGINE_FONT;
+extern FontROMSpec VUENGINE_FONT;
 
-extern CharSetDefinition CREDITS_L_CH;
-extern CharSetDefinition CREDITS_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_PAUSE_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_PAUSE_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_R_CH;
+extern CharSetSpec CREDITS_L_CH;
+extern CharSetSpec CREDITS_R_CH;
+extern CharSetSpec GALLERY_BUTTON_PAUSE_L_CH;
+extern CharSetSpec GALLERY_BUTTON_PAUSE_R_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
 
-extern TextureDefinition CREDITS_L_TX;
-extern TextureDefinition CREDITS_R_TX;
-extern TextureDefinition GALLERY_BUTTON_PAUSE_L_TX;
-extern TextureDefinition GALLERY_BUTTON_PAUSE_R_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_L_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_R_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_L_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_R_TX;
+extern TextureSpec CREDITS_L_TX;
+extern TextureSpec CREDITS_R_TX;
+extern TextureSpec GALLERY_BUTTON_PAUSE_L_TX;
+extern TextureSpec GALLERY_BUTTON_PAUSE_R_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
 
-extern EntityDefinition CREDITS_EN;
-extern EntityDefinition GALLERY_BUTTON_PAUSE_EN;
-extern EntityDefinition GALLERY_BUTTON_RESUME_EN;
-extern EntityDefinition GALLERY_BUTTON_BACK_EN;
+extern EntitySpec CREDITS_EN;
+extern EntitySpec GALLERY_BUTTON_PAUSE_EN;
+extern EntitySpec GALLERY_BUTTON_RESUME_EN;
+extern EntitySpec GALLERY_BUTTON_BACK_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMDef CREDITS_ST_CHILDREN[] =
+PositionedEntityROMSpec CREDITS_ST_CHILDREN[] =
 {
 	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
 	{&GALLERY_BUTTON_PAUSE_EN,	{350,  12, -0.001f, 0}, 0, "Pause",  NULL, NULL, true},
@@ -77,14 +77,14 @@ PositionedEntityROMDef CREDITS_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMDef* const CREDITS_ST_FONTS[] =
+FontROMSpec* const CREDITS_ST_FONTS[] =
 {
 	//&VUENGINE_FONT,
 
 	NULL
 };
 
-CharSetROMDef* const CREDITS_ST_CHARSETS[] =
+CharSetROMSpec* const CREDITS_ST_CHARSETS[] =
 {
 	&GALLERY_BUTTON_BACK_L_CH,
 	&GALLERY_BUTTON_BACK_R_CH,
@@ -98,7 +98,7 @@ CharSetROMDef* const CREDITS_ST_CHARSETS[] =
 	NULL
 };
 
-TextureDefinition* const CREDITS_ST_TEXTURES[] =
+TextureSpec* const CREDITS_ST_TEXTURES[] =
 {
 	&GALLERY_BUTTON_BACK_L_TX,
 	&GALLERY_BUTTON_BACK_R_TX,
@@ -116,7 +116,7 @@ TextureDefinition* const CREDITS_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMDef CREDITS_ST =
+StageROMSpec CREDITS_ST =
 {
 	// allocator
 	__TYPE(Stage),
@@ -205,7 +205,7 @@ StageROMDef CREDITS_ST =
             },
 
             // brightness repeat
-            (BrightnessRepeatDefinition*)NULL,
+            (BrightnessRepeatSpec*)NULL,
         },
 
         // palettes' config
@@ -296,13 +296,13 @@ StageROMDef CREDITS_ST =
     // assets
     {
         // fonts to preload
-        (FontDefinition**)CREDITS_ST_FONTS,
+        (FontSpec**)CREDITS_ST_FONTS,
 
 		// char sets to preload
-		(CharSetDefinition**)CREDITS_ST_CHARSETS,
+		(CharSetSpec**)CREDITS_ST_CHARSETS,
 
 		// textures to preload
-		(TextureDefinition**)CREDITS_ST_TEXTURES,
+		(TextureSpec**)CREDITS_ST_TEXTURES,
 
         // background music
         NULL,

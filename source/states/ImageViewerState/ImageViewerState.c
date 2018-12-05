@@ -40,19 +40,19 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern StageROMDef IMAGE_VIEWER_ST;
-extern TextureROMDef REX_L_TX;
-extern TextureROMDef REX_R_TX;
-extern TextureROMDef BANANA_L_TX;
-extern TextureROMDef BANANA_R_TX;
-extern TextureROMDef VERTIGO_L_TX;
-extern TextureROMDef VERTIGO_R_TX;
-extern TextureROMDef VOLCANO_L_TX;
-extern TextureROMDef VOLCANO_R_TX;
-extern AnimationDescriptionROMDef VOLCANO_ANIM;
-extern AnimationDescriptionROMDef REX_ANIM;
-extern AnimationDescriptionROMDef BANANA_ANIM;
-extern AnimationDescriptionROMDef VERTIGO_ANIM;
+extern StageROMSpec IMAGE_VIEWER_ST;
+extern TextureROMSpec REX_L_TX;
+extern TextureROMSpec REX_R_TX;
+extern TextureROMSpec BANANA_L_TX;
+extern TextureROMSpec BANANA_R_TX;
+extern TextureROMSpec VERTIGO_L_TX;
+extern TextureROMSpec VERTIGO_R_TX;
+extern TextureROMSpec VOLCANO_L_TX;
+extern TextureROMSpec VOLCANO_R_TX;
+extern AnimationDescriptionROMSpec VOLCANO_ANIM;
+extern AnimationDescriptionROMSpec REX_ANIM;
+extern AnimationDescriptionROMSpec BANANA_ANIM;
+extern AnimationDescriptionROMSpec VERTIGO_ANIM;
 extern const u16 BLIP_SND[];
 extern const u16 BACK_SND[];
 extern const u16 SELECT_SND[];
@@ -92,7 +92,7 @@ void ImageViewerState::enter(void* owner)
 	Base::enter(this, owner);
 
 	// load stage
-	GameState::loadStage(this, (StageDefinition*)&IMAGE_VIEWER_ST, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&IMAGE_VIEWER_ST, NULL, true);
 
 	// enable user input
     Game::enableKeypad(Game::getInstance());
@@ -303,8 +303,8 @@ void ImageViewerState::playAnimation()
 		// get image entity texture
 		Texture entityTexture = Sprite::getTexture(VirtualNode::getData(node));
 
-		// rewrite texture definition
-		Texture::setDefinition(entityTexture, ImageViewerState::getTexture(this, i));
+		// rewrite texture spec
+		Texture::setSpec(entityTexture, ImageViewerState::getTexture(this, i));
 	}
 
 	// force CHAR memory defragmentation to prevent memory depletion
@@ -325,30 +325,30 @@ void ImageViewerState::playAnimation()
 	//Camera::startEffect(Camera::getInstance(), kShow);
 }
 
-TextureDefinition* ImageViewerState::getTexture(u8 textureNumber)
+TextureSpec* ImageViewerState::getTexture(u8 textureNumber)
 {
 	switch(this->currentAnimation)
 	{
 		case 0:
 		default:
 			{
-				return (textureNumber == 0) ? (TextureDefinition*)&VOLCANO_L_TX : (TextureDefinition*)&VOLCANO_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&VOLCANO_L_TX : (TextureSpec*)&VOLCANO_R_TX;
 				break;
 			}
 		case 1:
 		case 2:
 			{
-				return (textureNumber == 0) ? (TextureDefinition*)&REX_L_TX : (TextureDefinition*)&REX_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&REX_L_TX : (TextureSpec*)&REX_R_TX;
 				break;
 			}
 		case 3:
 			{
-				return (textureNumber == 0) ? (TextureDefinition*)&BANANA_L_TX : (TextureDefinition*)&BANANA_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&BANANA_L_TX : (TextureSpec*)&BANANA_R_TX;
 				break;
 			}
 		case 4:
 			{
-				return (textureNumber == 0) ? (TextureDefinition*)&VERTIGO_L_TX : (TextureDefinition*)&VERTIGO_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&VERTIGO_L_TX : (TextureSpec*)&VERTIGO_R_TX;
 				break;
 			}
 	}

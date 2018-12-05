@@ -32,47 +32,47 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern FontROMDef NUMBER_FONT;
+extern FontROMSpec NUMBER_FONT;
 
-extern CharSetDefinition VOLCANO_L_CH;
-extern CharSetDefinition VOLCANO_R_CH;
-extern CharSetDefinition GALLERY_TITLE_L_CH;
-extern CharSetDefinition GALLERY_TITLE_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_PAUSE_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_PAUSE_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_FRAMES_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_FRAMES_R_CH;
+extern CharSetSpec VOLCANO_L_CH;
+extern CharSetSpec VOLCANO_R_CH;
+extern CharSetSpec GALLERY_TITLE_L_CH;
+extern CharSetSpec GALLERY_TITLE_R_CH;
+extern CharSetSpec GALLERY_BUTTON_PAUSE_L_CH;
+extern CharSetSpec GALLERY_BUTTON_PAUSE_R_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
+extern CharSetSpec GALLERY_BUTTON_FRAMES_L_CH;
+extern CharSetSpec GALLERY_BUTTON_FRAMES_R_CH;
 
-extern TextureDefinition VOLCANO_L_TX;
-extern TextureDefinition VOLCANO_R_TX;
-extern TextureDefinition GALLERY_TITLE_L_TX;
-extern TextureDefinition GALLERY_TITLE_R_TX;
-extern TextureDefinition GALLERY_BUTTON_PAUSE_L_TX;
-extern TextureDefinition GALLERY_BUTTON_PAUSE_R_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_L_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_R_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_L_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_R_TX;
-extern TextureDefinition GALLERY_BUTTON_FRAMES_L_TX;
-extern TextureDefinition GALLERY_BUTTON_FRAMES_R_TX;
+extern TextureSpec VOLCANO_L_TX;
+extern TextureSpec VOLCANO_R_TX;
+extern TextureSpec GALLERY_TITLE_L_TX;
+extern TextureSpec GALLERY_TITLE_R_TX;
+extern TextureSpec GALLERY_BUTTON_PAUSE_L_TX;
+extern TextureSpec GALLERY_BUTTON_PAUSE_R_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
+extern TextureSpec GALLERY_BUTTON_FRAMES_L_TX;
+extern TextureSpec GALLERY_BUTTON_FRAMES_R_TX;
 
-extern EntityDefinition VOLCANO_EN;
-extern EntityDefinition GALLERY_TITLE_EN;
-extern EntityDefinition GALLERY_BUTTON_PAUSE_EN;
-extern EntityDefinition GALLERY_BUTTON_RESUME_EN;
-extern EntityDefinition GALLERY_BUTTON_BACK_EN;
-extern EntityDefinition GALLERY_BUTTON_FRAMES_EN;
+extern EntitySpec VOLCANO_EN;
+extern EntitySpec GALLERY_TITLE_EN;
+extern EntitySpec GALLERY_BUTTON_PAUSE_EN;
+extern EntitySpec GALLERY_BUTTON_RESUME_EN;
+extern EntitySpec GALLERY_BUTTON_BACK_EN;
+extern EntitySpec GALLERY_BUTTON_FRAMES_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMDef IMAGE_VIEWER_ST_CHILDREN[] =
+PositionedEntityROMSpec IMAGE_VIEWER_ST_CHILDREN[] =
 {
 	{&GALLERY_BUTTON_FRAMES_EN,	{346,  48, -0.001f, 0}, 0, "Frames", NULL, NULL, true},
 	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
@@ -89,14 +89,14 @@ PositionedEntityROMDef IMAGE_VIEWER_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMDef* const IMAGE_VIEWER_ST_FONTS[] =
+FontROMSpec* const IMAGE_VIEWER_ST_FONTS[] =
 {
 	&NUMBER_FONT,
 
 	NULL
 };
 
-CharSetROMDef* const IMAGE_VIEWER_ST_CHARSETS[] =
+CharSetROMSpec* const IMAGE_VIEWER_ST_CHARSETS[] =
 {
 	&GALLERY_BUTTON_FRAMES_L_CH,
 	&GALLERY_BUTTON_FRAMES_R_CH,
@@ -114,7 +114,7 @@ CharSetROMDef* const IMAGE_VIEWER_ST_CHARSETS[] =
 	NULL
 };
 
-TextureDefinition* const IMAGE_VIEWER_ST_TEXTURES[] =
+TextureSpec* const IMAGE_VIEWER_ST_TEXTURES[] =
 {
 	&GALLERY_BUTTON_FRAMES_L_TX,
 	&GALLERY_BUTTON_FRAMES_R_TX,
@@ -136,7 +136,7 @@ TextureDefinition* const IMAGE_VIEWER_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMDef IMAGE_VIEWER_ST =
+StageROMSpec IMAGE_VIEWER_ST =
 {
 	// allocator
 	__TYPE(Stage),
@@ -225,7 +225,7 @@ StageROMDef IMAGE_VIEWER_ST =
             },
 
             // brightness repeat
-            (BrightnessRepeatDefinition*)NULL,
+            (BrightnessRepeatSpec*)NULL,
         },
 
         // palettes' config
@@ -316,13 +316,13 @@ StageROMDef IMAGE_VIEWER_ST =
     // assets
     {
         // fonts to preload
-        (FontDefinition**)IMAGE_VIEWER_ST_FONTS,
+        (FontSpec**)IMAGE_VIEWER_ST_FONTS,
 
 		// char sets to preload
-		(CharSetDefinition**)IMAGE_VIEWER_ST_CHARSETS,
+		(CharSetSpec**)IMAGE_VIEWER_ST_CHARSETS,
 
 		// textures to preload
-		(TextureDefinition**)IMAGE_VIEWER_ST_TEXTURES,
+		(TextureSpec**)IMAGE_VIEWER_ST_TEXTURES,
 
         // background music
         NULL,

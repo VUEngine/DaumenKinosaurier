@@ -38,7 +38,7 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern StageROMDef CREDITS_ST;
+extern StageROMSpec CREDITS_ST;
 extern const u16 SELECT_SND[];
 extern const u16 BACK_SND[];
 
@@ -74,7 +74,7 @@ void CreditsState::enter(void* owner)
 	Base::enter(this, owner);
 
 	// load stage
-	GameState::loadStage(this, (StageDefinition*)&CREDITS_ST, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&CREDITS_ST, NULL, true);
 
 	// enable user input
     Game::enableKeypad(Game::getInstance());

@@ -32,32 +32,32 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern FontROMDef VUENGINE_FONT;
+extern FontROMSpec VUENGINE_FONT;
 
-extern CharSetDefinition REX_L_CH;
-extern CharSetDefinition REX_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_R_CH;
+extern CharSetSpec REX_L_CH;
+extern CharSetSpec REX_R_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
 
-extern TextureDefinition REX_L_TX;
-extern TextureDefinition REX_R_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_L_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_R_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_L_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_R_TX;
+extern TextureSpec REX_L_TX;
+extern TextureSpec REX_R_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
 
-extern EntityDefinition REX_EN;
-extern EntityDefinition GALLERY_BUTTON_RESUME_EN;
-extern EntityDefinition GALLERY_BUTTON_BACK_EN;
+extern EntitySpec REX_EN;
+extern EntitySpec GALLERY_BUTTON_RESUME_EN;
+extern EntitySpec GALLERY_BUTTON_BACK_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMDef ANIMATION_ST_CHILDREN[] =
+PositionedEntityROMSpec ANIMATION_ST_CHILDREN[] =
 {
 	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
 	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
@@ -71,14 +71,14 @@ PositionedEntityROMDef ANIMATION_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMDef* const ANIMATION_ST_FONTS[] =
+FontROMSpec* const ANIMATION_ST_FONTS[] =
 {
 	//&VUENGINE_FONT,
 
 	NULL
 };
 
-CharSetROMDef* const ANIMATION_ST_CHARSETS[] =
+CharSetROMSpec* const ANIMATION_ST_CHARSETS[] =
 {
 	&GALLERY_BUTTON_BACK_L_CH,
 	&GALLERY_BUTTON_BACK_R_CH,
@@ -88,7 +88,7 @@ CharSetROMDef* const ANIMATION_ST_CHARSETS[] =
 	NULL
 };
 
-TextureDefinition* const ANIMATION_ST_TEXTURES[] =
+TextureSpec* const ANIMATION_ST_TEXTURES[] =
 {
 	&GALLERY_BUTTON_BACK_L_TX,
 	&GALLERY_BUTTON_BACK_R_TX,
@@ -103,7 +103,7 @@ TextureDefinition* const ANIMATION_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMDef ANIMATION_ST =
+StageROMSpec ANIMATION_ST =
 {
 	// allocator
 	__TYPE(Stage),
@@ -192,7 +192,7 @@ StageROMDef ANIMATION_ST =
             },
 
             // brightness repeat
-            (BrightnessRepeatDefinition*)NULL,
+            (BrightnessRepeatSpec*)NULL,
         },
 
         // palettes' config
@@ -283,13 +283,13 @@ StageROMDef ANIMATION_ST =
     // assets
     {
         // fonts to preload
-        (FontDefinition**)ANIMATION_ST_FONTS,
+        (FontSpec**)ANIMATION_ST_FONTS,
 
 		// char sets to preload
-		(CharSetDefinition**)ANIMATION_ST_CHARSETS,
+		(CharSetSpec**)ANIMATION_ST_CHARSETS,
 
 		// textures to preload
-		(TextureDefinition**)ANIMATION_ST_TEXTURES,
+		(TextureSpec**)ANIMATION_ST_TEXTURES,
 
         // background music
         NULL,

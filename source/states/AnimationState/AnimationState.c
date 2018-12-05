@@ -40,7 +40,7 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern StageROMDef ANIMATION_ST;
+extern StageROMSpec ANIMATION_ST;
 
 extern const u16 SELECT_SND[];
 extern const u16 BACK_SND[];
@@ -48,14 +48,14 @@ extern const u16 ROAR_SND[];
 extern const u16 STEP_SND[];
 extern const u16 CRASH_SND[];
 
-extern EntityDefinition REX_EN;
-extern EntityDefinition BANANA_EN;
-extern EntityDefinition REX_RUN_EN;
-extern EntityDefinition VERTIGO_EN;
-extern EntityDefinition VOLCANO_EN;
-extern EntityDefinition ENDE_EN;
-extern EntityDefinition CREDITS_TEXT_EN;
-extern EntityDefinition CREDITS_EN;
+extern EntitySpec REX_EN;
+extern EntitySpec BANANA_EN;
+extern EntitySpec REX_RUN_EN;
+extern EntitySpec VERTIGO_EN;
+extern EntitySpec VOLCANO_EN;
+extern EntitySpec ENDE_EN;
+extern EntitySpec CREDITS_TEXT_EN;
+extern EntitySpec CREDITS_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ void AnimationState::enter(void* owner)
 	Camera::setCameraEffectManager(Camera::getInstance(), CameraEffectManager::safeCast(CustomCameraEffectManager_getInstance()));
 
 	// load stage
-	GameState::loadStage(this, (StageDefinition*)&ANIMATION_ST, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&ANIMATION_ST, NULL, true);
 
 	// enable user input
     Game::enableKeypad(Game::getInstance());
@@ -413,7 +413,7 @@ void AnimationState::playVolcanoEnd()
 	SoundManager::playFxSound(SoundManager::getInstance(), CRASH_SND, position);
 
 	// play "ende" fade in animation
-	PositionedEntityROMDef endeEntity[] =
+	PositionedEntityROMSpec endeEntity[] =
 	{
 		{&ENDE_EN, {86, 54, -0.001f, 0}, 0, "Ende", NULL, NULL, true},
 		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},

@@ -32,56 +32,56 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern FontROMDef VUENGINE_FONT;
+extern FontROMSpec VUENGINE_FONT;
 
-extern CharSetDefinition VOLCANO_L_CH;
-extern CharSetDefinition VOLCANO_R_CH;
-extern CharSetDefinition COPYRIGHT_CH;
-extern CharSetDefinition MENU_CH;
-extern CharSetDefinition MENU_CURSOR_CH;
-extern CharSetDefinition LOGO_L_CH;
-extern CharSetDefinition LOGO_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_PAUSE_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_PAUSE_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_BACK_R_CH;
-extern CharSetDefinition GALLERY_BUTTON_NEXT_L_CH;
-extern CharSetDefinition GALLERY_BUTTON_NEXT_R_CH;
+extern CharSetSpec VOLCANO_L_CH;
+extern CharSetSpec VOLCANO_R_CH;
+extern CharSetSpec COPYRIGHT_CH;
+extern CharSetSpec MENU_CH;
+extern CharSetSpec MENU_CURSOR_CH;
+extern CharSetSpec LOGO_L_CH;
+extern CharSetSpec LOGO_R_CH;
+extern CharSetSpec GALLERY_BUTTON_PAUSE_L_CH;
+extern CharSetSpec GALLERY_BUTTON_PAUSE_R_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
+extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
+extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
+extern CharSetSpec GALLERY_BUTTON_NEXT_L_CH;
+extern CharSetSpec GALLERY_BUTTON_NEXT_R_CH;
 
-extern TextureDefinition VOLCANO_L_TX;
-extern TextureDefinition VOLCANO_R_TX;
-extern TextureDefinition COPYRIGHT_TX;
-extern TextureDefinition MENU_TX;
-extern TextureDefinition MENU_CURSOR_TX;
-extern TextureDefinition LOGO_L_TX;
-extern TextureDefinition LOGO_R_TX;
-extern TextureDefinition GALLERY_BUTTON_PAUSE_L_TX;
-extern TextureDefinition GALLERY_BUTTON_PAUSE_R_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_L_TX;
-extern TextureDefinition GALLERY_BUTTON_RESUME_R_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_L_TX;
-extern TextureDefinition GALLERY_BUTTON_BACK_R_TX;
-extern TextureDefinition GALLERY_BUTTON_NEXT_L_TX;
-extern TextureDefinition GALLERY_BUTTON_NEXT_R_TX;
+extern TextureSpec VOLCANO_L_TX;
+extern TextureSpec VOLCANO_R_TX;
+extern TextureSpec COPYRIGHT_TX;
+extern TextureSpec MENU_TX;
+extern TextureSpec MENU_CURSOR_TX;
+extern TextureSpec LOGO_L_TX;
+extern TextureSpec LOGO_R_TX;
+extern TextureSpec GALLERY_BUTTON_PAUSE_L_TX;
+extern TextureSpec GALLERY_BUTTON_PAUSE_R_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
+extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
+extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
+extern TextureSpec GALLERY_BUTTON_NEXT_L_TX;
+extern TextureSpec GALLERY_BUTTON_NEXT_R_TX;
 
-extern EntityDefinition VOLCANO_EN;
-extern EntityDefinition COPYRIGHT_EN;
-extern EntityDefinition MENU_EN;
-extern EntityDefinition MENU_CURSOR_EN;
-extern EntityDefinition LOGO_EN;
-extern EntityDefinition GALLERY_BUTTON_PAUSE_EN;
-extern EntityDefinition GALLERY_BUTTON_RESUME_EN;
-extern EntityDefinition GALLERY_BUTTON_BACK_EN;
-extern EntityDefinition GALLERY_BUTTON_NEXT_EN;
+extern EntitySpec VOLCANO_EN;
+extern EntitySpec COPYRIGHT_EN;
+extern EntitySpec MENU_EN;
+extern EntitySpec MENU_CURSOR_EN;
+extern EntitySpec LOGO_EN;
+extern EntitySpec GALLERY_BUTTON_PAUSE_EN;
+extern EntitySpec GALLERY_BUTTON_RESUME_EN;
+extern EntitySpec GALLERY_BUTTON_BACK_EN;
+extern EntitySpec GALLERY_BUTTON_NEXT_EN;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMDef TITLE_SCREEN_ST_CHILDREN[] =
+PositionedEntityROMSpec TITLE_SCREEN_ST_CHILDREN[] =
 {
 	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0},	0, "Back",		NULL, NULL, true},
 	{&GALLERY_BUTTON_NEXT_EN,	{354,  12, -0.001f, 0},	0, "Next",		NULL, NULL, true},
@@ -100,19 +100,19 @@ PositionedEntityROMDef TITLE_SCREEN_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMDef* const TITLE_SCREEN_ST_FONTS[] =
+FontROMSpec* const TITLE_SCREEN_ST_FONTS[] =
 {
 	//&VUENGINE_FONT,
 
 	NULL
 };
 
-CharSetROMDef* const TITLE_SCREEN_ST_CHARSETS[] =
+CharSetROMSpec* const TITLE_SCREEN_ST_CHARSETS[] =
 {
 	NULL
 };
 
-TextureDefinition* const TITLE_SCREEN_ST_TEXTURES[] =
+TextureSpec* const TITLE_SCREEN_ST_TEXTURES[] =
 {
 	NULL
 };
@@ -122,7 +122,7 @@ TextureDefinition* const TITLE_SCREEN_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMDef TITLE_SCREEN_ST =
+StageROMSpec TITLE_SCREEN_ST =
 {
 	// allocator
 	__TYPE(Stage),
@@ -211,7 +211,7 @@ StageROMDef TITLE_SCREEN_ST =
             },
 
             // brightness repeat
-            (BrightnessRepeatDefinition*)NULL,
+            (BrightnessRepeatSpec*)NULL,
         },
 
         // palettes' config
@@ -302,13 +302,13 @@ StageROMDef TITLE_SCREEN_ST =
     // assets
     {
         // fonts to preload
-        (FontDefinition**)TITLE_SCREEN_ST_FONTS,
+        (FontSpec**)TITLE_SCREEN_ST_FONTS,
 
 		// char sets to preload
-		(CharSetDefinition**)TITLE_SCREEN_ST_CHARSETS,
+		(CharSetSpec**)TITLE_SCREEN_ST_CHARSETS,
 
 		// textures to preload
-		(TextureDefinition**)TITLE_SCREEN_ST_TEXTURES,
+		(TextureSpec**)TITLE_SCREEN_ST_TEXTURES,
 
         // background music
         NULL,

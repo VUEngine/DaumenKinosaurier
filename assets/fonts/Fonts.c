@@ -32,8 +32,8 @@
 //												DEFINITIONS
 //---------------------------------------------------------------------------------------------------------
 
-FontDefinition* const __FONTS[] =
+FontSpec* const __FONTS[] =
 {
-	(FontDefinition*)&NUMBER_FONT,
+	(FontSpec*)&NUMBER_FONT,
 	NULL
 };
