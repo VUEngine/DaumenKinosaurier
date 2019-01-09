@@ -175,7 +175,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 					false
 				));
 
-				Entity::releaseSprites(copyright);
+				Entity::releaseSprites(copyright, true);
 				Container::deleteMyself(copyright);
 
 				// delete menu
@@ -185,7 +185,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 					false
 				));
 
-				Entity::releaseSprites(menu);
+				Entity::releaseSprites(menu, true);
 				Container::deleteMyself(menu);
 
 				// delete cursor
@@ -384,7 +384,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 						false
 					));
 
-					Entity::releaseSprites(logo);
+					Entity::releaseSprites(logo, true);
 					Container::deleteMyself(logo);
 
 					// delayed adding of credits text entity
@@ -458,7 +458,7 @@ void TitleScreenState::onFadeOutComplete(Object eventFirer __attribute__ ((unuse
 			Game::changeState(Game::getInstance(), GameState::safeCast(ImageViewerState::getInstance()));
 			break;
 		case kMenuOptionCredits:
-			Game::changeState(Game::getInstance(), GameState::safeCast(CreditsState::getInstance()));
+//			Game::changeState(Game::getInstance(), GameState::safeCast(CreditsState::getInstance()));
 			break;
 	}
 }
@@ -496,7 +496,7 @@ void TitleScreenState::playCreditsAnimation()
 		false
 	));
 
-	Entity::releaseSprites(image);
+	Entity::releaseSprites(image, true);
 	Container::deleteMyself(Container::safeCast(image));
 
 	// delete credits entity
@@ -506,7 +506,7 @@ void TitleScreenState::playCreditsAnimation()
 		false
 	));
 
-	Entity::releaseSprites(creditsText);
+	Entity::releaseSprites(creditsText, true);
 	Container::deleteMyself(creditsText);
 
 	// delayed adding of credits animation entity
