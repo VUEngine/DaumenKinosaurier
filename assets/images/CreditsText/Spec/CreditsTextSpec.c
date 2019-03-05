@@ -183,8 +183,11 @@ AnimatedEntityROMSpec CREDITS_TEXT_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)CREDITS_TEXT_SPRITES,
+		(SpriteSpec**)CREDITS_TEXT_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,
@@ -213,8 +216,11 @@ AnimatedEntityROMSpec CREDITS_TEXT_ALTERNATIVE_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)CREDITS_TEXT_SPRITES,
+		(SpriteSpec**)CREDITS_TEXT_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

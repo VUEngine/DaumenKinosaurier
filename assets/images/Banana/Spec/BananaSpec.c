@@ -266,8 +266,11 @@ AnimatedEntityROMSpec BANANA_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)BANANA_SPRITES,
+		(SpriteSpec**)BANANA_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

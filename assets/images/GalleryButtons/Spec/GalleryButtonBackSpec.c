@@ -238,8 +238,11 @@ AnimatedEntityROMSpec GALLERY_BUTTON_BACK_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)GALLERY_BUTTON_BACK_SPRITES,
+		(SpriteSpec**)GALLERY_BUTTON_BACK_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

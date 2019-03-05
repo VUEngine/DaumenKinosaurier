@@ -122,8 +122,11 @@ EntityROMSpec MENU_EN =
 	// class allocator
 	__TYPE(Entity),
 
+	// behaviors 
+	NULL,
+
 	// sprites
-	(SpriteROMSpec**)MENU_SPRITES,
+	(SpriteSpec**)MENU_SPRITES,
 
 	// collision shapes
 	(ShapeSpec*)NULL,

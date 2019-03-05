@@ -250,8 +250,11 @@ AnimatedEntityROMSpec ENDE_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)ENDE_SPRITES,
+		(SpriteSpec**)ENDE_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

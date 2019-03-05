@@ -330,8 +330,11 @@ AnimatedEntityROMSpec GALLERY_TITLE_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)GALLERY_TITLE_SPRITES,
+		(SpriteSpec**)GALLERY_TITLE_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

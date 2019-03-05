@@ -238,8 +238,11 @@ AnimatedEntityROMSpec GALLERY_BUTTON_PAUSE_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)GALLERY_BUTTON_PAUSE_SPRITES,
+		(SpriteSpec**)GALLERY_BUTTON_PAUSE_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

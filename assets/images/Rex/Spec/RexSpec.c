@@ -323,8 +323,11 @@ AnimatedEntityROMSpec REX_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)REX_SPRITES,
+		(SpriteSpec**)REX_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,
@@ -353,8 +356,11 @@ AnimatedEntityROMSpec REX_RUN_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)REX_SPRITES,
+		(SpriteSpec**)REX_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

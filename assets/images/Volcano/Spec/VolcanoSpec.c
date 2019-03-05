@@ -239,8 +239,11 @@ AnimatedEntityROMSpec VOLCANO_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)VOLCANO_SPRITES,
+		(SpriteSpec**)VOLCANO_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

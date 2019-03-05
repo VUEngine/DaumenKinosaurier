@@ -156,8 +156,11 @@ AnimatedEntityROMSpec MENU_CURSOR_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)MENU_CURSOR_SPRITES,
+		(SpriteSpec**)MENU_CURSOR_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,

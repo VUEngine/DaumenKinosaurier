@@ -266,8 +266,11 @@ AnimatedEntityROMSpec VERTIGO_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
+		// behaviors 
+		NULL,
+
 		// sprites
-		(SpriteROMSpec**)VERTIGO_SPRITES,
+		(SpriteSpec**)VERTIGO_SPRITES,
 
 		// collision shapes
 		(ShapeSpec*)NULL,
