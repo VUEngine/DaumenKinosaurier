@@ -32,7 +32,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 // game title (20 chars) 	 ####################
-#define __GAME_TITLE		"DaumenKinosaurier   "
+#define __GAME_TITLE		"Daumen Kinosaurier  "
 // maker code (2 chars)		 ##
 #define __MAKER_CODE		"CR"
 // game code (4 chars)		 ####
