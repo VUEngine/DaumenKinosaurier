@@ -67,7 +67,7 @@
 			"assets/images/Volcano/Right": {
 				"name": "VolcanoRight",
 				"template": "entityStacked"
-			},
+			}
 		}
 	}
 }
