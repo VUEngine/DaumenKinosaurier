@@ -1,7 +1,7 @@
 {
 	"compiler": {
 		"framePointer": false,
-		"optimization": "O3",
+		"optimization": "Os",
 		"output": "c",
 		"prologFunctions": false
 	},
@@ -45,7 +45,7 @@
 	},
 	"romHeader": {
 		"gameCode": "VDKE",
-		"gameTitle": "Daumen Kinosaurier  ",
+		"gameTitle": "DaumenKinosaurier",
 		"makerCode": "CR",
 		"revision": 0
 	},
