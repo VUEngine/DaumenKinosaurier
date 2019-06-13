@@ -1,4 +1,5 @@
 
+
 //{{BLOCK(MenuCursor)
 
 //======================================================================
@@ -21,7 +22,7 @@ const unsigned int MenuCursorTiles[16] __attribute__((aligned(4)))=
 
 const unsigned short MenuCursorMap[4] __attribute__((aligned(4)))=
 {
-	0x0000
+	0x0000,0x0001,0x0002,0x0000,
 };
 
 //}}BLOCK(MenuCursor)

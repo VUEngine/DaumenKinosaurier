@@ -59,9 +59,9 @@ extern EntitySpec GALLERY_BUTTON_BACK_EN;
 
 PositionedEntityROMSpec ANIMATION_ST_CHILDREN[] =
 {
-	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
-	{&REX_EN,					{192, 112,       0, 0}, 0, "Image",  NULL, NULL, true},
+	{&GALLERY_BUTTON_BACK_EN,	{354,  30, 	-1, 0}, 0, "Back",   NULL, NULL, true},
+	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, 	-1, 0}, 0, "Resume", NULL, NULL, true},
+	{&REX_EN,					{192, 112,   0, 0}, 0, "Image",  NULL, NULL, true},
 
 	{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 };

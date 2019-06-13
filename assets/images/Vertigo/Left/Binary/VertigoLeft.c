@@ -1,7 +1,7 @@
 // Number of frames: 16
 // Number of chars per frame: 884
-
-const unsigned int VertigoLeftTiles[] __attribute__((aligned(4))) =
+ 
+const unsigned int VertigoLeftTiles[] __attribute__((aligned(4))) = 
 {
 0x00000000,0x00000000,0x00000000,0x00000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,
 0x97FF57FF,0x4FFF9BFF,0x5FFF4FFF,0x3FFF5FFF,0xAAAABBAA,0xBAA6EAA6,0xAAA9AA95,0xBAA5EAA5,
@@ -32631,7 +32631,7 @@ const unsigned int VertigoLeftTiles[] __attribute__((aligned(4))) =
 0xFFFFFFFF,0xEAAAFFFE,0xEAAABFFF,0xEABFAFEA,0xFFEBFFFF,0xFFFFFFFF,0xAAFFFEAA,0xAAEFFFBA,
 0xFFFFFABF,0xFFFFFFFF,0xFFFFFFEB,0xAAAAFFFF,0xFFFFFFFF,0xFFFFFBAF,0xFFFFFFFF,0xFFFFFFFF,
 };
-
+ 
 const unsigned short VertigoLeftMap[] __attribute__((aligned(4)))=
 {
 0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,

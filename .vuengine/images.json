@@ -6,17 +6,17 @@
 				"template": "entityStacked"
 			},
 			"assets/images/Banana/Middle": {
-				"name": "BananaRight",
+				"name": "BananaMiddle",
 				"template": "entityStacked"
 			},
 			"assets/images/Copyright": {
 				"template": "entity"
 			},
-			"assets/images/CreditsLeft": {
+			"assets/images/Credits/Left": {
 				"name": "CreditsLeft",
 				"template": "entityStacked"
 			},
-			"assets/images/CreditsRight": {
+			"assets/images/Credits/Right": {
 				"name": "CreditsRight",
 				"template": "entityStacked"
 			},
@@ -57,7 +57,7 @@
 				"template": "entityStacked"
 			},
 			"assets/images/Vertigo/Middle": {
-				"name": "VertigoMiddle",
+				"name": "VertigoRight",
 				"template": "entityStacked"
 			},
 			"assets/images/Volcano/Left": {

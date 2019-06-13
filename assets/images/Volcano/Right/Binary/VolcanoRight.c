@@ -1,7 +1,7 @@
 // Number of frames: 10
 // Number of chars per frame: 720
-
-const unsigned int VolcanoRightTiles[] __attribute__((aligned(4))) =
+ 
+const unsigned int VolcanoRightTiles[] __attribute__((aligned(4))) = 
 {
 0x00000000,0x00000000,0x00000000,0x00000000,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,
 0xFFFFFFFF,0xFFFFFFFF,0xBFFFFFFF,0x5FFF3FFF,0x564FA92F,0x25169553,0x02640945,0x80160099,
@@ -4057,7 +4057,7 @@ const unsigned int VolcanoRightTiles[] __attribute__((aligned(4))) =
 0x00000000,
 0x00000000,
 };
-
+ 
 const unsigned short VolcanoRightMap[] __attribute__((aligned(4)))=
 {
 0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,

@@ -1,5 +1,5 @@
-// Number of frames: 1
-// Number of chars per frame: 0
+// Number of frames: 16
+// Number of chars per frame: 893
  
 const unsigned int VertigoRightTiles[] __attribute__((aligned(4))) = 
 {
