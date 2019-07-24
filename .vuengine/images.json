@@ -1,73 +1,71 @@
 {
-	"images": {
-		"folders": {
-			"assets/images/Banana/Left": {
-				"name": "BananaLeft",
-				"template": "entityStacked"
-			},
-			"assets/images/Banana/Middle": {
-				"name": "BananaMiddle",
-				"template": "entityStacked"
-			},
-			"assets/images/Copyright": {
-				"template": "entity"
-			},
-			"assets/images/Credits/Left": {
-				"name": "CreditsLeft",
-				"template": "entityStacked"
-			},
-			"assets/images/Credits/Right": {
-				"name": "CreditsRight",
-				"template": "entityStacked"
-			},
-			"assets/images/CreditsText": {
-				"template": "animatedEntity"
-			},
-			"assets/images/Ende": {
-				"template": "animatedEntity"
-			},
-			"assets/images/Font": {
-				"template": "font"
-			},
-			"assets/images/GalleryButtons": {
-				"template": "animatedEntity"
-			},
-			"assets/images/GalleryTitle": {
-				"template": "animatedEntity"
-			},
-			"assets/images/Logo": {
-				"template": "animatedEntity"
-			},
-			"assets/images/Menu": {
-				"template": "entity"
-			},
-			"assets/images/MenuCursor": {
-				"template": "animatedEntity"
-			},
-			"assets/images/Rex/Left": {
-				"name": "RexLeft",
-				"template": "entityStacked"
-			},
-			"assets/images/Rex/Middle": {
-				"name": "RexMiddle",
-				"template": "entityStacked"
-			},
-			"assets/images/Vertigo/Left": {
-				"name": "VertigoLeft",
-				"template": "entityStacked"
-			},
-			"assets/images/Vertigo/Middle": {
-				"name": "VertigoRight",
-				"template": "entityStacked"
-			},
-			"assets/images/Volcano/Left": {
-				"name": "VolcanoLeft",
-				"template": "entityStacked"
-			},
-			"assets/images/Volcano/Right": {
-				"name": "VolcanoRight",
-				"template": "entityStacked"
-			}
+	"folders": {
+		"assets/images/Banana/Left": {
+			"name": "BananaLeft",
+			"template": "entityStacked"
+		},
+		"assets/images/Banana/Middle": {
+			"name": "BananaMiddle",
+			"template": "entityStacked"
+		},
+		"assets/images/Copyright": {
+			"template": "entity"
+		},
+		"assets/images/Credits/Left": {
+			"name": "CreditsLeft",
+			"template": "entityStacked"
+		},
+		"assets/images/Credits/Right": {
+			"name": "CreditsRight",
+			"template": "entityStacked"
+		},
+		"assets/images/CreditsText": {
+			"template": "animatedEntity"
+		},
+		"assets/images/Ende": {
+			"template": "animatedEntity"
+		},
+		"assets/images/Font": {
+			"template": "font"
+		},
+		"assets/images/GalleryButtons": {
+			"template": "animatedEntity"
+		},
+		"assets/images/GalleryTitle": {
+			"template": "animatedEntity"
+		},
+		"assets/images/Logo": {
+			"template": "animatedEntity"
+		},
+		"assets/images/Menu": {
+			"template": "entity"
+		},
+		"assets/images/MenuCursor": {
+			"template": "animatedEntity"
+		},
+		"assets/images/Rex/Left": {
+			"name": "RexLeft",
+			"template": "entityStacked"
+		},
+		"assets/images/Rex/Middle": {
+			"name": "RexMiddle",
+			"template": "entityStacked"
+		},
+		"assets/images/Vertigo/Left": {
+			"name": "VertigoLeft",
+			"template": "entityStacked"
+		},
+		"assets/images/Vertigo/Middle": {
+			"name": "VertigoRight",
+			"template": "entityStacked"
+		},
+		"assets/images/Volcano/Left": {
+			"name": "VolcanoLeft",
+			"template": "entityStacked"
+		},
+		"assets/images/Volcano/Right": {
+			"name": "VolcanoRight",
+			"template": "entityStacked"
 		}
 	}
 }

@@ -1,8 +1,6 @@
 {
-	"romHeader": {
-		"gameCode": "VDKE",
-		"gameTitle": "DaumenKinosaurier",
-		"makerCode": "CR",
-		"revision": 0
-	}
+	"gameCode": "VDKE",
+	"gameTitle": "DaumenKinosaurier",
+	"makerCode": "CR",
+	"revision": 0
 }

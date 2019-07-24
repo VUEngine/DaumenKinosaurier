@@ -48,7 +48,7 @@
 #undef __PROFILE_GAME_STATE_DURING_VIP_INTERRUPT
 
 // alert vip's overtime
-#define __ALERT_VIP_OVERTIME
+#undef __ALERT_VIP_OVERTIME
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@
 // printing area
 #define __PRINTING_BGMAP_X_OFFSET					0
 #define __PRINTING_BGMAP_Y_OFFSET					0
-#define __PRINTING_BGMAP_Z_OFFSET					0
+#define __PRINTING_BGMAP_PARALLAX_OFFSET			0
 #define __PRINTABLE_BGMAP_AREA 						1792
 
 
@@ -317,6 +317,11 @@
 // thresholds to stop bodies
 #define __STOP_VELOCITY_THRESHOLD					__PIXELS_TO_METERS(8)
 #define __STOP_BOUNCING_VELOCITY_THRESHOLD 			__PIXELS_TO_METERS(48)
+
+// maximum bounciness coefficient allowed
+#define __MAXIMUM_BOUNCINESS_COEFFICIENT			1.0f
+
+#define __FRICTION_FORCE_FACTOR_POWER				2
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -380,9 +385,6 @@
 //---------------------------------------------------------------------------------------------------------
 //										RANDOM NUMBER GENERATION
 //---------------------------------------------------------------------------------------------------------
-
-// how many times the randomSeed function cycles generate a random seed
-#define __RANDOM_SEED_CYCLES						2
 
 #undef __ADD_USER_INPUT_AND_TIME_TO_RANDOM_SEED
 
