@@ -1,5 +1,7 @@
 {
-	"gameCode": "VDKE",
+	"gameCodeSystem": "V",
+	"gameCodeId": "DK",
+	"gameCodeLanguage": "E",
 	"gameTitle": "DaumenKinosaurier",
 	"makerCode": "CR",
 	"revision": 0
