@@ -1,3 +1,12 @@
 [
-	"NUMBER_FONT"
+	{
+		"name": "Number",
+		"image": "Font/NumberFont",
+		"offset": 46,
+		"characterCount": 12,
+		"size": {
+			"x": 1,
+			"y": 1
+		}
+	}
 ]

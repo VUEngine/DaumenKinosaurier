@@ -108,6 +108,18 @@ StageROMSpec ANIMATION_ST =
 	// allocator
 	__TYPE(Stage),
 
+	// Timer config
+	{
+		__TIMER_100US,
+		10,
+		kMS
+	},
+
+	// Sound config
+	{
+		__DEFAULT_PCM_HZ,
+	},
+
 	// level
 	{
         // size
@@ -291,8 +303,8 @@ StageROMSpec ANIMATION_ST =
 		// textures to preload
 		(TextureSpec**)ANIMATION_ST_TEXTURES,
 
-        // background music
-        NULL,
+        // background sounds
+		(Sound**)NULL,
     },
 
     // entities

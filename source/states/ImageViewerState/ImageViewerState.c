@@ -413,14 +413,14 @@ void ImageViewerState::printFrameNumber()
 	s8 actualFrame = AnimatedEntity::getActualFrame(this->imageEntity) + 1;
 	int numberOfFrames = AnimatedEntity::getNumberOfFrames(this->imageEntity);
 
-	Printing::text(Printing::getInstance(), "00/00", 40, 7, NULL);
-	Printing::int(Printing::getInstance(), actualFrame, (actualFrame < 10) ? 41 : 40, 7, NULL);
-	Printing::int(Printing::getInstance(), numberOfFrames, (numberOfFrames < 10) ? 44 : 43, 7, NULL);
+	Printing::text(Printing::getInstance(), "00/00", 40, 7, "Number");
+	Printing::int(Printing::getInstance(), actualFrame, (actualFrame < 10) ? 41 : 40, 7, "Number");
+	Printing::int(Printing::getInstance(), numberOfFrames, (numberOfFrames < 10) ? 44 : 43, 7, "Number");
 }
 
 void ImageViewerState::clearFrameNumber()
 {
-	Printing::text(Printing::getInstance(), ".....", 40, 7, NULL);
+	Printing::text(Printing::getInstance(), ".....", 40, 7, "Number");
 }
 
 // handle event
