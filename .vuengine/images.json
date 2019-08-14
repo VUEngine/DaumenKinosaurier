@@ -1,69 +1,69 @@
 {
 	"folders": {
-		"assets/images/Banana/Left": {
+		"Banana/Left": {
 			"name": "BananaLeft",
 			"template": "entityStacked"
 		},
-		"assets/images/Banana/Middle": {
+		"Banana/Middle": {
 			"name": "BananaMiddle",
 			"template": "entityStacked"
 		},
-		"assets/images/Copyright": {
+		"Copyright": {
 			"template": "entity"
 		},
-		"assets/images/Credits/Left": {
+		"Credits/Left": {
 			"name": "CreditsLeft",
 			"template": "entityStacked"
 		},
-		"assets/images/Credits/Right": {
+		"Credits/Right": {
 			"name": "CreditsRight",
 			"template": "entityStacked"
 		},
-		"assets/images/CreditsText": {
+		"CreditsText": {
 			"template": "animatedEntity"
 		},
-		"assets/images/Ende": {
+		"Ende": {
 			"template": "animatedEntity"
 		},
-		"assets/images/Font": {
+		"Font": {
 			"template": "font"
 		},
-		"assets/images/GalleryButtons": {
+		"GalleryButtons": {
 			"template": "animatedEntity"
 		},
-		"assets/images/GalleryTitle": {
+		"GalleryTitle": {
 			"template": "animatedEntity"
 		},
-		"assets/images/Logo": {
+		"Logo": {
 			"template": "animatedEntity"
 		},
-		"assets/images/Menu": {
+		"Menu": {
 			"template": "entity"
 		},
-		"assets/images/MenuCursor": {
+		"MenuCursor": {
 			"template": "animatedEntity"
 		},
-		"assets/images/Rex/Left": {
+		"Rex/Left": {
 			"name": "RexLeft",
 			"template": "entityStacked"
 		},
-		"assets/images/Rex/Middle": {
+		"Rex/Middle": {
 			"name": "RexMiddle",
 			"template": "entityStacked"
 		},
-		"assets/images/Vertigo/Left": {
+		"Vertigo/Left": {
 			"name": "VertigoLeft",
 			"template": "entityStacked"
 		},
-		"assets/images/Vertigo/Middle": {
+		"Vertigo/Middle": {
 			"name": "VertigoRight",
 			"template": "entityStacked"
 		},
-		"assets/images/Volcano/Left": {
+		"Volcano/Left": {
 			"name": "VolcanoLeft",
 			"template": "entityStacked"
 		},
-		"assets/images/Volcano/Right": {
+		"Volcano/Right": {
 			"name": "VolcanoRight",
 			"template": "entityStacked"
 		}
