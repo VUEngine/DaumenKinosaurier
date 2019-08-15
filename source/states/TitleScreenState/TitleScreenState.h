@@ -46,9 +46,9 @@ enum TitleScreenMenuOptions
 
 enum TitleScreenStateMessages
 {
-	kMenuSelection = kLastEngineMessage + 1,
-	kShowCreditsText,
-	kShowCreditsAnimation,
+	kMessageMenuSelection = kMessageLastEngine + 1,
+	kMessageShowCreditsAnimation,
+	kMessageShowCreditsText,
 };
 
 enum TitleScreenStateModes

@@ -42,12 +42,6 @@
 
 extern StageROMSpec ANIMATION_ST;
 
-extern const u16 SELECT_SND[];
-extern const u16 BACK_SND[];
-extern const u16 ROAR_SND[];
-extern const u16 STEP_SND[];
-extern const u16 CRASH_SND[];
-
 extern EntitySpec REX_EN;
 extern EntitySpec BANANA_EN;
 extern EntitySpec REX_RUN_EN;
@@ -156,7 +150,7 @@ void AnimationState::processUserInput(UserInput userInput)
 		AnimatedEntity::pauseAnimation(imageEntity, this->isPaused);
 
 		// stop all sound playback
-		SoundManager::stopAllSound(SoundManager::getInstance());
+		SoundManager::stopAllSounds(SoundManager::getInstance());
 
 		// get ende entity from stage
 		Container endeEntity = Container::getChildByName(
@@ -199,8 +193,8 @@ void AnimationState::processUserInput(UserInput userInput)
 		}
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 	}
 	else if(this->isPaused && (K_B & userInput.pressedKey))
 	{
@@ -208,8 +202,8 @@ void AnimationState::processUserInput(UserInput userInput)
 		Game::disableKeypad(Game::getInstance());
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
 
 		// start fade out effect
 		Brightness brightness = (Brightness){0, 0, 0};
@@ -253,20 +247,20 @@ void AnimationState::execute(void* owner)
 			// scream
 			if (currentFrame == 9)
 			{
-				Vector3D position = {192, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), ROAR_SND, position);
+				//Vector3D position = {192, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), ROAR_SND, position);
 			}
 			// right step
 			else if (currentFrame == 27 || currentFrame == 35 || currentFrame == 43)
 			{
-				Vector3D position = {44, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {44, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 31 || currentFrame == 39 || currentFrame == 47)
 			{
-				Vector3D position = {344, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {344, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -275,14 +269,14 @@ void AnimationState::execute(void* owner)
 			// right step
 			if (currentFrame == 3 || currentFrame == 11 || currentFrame == 19)
 			{
-				Vector3D position = {44, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {44, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 7 || currentFrame == 15 || currentFrame == 23)
 			{
-				Vector3D position = {344, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {344, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -291,14 +285,14 @@ void AnimationState::execute(void* owner)
 			// right step
 			if (currentFrame == 2 || currentFrame == 10)
 			{
-				Vector3D position = {44, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {44, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 6 || currentFrame == 14)
 			{
-				Vector3D position = {344, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {344, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -307,14 +301,14 @@ void AnimationState::execute(void* owner)
 			// right step
 			if (currentFrame == 0 || currentFrame == 8)
 			{
-				Vector3D position = {44, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {44, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			// left step
 			else if (currentFrame == 4 || currentFrame == 12)
 			{
-				Vector3D position = {344, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
+				//Vector3D position = {344, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), STEP_SND, position);
 			}
 			break;
 		}
@@ -409,8 +403,8 @@ void AnimationState::playVolcanoEnd()
 	Camera::startEffect(Camera::getInstance(), kShake, 800);
 
 	// play sound
-	Vector3D position = {192, 112, 0};
-	SoundManager::playFxSound(SoundManager::getInstance(), CRASH_SND, position);
+	//Vector3D position = {192, 112, 0};
+	//SoundManager::playFxSound(SoundManager::getInstance(), CRASH_SND, position);
 
 	// play "ende" fade in animation
 	PositionedEntityROMSpec endeEntity[] =

@@ -44,9 +44,6 @@
 
 extern StageROMSpec TITLE_SCREEN_ST;
 extern EntitySpec CREDITS_EN;
-extern const u16 BLIP_SND[];
-extern const u16 SELECT_SND[];
-extern const u16 BACK_SND[];
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -149,8 +146,8 @@ void TitleScreenState::processUserInput(UserInput userInput)
 				Game::disableKeypad(Game::getInstance());
 
 				// play sound
-				Vector3D position = {192, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+				//Vector3D position = {192, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 
 				// start fade out effect
 				Brightness brightness = (Brightness){0, 0, 0};
@@ -200,14 +197,14 @@ void TitleScreenState::processUserInput(UserInput userInput)
 				));
 
 				// play sound
-				Vector3D position = {192, 112, 0};
-				SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+				//Vector3D position = {192, 112, 0};
+				//SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 
 				// play logo's fade out anim
 				AnimatedEntity::playAnimation(logoEntity, "FadeOut");
 
 				// after a short delay, handle menu selection
-				MessageDispatcher::dispatchMessage(750, Object::safeCast(this), Object::safeCast(this), kMenuSelection, NULL);
+				MessageDispatcher::dispatchMessage(750, Object::safeCast(this), Object::safeCast(this), kMessageMenuSelection, NULL);
 			}
 		}
 		else if(this->mode == kModePlaying && this->currentSelection == kMenuOptionPlayMovie && (K_A & userInput.pressedKey))
@@ -264,8 +261,8 @@ void TitleScreenState::processUserInput(UserInput userInput)
 			}
 
 			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+			//Vector3D position = {192, 112, 0};
+			//SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 		}
 		else if((this->isPaused || (this->mode == kModePlaying && this->currentSelection == kMenuOptionCredits)) && (K_B & userInput.pressedKey))
 		{
@@ -273,8 +270,8 @@ void TitleScreenState::processUserInput(UserInput userInput)
 			Game::disableKeypad(Game::getInstance());
 
 			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+			//Vector3D position = {192, 112, 0};
+			//SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
 
 			// start fade out effect
 			Brightness brightness = (Brightness){0, 0, 0};
@@ -311,8 +308,8 @@ void TitleScreenState::processUserInput(UserInput userInput)
 			}
 
 			// play sound
-			Vector3D position = {192, 112, 0};
-			SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+			//Vector3D position = {192, 112, 0};
+			//SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 		}
 	}
 	else if(this->mode == kModeMenu && (K_LU & userInput.pressedKey || K_RU & userInput.pressedKey || K_LT & userInput.pressedKey))
@@ -327,7 +324,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 		Entity::setLocalPosition(this->cursorEntity, &position);
 
 		// play sound
-		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+		//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
 	}
 	else if(this->mode == kModeMenu && (K_LD & userInput.pressedKey || K_RD & userInput.pressedKey || K_RT & userInput.pressedKey))
 	{
@@ -341,7 +338,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 		Entity::setLocalPosition(this->cursorEntity, &position);
 
 		// play sound
-		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+		//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
 	}
 }
 
@@ -350,7 +347,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 {
 	switch(Telegram::getMessage(telegram))
 	{
-		case kMenuSelection:
+		case kMessageMenuSelection:
 		{
 			this->mode = kModePlaying;
 
@@ -388,7 +385,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 					Container::deleteMyself(logo);
 
 					// delayed adding of credits text entity
-					MessageDispatcher::dispatchMessage(120, Object::safeCast(this), Object::safeCast(this), kShowCreditsText, NULL);
+					MessageDispatcher::dispatchMessage(120, Object::safeCast(this), Object::safeCast(this), kMessageShowCreditsText, NULL);
 
 					break;
 				}
@@ -397,7 +394,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 			break;
 		}
 
-		case kShowCreditsText:
+		case kMessageShowCreditsText:
 		{
 			// enable user input
 			Game::enableKeypad(Game::getInstance());
@@ -425,7 +422,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 			break;
 		}
 
-		case kShowCreditsAnimation:
+		case kMessageShowCreditsAnimation:
 		{
 			// add image entity
 			PositionedEntity POSITIONED_ENTITY = {&CREDITS_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
@@ -510,5 +507,5 @@ void TitleScreenState::playCreditsAnimation()
 	Container::deleteMyself(creditsText);
 
 	// delayed adding of credits animation entity
-	MessageDispatcher::dispatchMessage(120, Object::safeCast(TitleScreenState::getInstance()), Object::safeCast(TitleScreenState::getInstance()), kShowCreditsAnimation, NULL);
+	MessageDispatcher::dispatchMessage(120, Object::safeCast(TitleScreenState::getInstance()), Object::safeCast(TitleScreenState::getInstance()), kMessageShowCreditsAnimation, NULL);
 }

@@ -39,8 +39,6 @@
 //---------------------------------------------------------------------------------------------------------
 
 extern StageROMSpec CREDITS_ST;
-extern const u16 SELECT_SND[];
-extern const u16 BACK_SND[];
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -152,8 +150,8 @@ void CreditsState::processUserInput(UserInput userInput)
 		}
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 	}
 	else if(this->fadeInComplete && this->isPaused)
 	{
@@ -161,8 +159,8 @@ void CreditsState::processUserInput(UserInput userInput)
 		Game::disableKeypad(Game::getInstance());
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
 
 		// start fade out effect
 		Brightness brightness = (Brightness){0, 0, 0};

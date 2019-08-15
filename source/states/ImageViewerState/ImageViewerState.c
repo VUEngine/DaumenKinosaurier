@@ -53,9 +53,6 @@ extern AnimationDescriptionROMSpec VOLCANO_ANIM;
 extern AnimationDescriptionROMSpec REX_ANIM;
 extern AnimationDescriptionROMSpec BANANA_ANIM;
 extern AnimationDescriptionROMSpec VERTIGO_ANIM;
-extern const u16 BLIP_SND[];
-extern const u16 BACK_SND[];
-extern const u16 SELECT_SND[];
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -171,8 +168,8 @@ void ImageViewerState::processUserInput(UserInput userInput)
 		AnimatedEntity::pauseAnimation(this->framesButtonEntity, true);
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), BACK_SND, position);
 
 		// start fade out effect
 		Brightness brightness = (Brightness){0, 0, 0};
@@ -211,8 +208,8 @@ void ImageViewerState::processUserInput(UserInput userInput)
 		//AnimatedEntity::pauseAnimation(this->titleEntity, this->isPaused);
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), SELECT_SND, position);
 	}
 	else if(K_LT & userInput.pressedKey)
 	{
@@ -226,8 +223,8 @@ void ImageViewerState::processUserInput(UserInput userInput)
 		ImageViewerState::playAnimation(this);
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
 	}
 	else if(K_RT & userInput.pressedKey)
 	{
@@ -241,8 +238,8 @@ void ImageViewerState::processUserInput(UserInput userInput)
 		ImageViewerState::playAnimation(this);
 
 		// play sound
-		Vector3D position = {192, 112, 0};
-		SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
+		//Vector3D position = {192, 112, 0};
+		//SoundManager::playFxSound(SoundManager::getInstance(), BLIP_SND, position);
 	}
 	else if(this->isPaused && (K_LL & userInput.pressedKey || K_RL & userInput.pressedKey))
 	{
