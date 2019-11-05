@@ -131,6 +131,7 @@ StageROMSpec CREDITS_ST =
 	// Sound config
 	{
 		__DEFAULT_PCM_HZ,
+		false
 	},
 
 	// level

@@ -111,13 +111,14 @@ StageROMSpec ANIMATION_ST =
 	// Timer config
 	{
 		__TIMER_100US,
-		10,
+		20,
 		kMS
 	},
 
 	// Sound config
 	{
 		__DEFAULT_PCM_HZ,
+		false
 	},
 
 	// level
