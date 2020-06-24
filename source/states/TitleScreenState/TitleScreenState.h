@@ -39,7 +39,7 @@
 
 enum TitleScreenMenuOptions
 {
-	kMenuOptionPlayMovie,
+	kMenuOptionPlayMovie = 0,
 	kMenuOptionAnimationGallery,
 	kMenuOptionCredits,
 };
@@ -78,7 +78,7 @@ singleton class TitleScreenState : GameState
 	override void enter(void* owner);
 	override void processUserInput(UserInput userInput);
 	override bool handleMessage(Telegram telegram);
-	void onAFlipbookByComplete();
+	void onAFlipbookByComplete(Object eventFirer __attribute__((unused)));
 	void playCreditsAnimation();
 }
 

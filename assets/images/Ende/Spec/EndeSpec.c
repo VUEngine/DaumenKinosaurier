@@ -131,6 +131,12 @@ TextureROMSpec ENDE_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec ENDE_L_SPRITE =
@@ -205,6 +211,12 @@ TextureROMSpec ENDE_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec ENDE_R_SPRITE =
@@ -256,7 +268,10 @@ AnimatedEntityROMSpec ENDE_EN =
 		// sprites
 		(SpriteSpec**)ENDE_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

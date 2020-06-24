@@ -121,6 +121,12 @@ TextureROMSpec GALLERY_BUTTON_PAUSE_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec GALLERY_BUTTON_PAUSE_L_SPRITE =
@@ -194,6 +200,12 @@ TextureROMSpec GALLERY_BUTTON_PAUSE_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec GALLERY_BUTTON_PAUSE_R_SPRITE =
@@ -244,7 +256,10 @@ AnimatedEntityROMSpec GALLERY_BUTTON_PAUSE_EN =
 		// sprites
 		(SpriteSpec**)GALLERY_BUTTON_PAUSE_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

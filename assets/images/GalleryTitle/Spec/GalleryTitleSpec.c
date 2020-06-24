@@ -213,6 +213,12 @@ TextureROMSpec GALLERY_TITLE_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec GALLERY_TITLE_L_SPRITE =
@@ -286,6 +292,12 @@ TextureROMSpec GALLERY_TITLE_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec GALLERY_TITLE_R_SPRITE =
@@ -336,7 +348,10 @@ AnimatedEntityROMSpec GALLERY_TITLE_EN =
 		// sprites
 		(SpriteSpec**)GALLERY_TITLE_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

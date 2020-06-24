@@ -173,6 +173,12 @@ TextureROMSpec LOGO_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec LOGO_L_SPRITE =
@@ -247,6 +253,12 @@ TextureROMSpec LOGO_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec LOGO_R_SPRITE =
@@ -298,7 +310,10 @@ AnimatedEntityROMSpec LOGO_EN =
 		// sprites
 		(SpriteSpec**)LOGO_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

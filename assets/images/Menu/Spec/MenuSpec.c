@@ -82,6 +82,12 @@ TextureROMSpec MENU_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec MENU_SPRITE =
@@ -128,6 +134,9 @@ EntityROMSpec MENU_EN =
 	// sprites
 	(SpriteSpec**)MENU_SPRITES,
 
+	// use z displacement in projection
+	false,
+			
 	// collision shapes
 	(ShapeSpec*)NULL,
 

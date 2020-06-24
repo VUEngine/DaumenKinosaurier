@@ -120,6 +120,12 @@ TextureROMSpec CREDITS_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec CREDITS_L_SPRITE =
@@ -194,6 +200,12 @@ TextureROMSpec CREDITS_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec CREDITS_R_SPRITE =
@@ -245,7 +257,10 @@ AnimatedEntityROMSpec CREDITS_EN =
 		// sprites
 		(SpriteSpec**)CREDITS_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

@@ -147,6 +147,12 @@ TextureROMSpec VERTIGO_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec VERTIGO_L_SPRITE =
@@ -221,6 +227,12 @@ TextureROMSpec VERTIGO_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec VERTIGO_R_SPRITE =
@@ -272,7 +284,10 @@ AnimatedEntityROMSpec VERTIGO_EN =
 		// sprites
 		(SpriteSpec**)VERTIGO_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

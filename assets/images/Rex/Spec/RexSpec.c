@@ -204,6 +204,12 @@ TextureROMSpec REX_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec REX_L_SPRITE =
@@ -278,6 +284,12 @@ TextureROMSpec REX_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec REX_R_SPRITE =
@@ -329,7 +341,10 @@ AnimatedEntityROMSpec REX_EN =
 		// sprites
 		(SpriteSpec**)REX_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size
@@ -362,7 +377,10 @@ AnimatedEntityROMSpec REX_RUN_EN =
 		// sprites
 		(SpriteSpec**)REX_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

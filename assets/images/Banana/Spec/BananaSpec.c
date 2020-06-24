@@ -147,6 +147,12 @@ TextureROMSpec BANANA_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec BANANA_L_SPRITE =
@@ -221,6 +227,12 @@ TextureROMSpec BANANA_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec BANANA_R_SPRITE =
@@ -272,7 +284,10 @@ AnimatedEntityROMSpec BANANA_EN =
 		// sprites
 		(SpriteSpec**)BANANA_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

@@ -120,6 +120,12 @@ TextureROMSpec VOLCANO_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec VOLCANO_L_SPRITE =
@@ -194,6 +200,12 @@ TextureROMSpec VOLCANO_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec VOLCANO_R_SPRITE =
@@ -245,7 +257,10 @@ AnimatedEntityROMSpec VOLCANO_EN =
 		// sprites
 		(SpriteSpec**)VOLCANO_SPRITES,
 
-		// collision shapes
+		// use z displacement in projection
+		false,
+			
+	// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

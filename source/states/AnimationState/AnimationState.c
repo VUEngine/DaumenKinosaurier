@@ -67,6 +67,11 @@ void AnimationState::constructor()
 	this->resumeButtonEntity = NULL;
 	this->backButtonEntity = NULL;
 	//this->framesButtonEntity = NULL;
+
+	this->stream = false;
+	this->transform = false;
+	this->updatePhysics = false;
+	this->processCollisions = false;
 }
 
 // class's destructor
