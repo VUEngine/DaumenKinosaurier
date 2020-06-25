@@ -75,10 +75,12 @@ AnimationFunctionROMSpec REX_DEFAULT_ANIM =
 AnimationFunctionROMSpec REX_SCREAM_LOOP_ANIM =
 {
 	// number of frames of this animation function
-	12,
+	24,
 
 	// frames to play in animation
 	{
+		0,  1,  2,  3,  4,  5,  
+		6,  7,  8, 9, 10, 11, 
 		12, 13, 14, 15, 16, 17,
 		18, 17, 16, 15, 14, 13,
 	},
@@ -204,12 +206,6 @@ TextureROMSpec REX_L_TX =
 
 	// recyclable
 	false,
-
-	// vertical flip
-	false,
-
-	// horizontal flip
-	false,
 };
 
 BgmapSpriteROMSpec REX_L_SPRITE =
@@ -284,12 +280,6 @@ TextureROMSpec REX_R_TX =
 
 	// recyclable
 	false,
-
-	// vertical flip
-	false,
-
-	// horizontal flip
-	false,
 };
 
 BgmapSpriteROMSpec REX_R_SPRITE =
@@ -341,10 +331,7 @@ AnimatedEntityROMSpec REX_EN =
 		// sprites
 		(SpriteSpec**)REX_SPRITES,
 
-		// use z displacement in projection
-		false,
-			
-	// collision shapes
+		// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size
@@ -377,10 +364,7 @@ AnimatedEntityROMSpec REX_RUN_EN =
 		// sprites
 		(SpriteSpec**)REX_SPRITES,
 
-		// use z displacement in projection
-		false,
-			
-	// collision shapes
+		// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size

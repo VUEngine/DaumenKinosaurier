@@ -287,7 +287,7 @@ AnimatedEntityROMSpec BANANA_EN =
 		// use z displacement in projection
 		false,
 			
-	// collision shapes
+		// collision shapes
 		(ShapeSpec*)NULL,
 
 		// size
@@ -305,6 +305,6 @@ AnimatedEntityROMSpec BANANA_EN =
 	(AnimationDescription*)&BANANA_ANIM,
 
 	// initial animation
-	"Default",
+	"Loop",
 };
 

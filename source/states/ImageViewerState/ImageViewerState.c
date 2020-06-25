@@ -295,21 +295,38 @@ void ImageViewerState::playAnimation()
 	// cycle left and right sprites
 	VirtualNode node = VirtualList::begin(entitySprites);
 	u8 i = 0;
+
+//	VIPManager::disableInterrupts(VIPManager::getInstance());
+	VIPManager::disableDrawing(VIPManager::getInstance());
+
+	// rewrite animation description and play loop animation
+
 	for(i = 0; node; node = VirtualNode::getNext(node), i++)
 	{
 		// get image entity texture
-		Texture entityTexture = Sprite::getTexture(VirtualNode::getData(node));
+		Texture texture = Sprite::getTexture(VirtualNode::getData(node));
 
-		// rewrite texture spec
-		Texture::setSpec(entityTexture, ImageViewerState::getTexture(this, i));
+		Texture::setSpec(texture, ImageViewerState::getTexture(this, i));
 	}
 
-	// force CHAR memory defragmentation to prevent memory depletion
-	CharSetManager::defragment(CharSetManager::getInstance());
-
-	// rewrite animation description and play loop animation
 	AnimatedEntity::setAnimationDescription(this->imageEntity, ImageViewerState::getAnimationDescription(this));
 	AnimatedEntity::playAnimation(this->imageEntity, ImageViewerState::getAnimationName(this));
+
+	// force CHAR memory defragmentation to prevent memory depletion
+	CharSetManager::writeCharSets(CharSetManager::getInstance());
+
+	node = VirtualList::begin(entitySprites);
+
+	for(i = 0; node; node = VirtualNode::getNext(node), i++)
+	{
+		Sprite sprite = Sprite::safeCast(VirtualNode::getData(node));
+		Texture texture = Sprite::getTexture(sprite);
+
+		Sprite::render(sprite, 31, false);
+		Texture::update(texture);
+	}
+
+	VIPManager::enableDrawing(VIPManager::getInstance());
 
 	// force unpaused
 	this->isPaused = false;
