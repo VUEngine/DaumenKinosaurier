@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <Libgccvb.h>
-#include <AnimatedEntity.h>
+#include <AnimatedImage.h>
 #include <BgmapAnimatedSprite.h>
 #include <AnimationState.h>
 #include <TitleScreenState.h>
@@ -59,7 +59,7 @@ AnimationFunctionROMSpec CREDITS_TEXT_DEFAULT_ANIM =
 	false,
 
 	// method to call on function completion
-	(EventListener)&AnimationState_playCreditsAnimation,
+	(EventListener)&AnimatedImage_playCreditsAnimation,
 
 	// function's name
 	"Default",
@@ -83,7 +83,7 @@ AnimationFunctionROMSpec CREDITS_TEXT_DEFAULT_ALTERNATIVE_ANIM =
 	false,
 
 	// method to call on function completion
-	(EventListener)&TitleScreenState_playCreditsAnimation,
+	(EventListener)&AnimatedImage_playCreditsAnimationForTitleScreen,
 
 	// function's name
 	"DfltAlt",
@@ -183,40 +183,42 @@ BgmapSpriteROMSpec* const CREDITS_TEXT_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMSpec CREDITS_TEXT_EN =
-{
+AnimatedImageROMSpec CREDITS_TEXT_EN =
+{	
 	{
-		// class allocator
-		__TYPE(AnimatedEntity),
+		{
+			// class allocator
+			__TYPE(AnimatedImage),
 
-		// behaviors 
-		NULL,
+			// behaviors 
+			NULL,
 
-		// sprites
-		(SpriteSpec**)CREDITS_TEXT_SPRITES,
+			// sprites
+			(SpriteSpec**)CREDITS_TEXT_SPRITES,
 
-		// use z displacement in projection
-		false,
-			
-	// collision shapes
-		(ShapeSpec*)NULL,
+			// use z displacement in projection
+			false,
 
-		// size
-		// if 0, width and height will be inferred from the first sprite's texture's size
-		{0, 0, 0},
+			// collision shapes
+			(ShapeSpec*)NULL,
 
-		// gameworld's character's type
-		0,
+			// size
+			// if 0, width and height will be inferred from the first sprite's texture's size
+			{0, 0, 0},
 
-		// physical specification
-		(PhysicalSpecification*)NULL,
-	},
+			// gameworld's character's type
+			0,
 
-	// pointer to the animation spec for the item
-	(AnimationDescription*)&CREDITS_TEXT_ANIM,
+			// physical specification
+			(PhysicalSpecification*)NULL,
+		},
 
-	// initial animation
-	"Default",
+		// pointer to the animation spec for the item
+		(AnimationDescription*)&CREDITS_TEXT_ANIM,
+
+		// initial animation
+		"Default",
+	}
 };
 
 AnimatedEntityROMSpec CREDITS_TEXT_ALTERNATIVE_EN =

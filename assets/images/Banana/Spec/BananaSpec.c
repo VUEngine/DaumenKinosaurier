@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <Libgccvb.h>
-#include <AnimatedEntity.h>
+#include <AnimatedImage.h>
 #include <BgmapAnimatedSprite.h>
 #include <AnimationState.h>
 
@@ -63,7 +63,7 @@ AnimationFunctionROMSpec BANANA_DEFAULT_ANIM =
 	false,
 
 	// method to call on function completion
-	(EventListener)&AnimationState_playRexRun,
+	(EventListener)&AnimatedImage_playRexRun,
 
 	// function's name
 	"Default",
@@ -272,39 +272,41 @@ BgmapSpriteROMSpec* const BANANA_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMSpec BANANA_EN =
-{
+AnimatedImageROMSpec BANANA_EN =
+{	
 	{
-		// class allocator
-		__TYPE(AnimatedEntity),
+		{
+			// class allocator
+			__TYPE(AnimatedImage),
 
-		// behaviors 
-		NULL,
+			// behaviors 
+			NULL,
 
-		// sprites
-		(SpriteSpec**)BANANA_SPRITES,
+			// sprites
+			(SpriteSpec**)BANANA_SPRITES,
 
-		// use z displacement in projection
-		false,
-			
-		// collision shapes
-		(ShapeSpec*)NULL,
+			// use z displacement in projection
+			false,
+				
+			// collision shapes
+			(ShapeSpec*)NULL,
 
-		// size
-		// if 0, width and height will be inferred from the first sprite's texture's size
-		{0, 0, 0},
+			// size
+			// if 0, width and height will be inferred from the first sprite's texture's size
+			{0, 0, 0},
 
-		// gameworld's character's type
-		0,
+			// gameworld's character's type
+			0,
 
-		// physical specification
-		(PhysicalSpecification*)NULL,
-	},
+			// physical specification
+			(PhysicalSpecification*)NULL,
+		},
 
-	// pointer to the animation spec for the item
-	(AnimationDescription*)&BANANA_ANIM,
+		// pointer to the animation spec for the item
+		(AnimationDescription*)&BANANA_ANIM,
 
-	// initial animation
-	"Loop",
+		// initial animation
+		"Loop",
+	}
 };
 

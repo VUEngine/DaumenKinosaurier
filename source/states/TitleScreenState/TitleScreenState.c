@@ -467,7 +467,7 @@ void TitleScreenState::onFadeOutToTitleComplete(Object eventFirer __attribute__ 
 	Game::changeState(Game::getInstance(), GameState::safeCast(this));
 }
 
-void TitleScreenState::onAFlipbookByComplete(Object eventFirer __attribute__((unused)))
+void TitleScreenState::onAFlipbookByComplete()
 {
 	// disable user input
 	Game::disableKeypad(Game::getInstance());

@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <Libgccvb.h>
-#include <AnimatedEntity.h>
+#include <AnimatedImage.h>
 #include <BgmapAnimatedSprite.h>
 #include <AnimationState.h>
 
@@ -65,7 +65,7 @@ AnimationFunctionROMSpec REX_DEFAULT_ANIM =
 	false,
 
 	// method to call on function completion
-	(EventListener)&AnimationState_playBanana,
+	(EventListener)&AnimatedImage_playBanana,
 
 	// function's name
 	"Default",
@@ -119,7 +119,7 @@ AnimationFunctionROMSpec REX_RUN_ANIM =
 	false,
 
 	// method to call on function completion
-	(EventListener)&AnimationState_playVertigo,
+	(EventListener)&AnimatedImage_playVertigo,
 
 	// function's name
 	"Run",
@@ -206,6 +206,12 @@ TextureROMSpec REX_L_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec REX_L_SPRITE =
@@ -280,6 +286,12 @@ TextureROMSpec REX_R_TX =
 
 	// recyclable
 	false,
+
+	// vertical flip
+	false,
+
+	// horizontal flip
+	false,
 };
 
 BgmapSpriteROMSpec REX_R_SPRITE =
@@ -319,68 +331,78 @@ BgmapSpriteROMSpec* const REX_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMSpec REX_EN =
-{
+AnimatedImageROMSpec REX_EN =
+{	
 	{
-		// class allocator
-		__TYPE(AnimatedEntity),
+		{
+			// class allocator
+			__TYPE(AnimatedImage),
 
-		// behaviors 
-		NULL,
+			// behaviors 
+			NULL,
 
-		// sprites
-		(SpriteSpec**)REX_SPRITES,
+			// sprites
+			(SpriteSpec**)REX_SPRITES,
 
-		// collision shapes
-		(ShapeSpec*)NULL,
+			// use z displacement in projection
+			false,
 
-		// size
-		// if 0, width and height will be inferred from the first sprite's texture's size
-		{0, 0, 0},
+			// collision shapes
+			(ShapeSpec*)NULL,
 
-		// gameworld's character's type
-		0,
+			// size
+			// if 0, width and height will be inferred from the first sprite's texture's size
+			{0, 0, 0},
 
-		// physical specification
-		(PhysicalSpecification*)NULL,
-	},
+			// gameworld's character's type
+			0,
 
-	// pointer to the animation spec for the item
-	(AnimationDescription*)&REX_ANIM,
+			// physical specification
+			(PhysicalSpecification*)NULL,
+		},
 
-	// initial animation
-	"Default",
+		// pointer to the animation spec for the item
+		(AnimationDescription*)&REX_ANIM,
+
+		// initial animation
+		"Default",
+	}
 };
 
-AnimatedEntityROMSpec REX_RUN_EN =
+AnimatedImageROMSpec REX_RUN_EN =
 {
 	{
-		// class allocator
-		__TYPE(AnimatedEntity),
+		{
+			// class allocator
+			__TYPE(AnimatedImage),
 
-		// behaviors 
-		NULL,
+			// behaviors 
+			NULL,
 
-		// sprites
-		(SpriteSpec**)REX_SPRITES,
+			// sprites
+			(SpriteSpec**)REX_SPRITES,
 
-		// collision shapes
-		(ShapeSpec*)NULL,
+			// use z displacement in projection
+			false,
 
-		// size
-		// if 0, width and height will be inferred from the first sprite's texture's size
-		{0, 0, 0},
+			// collision shapes
+			(ShapeSpec*)NULL,
 
-		// gameworld's character's type
-		0,
+			// size
+			// if 0, width and height will be inferred from the first sprite's texture's size
+			{0, 0, 0},
 
-		// physical specification
-		(PhysicalSpecification*)NULL,
-	},
+			// gameworld's character's type
+			0,
 
-	// pointer to the animation spec for the item
-	(AnimationDescription*)&REX_ANIM,
+			// physical specification
+			(PhysicalSpecification*)NULL,
+		},
 
-	// initial animation
-	"Run",
+		// pointer to the animation spec for the item
+		(AnimationDescription*)&REX_ANIM,
+
+		// initial animation
+		"Run",
+	}
 };

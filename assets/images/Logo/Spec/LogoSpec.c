@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <Libgccvb.h>
-#include <AnimatedEntity.h>
+#include <AnimatedImage.h>
 #include <BgmapAnimatedSprite.h>
 #include <TitleScreenState.h>
 
@@ -110,7 +110,7 @@ AnimationFunctionROMSpec LOGO_A_FLIPBOOK_BY_ANIM =
 	true,
 
 	// method to call on function completion
-	(EventListener)&TitleScreenState_onAFlipbookByComplete,
+	(EventListener)&AnimatedImage_onAFlipbookByComplete,
 
 	// function's name
 	"AFlipbBy",
@@ -298,38 +298,40 @@ BgmapSpriteROMSpec* const LOGO_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMSpec LOGO_EN =
+AnimatedImageROMSpec LOGO_EN =
 {
 	{
-		// class allocator
-		__TYPE(AnimatedEntity),
+		{
+			// class allocator
+			__TYPE(AnimatedImage),
 
-		// behaviors 
-		NULL,
+			// behaviors 
+			NULL,
 
-		// sprites
-		(SpriteSpec**)LOGO_SPRITES,
+			// sprites
+			(SpriteSpec**)LOGO_SPRITES,
 
-		// use z displacement in projection
-		false,
-			
-	// collision shapes
-		(ShapeSpec*)NULL,
+			// use z displacement in projection
+			false,
+				
+		// collision shapes
+			(ShapeSpec*)NULL,
 
-		// size
-		// if 0, width and height will be inferred from the first sprite's texture's size
-		{0, 0, 0},
+			// size
+			// if 0, width and height will be inferred from the first sprite's texture's size
+			{0, 0, 0},
 
-		// gameworld's character's type
-		0,
+			// gameworld's character's type
+			0,
 
-		// physical specification
-		(PhysicalSpecification*)NULL,
-	},
+			// physical specification
+			(PhysicalSpecification*)NULL,
+		},
 
-	// pointer to the animation spec for the item
-	(AnimationDescription*)&LOGO_ANIM,
+		// pointer to the animation spec for the item
+		(AnimationDescription*)&LOGO_ANIM,
 
-	// initial animation
-	"Default",
+		// initial animation
+		"Default",
+	}
 };

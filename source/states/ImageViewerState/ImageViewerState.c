@@ -296,11 +296,9 @@ void ImageViewerState::playAnimation()
 	VirtualNode node = VirtualList::begin(entitySprites);
 	u8 i = 0;
 
-//	VIPManager::disableInterrupts(VIPManager::getInstance());
 	VIPManager::disableDrawing(VIPManager::getInstance());
 
 	// rewrite animation description and play loop animation
-
 	for(i = 0; node; node = VirtualNode::getNext(node), i++)
 	{
 		// get image entity texture

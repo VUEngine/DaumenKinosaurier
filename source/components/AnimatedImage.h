@@ -1,7 +1,7 @@
-/* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
+/* VUEngine - Virtual Utopia Engine <https://www.vuengine.dev>
  * A universal game engine for the Nintendo Virtual Boy
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * © Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <c.radke@posteo.de>, 2007-2020
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -19,67 +19,53 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef TITLE_SCREEN_STATE_H_
-#define TITLE_SCREEN_STATE_H_
+#ifndef ANIMATED_IMAGE_H_
+#define ANIMATED_IMAGE_H_
 
 
 //---------------------------------------------------------------------------------------------------------
-// 												INCLUDES
+//												INCLUDES
 //---------------------------------------------------------------------------------------------------------
 
-#include <GameState.h>
 #include <AnimatedEntity.h>
+#include <Body.h>
+#include <StateMachine.h>
+#include <Clock.h>
 
 
 //---------------------------------------------------------------------------------------------------------
-// 												DECLARATIONS
+//											TYPE DEFINITIONS
 //---------------------------------------------------------------------------------------------------------
 
-#define	TITLE_SCREEN_MENU_OPTIONS	3
-
-enum TitleScreenMenuOptions
+typedef struct AnimatedImageSpec
 {
-	kMenuOptionPlayMovie = 0,
-	kMenuOptionAnimationGallery,
-	kMenuOptionCredits,
-};
+	/// it has an Entity at the beginning
+	AnimatedEntitySpec animatedEntitySpec;
 
-enum TitleScreenStateMessages
-{
-	kMessageMenuSelection = kMessageLastEngine + 1,
-	kMessageShowCreditsAnimation,
-	kMessageShowCreditsText,
-};
+} AnimatedImageSpec;
 
-enum TitleScreenStateModes
-{
-	kModeMenu,
-	kModePlaying,
-};
+typedef const AnimatedImageSpec AnimatedImageROMSpec;
 
 
 //---------------------------------------------------------------------------------------------------------
-// 											CLASS'S DECLARATION
+//											CLASS'S DECLARATION
 //---------------------------------------------------------------------------------------------------------
 
-singleton class TitleScreenState : GameState
+/// @ingroup stage-entities
+class AnimatedImage : AnimatedEntity
 {
-	AnimatedEntity cursorEntity;
-	AnimatedEntity resumeButtonEntity;
-	AnimatedEntity backButtonEntity;
-	AnimatedEntity nextButtonEntity;
-	bool fadeInComplete;
-	bool isPaused;
-	u8 currentSelection;
-	u8 currentCreditsFrame;
-	u8 mode;
+	/// @publicsection
+	void constructor(const AnimatedImageSpec* actorSpec, s16 internalId, const char* const name);
 
-	static TitleScreenState getInstance();
-	override void enter(void* owner);
-	override void processUserInput(UserInput userInput);
-	override bool handleMessage(Telegram telegram);
-	void onAFlipbookByComplete();
+	void playRexRun();
 	void playCreditsAnimation();
+	void playCreditsText();
+	void playBanana();
+	void playVertigo();
+	void playVolcanoEnd();
+	void playCreditsAnimation();
+	void playCreditsAnimationForTitleScreen();
+	void onAFlipbookByComplete();
 }
 
 
