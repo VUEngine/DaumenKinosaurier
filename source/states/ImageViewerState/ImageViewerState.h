@@ -28,7 +28,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <GameState.h>
-#include <AnimatedEntity.h>
+#include <AnimatedImage.h>
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@
 
 singleton class ImageViewerState : GameState
 {
-	AnimatedEntity imageEntity;
+	AnimatedImage imageEntity;
 	AnimatedEntity titleEntity;
 	AnimatedEntity pauseButtonEntity;
 	AnimatedEntity resumeButtonEntity;

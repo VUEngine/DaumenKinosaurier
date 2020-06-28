@@ -46,6 +46,12 @@ typedef struct AnimatedImageSpec
 
 typedef const AnimatedImageSpec AnimatedImageROMSpec;
 
+#define VOLCANO_TEXTURE			0
+#define REX_TEXTURE_1			1
+#define REX_TEXTURE_2			2
+#define BANANA_TEXTURE			3
+#define VERTIGO_TEXTURE			4
+
 
 //---------------------------------------------------------------------------------------------------------
 //											CLASS'S DECLARATION
@@ -57,15 +63,17 @@ class AnimatedImage : AnimatedEntity
 	/// @publicsection
 	void constructor(const AnimatedImageSpec* actorSpec, s16 internalId, const char* const name);
 
-	void playRexRun();
-	void playCreditsAnimation();
-	void playCreditsText();
-	void playBanana();
-	void playVertigo();
-	void playVolcanoEnd();
-	void playCreditsAnimation();
-	void playCreditsAnimationForTitleScreen();
-	void onAFlipbookByComplete();
+	void changeSpec(AnimationDescription* animationDescription, char* animationName);
+
+	void playRexRun(Object eventFirer);
+	void playCreditsAnimation(Object eventFirer);
+	void playCreditsText(Object eventFirer);
+	void playBanana(Object eventFirer);
+	void playVertigo(Object eventFirer);
+	void playVolcanoEnd(Object eventFirer);
+	void playCreditsAnimation(Object eventFirer);
+	void playCreditsAnimationForTitleScreen(Object eventFirer);
+	void onAFlipbookByComplete(Object eventFirer);
 }
 
 

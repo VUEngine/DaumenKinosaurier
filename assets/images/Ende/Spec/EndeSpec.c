@@ -272,7 +272,7 @@ AnimatedImageROMSpec ENDE_EN =
 			// use z displacement in projection
 			false,
 				
-		// collision shapes
+			// collision shapes
 			(ShapeSpec*)NULL,
 
 			// size

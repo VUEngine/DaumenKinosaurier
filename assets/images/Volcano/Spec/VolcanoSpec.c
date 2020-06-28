@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 #include <Libgccvb.h>
-#include <AnimatedEntity.h>
+#include <AnimatedImage.h>
 #include <BgmapAnimatedSprite.h>
 
 
@@ -245,38 +245,40 @@ BgmapSpriteROMSpec* const VOLCANO_SPRITES[] =
 	NULL
 };
 
-AnimatedEntityROMSpec VOLCANO_EN =
+AnimatedImageROMSpec VOLCANO_EN =
 {
 	{
-		// class allocator
-		__TYPE(AnimatedEntity),
+		{
+			// class allocator
+			__TYPE(AnimatedImage),
 
-		// behaviors 
-		NULL,
+			// behaviors 
+			NULL,
 
-		// sprites
-		(SpriteSpec**)VOLCANO_SPRITES,
+			// sprites
+			(SpriteSpec**)VOLCANO_SPRITES,
 
-		// use z displacement in projection
-		false,
-			
-		// collision shapes
-		(ShapeSpec*)NULL,
+			// use z displacement in projection
+			false,
+				
+			// collision shapes
+			(ShapeSpec*)NULL,
 
-		// size
-		// if 0, width and height will be inferred from the first sprite's texture's size
-		{0, 0, 0},
+			// size
+			// if 0, width and height will be inferred from the first sprite's texture's size
+			{0, 0, 0},
 
-		// gameworld's character's type
-		0,
+			// gameworld's character's type
+			0,
 
-		// physical specification
-		(PhysicalSpecification*)NULL,
-	},
+			// physical specification
+			(PhysicalSpecification*)NULL,
+		},
 
-	// pointer to the animation spec for the item
-	(AnimationDescription*)&VOLCANO_ANIM,
+		// pointer to the animation spec for the item
+		(AnimationDescription*)&VOLCANO_ANIM,
 
-	// initial animation
-	"Loop",
+		// initial animation
+		"Loop",
+	}
 };

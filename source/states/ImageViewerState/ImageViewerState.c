@@ -103,33 +103,33 @@ void ImageViewerState::enter(void* owner)
 	this->fadeInComplete = false;
 
 	// get entities
-	this->imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+	this->imageEntity = AnimatedImage::safeCast(Container::getChildByName(
+		this->stage,
 		"Image",
 		false
 	));
 	this->titleEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Title",
 		false
 	));
 	this->pauseButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Pause",
 		false
 	));
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Back",
 		false
 	));
 	this->framesButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Frames",
 		false
 	));
@@ -286,45 +286,7 @@ void ImageViewerState::printAnimationName()
 
 void ImageViewerState::playAnimation()
 {
-	// hide screen during transition
-	//Camera::startEffect(Camera::getInstance(), kHide);
-
-	// get image entity sprites
-	VirtualList entitySprites = Entity::getSprites(this->imageEntity);
-
-	// cycle left and right sprites
-	VirtualNode node = VirtualList::begin(entitySprites);
-	u8 i = 0;
-
-	VIPManager::disableDrawing(VIPManager::getInstance());
-
-	// rewrite animation description and play loop animation
-	for(i = 0; node; node = VirtualNode::getNext(node), i++)
-	{
-		// get image entity texture
-		Texture texture = Sprite::getTexture(VirtualNode::getData(node));
-
-		Texture::setSpec(texture, ImageViewerState::getTexture(this, i));
-	}
-
-	AnimatedEntity::setAnimationDescription(this->imageEntity, ImageViewerState::getAnimationDescription(this));
-	AnimatedEntity::playAnimation(this->imageEntity, ImageViewerState::getAnimationName(this));
-
-	// force CHAR memory defragmentation to prevent memory depletion
-	CharSetManager::writeCharSets(CharSetManager::getInstance());
-
-	node = VirtualList::begin(entitySprites);
-
-	for(i = 0; node; node = VirtualNode::getNext(node), i++)
-	{
-		Sprite sprite = Sprite::safeCast(VirtualNode::getData(node));
-		Texture texture = Sprite::getTexture(sprite);
-
-		Sprite::render(sprite, 31, false);
-		Texture::update(texture);
-	}
-
-	VIPManager::enableDrawing(VIPManager::getInstance());
+	AnimatedImage::changeSpec(this->imageEntity, ImageViewerState::getAnimationDescription(this), ImageViewerState::getAnimationName(this));
 
 	// force unpaused
 	this->isPaused = false;

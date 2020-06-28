@@ -288,8 +288,8 @@ AnimatedImageROMSpec VERTIGO_EN =
 			// use z displacement in projection
 			false,
 				
-		// collision shapes
-			(ShapeSpec*)NULL,
+			// collision shapes
+				(ShapeSpec*)NULL,
 
 			// size
 			// if 0, width and height will be inferred from the first sprite's texture's size

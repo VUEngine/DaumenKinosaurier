@@ -30,7 +30,7 @@
 #include <AnimationState.h>
 #include <KeypadManager.h>
 #include <MessageDispatcher.h>
-#include <AnimatedEntity.h>
+#include <AnimatedImage.h>
 #include <CustomCameraEffectManager.h>
 #include <TitleScreenState.h>
 #include <CreditsState.h>
@@ -104,18 +104,18 @@ void AnimationState::enter(void* owner)
 
 	// get entities from stage
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Back",
 		false
 	));
 	/*
 	this->framesButtonEntity = Entity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Frames",
 		false
 	));
@@ -143,7 +143,7 @@ void AnimationState::processUserInput(UserInput userInput)
 	{
 		// get image entity from stage
 		AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
-			Game::getStage(Game::getInstance()),
+			this->stage,
 			"Image",
 			false
 		));
@@ -159,7 +159,7 @@ void AnimationState::processUserInput(UserInput userInput)
 
 		// get ende entity from stage
 		Container endeEntity = Container::getChildByName(
-			Game::getStage(Game::getInstance()),
+			this->stage,
 			"Ende",
 			false
 		);
@@ -172,7 +172,7 @@ void AnimationState::processUserInput(UserInput userInput)
 
 		// get ende entity from stage
 		Container creditsEntity = Container::getChildByName(
-			Game::getStage(Game::getInstance()),
+			this->stage,
 			"Credits",
 			false
 		);
@@ -236,7 +236,7 @@ void AnimationState::execute(void* owner)
 
 	// get image entity from stage
 	AnimatedEntity imageEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Image",
 		false
 	));
@@ -336,16 +336,15 @@ void AnimationState::setCurrentAnimationSequence(u8 currentSequence)
 void AnimationState::playBanana()
 {
 	// delete image entity
-	Container imageEntity = Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+	AnimatedImage imageEntity = AnimatedImage::safeCast(Stage::getChildByName(
+		this->stage,
 		"Image",
 		false
-	);
-	Container::deleteMyself(imageEntity);
+	));
 
-	// add new image entity
-	PositionedEntity POSITIONED_ENTITY = {&BANANA_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
+	extern AnimationDescription BANANA_ANIM;
+
+	AnimatedImage::changeSpec(imageEntity, &BANANA_ANIM, "Default");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceBanana);
@@ -354,16 +353,15 @@ void AnimationState::playBanana()
 void AnimationState::playRexRun()
 {
 	// delete image entity
-	Container imageEntity = Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+	AnimatedImage imageEntity = AnimatedImage::safeCast(Stage::getChildByName(
+		this->stage,
 		"Image",
 		false
-	);
-	Container::deleteMyself(imageEntity);
+	));
 
-	// add new image entity
-	PositionedEntity POSITIONED_ENTITY = {&REX_RUN_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
+	extern AnimationDescription REX_ANIM;
+
+	AnimatedImage::changeSpec(imageEntity, &REX_ANIM, "Run");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceRexRun);
@@ -372,16 +370,15 @@ void AnimationState::playRexRun()
 void AnimationState::playVertigo()
 {
 	// delete image entity
-	Container imageEntity = Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+	AnimatedImage imageEntity = AnimatedImage::safeCast(Stage::getChildByName(
+		this->stage,
 		"Image",
 		false
-	);
-	Container::deleteMyself(imageEntity);
+	));
 
-	// add new image entity
-	PositionedEntity POSITIONED_ENTITY = {&VERTIGO_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
+	extern AnimationDescription VERTIGO_ANIM;
+
+	AnimatedImage::changeSpec(imageEntity, &VERTIGO_ANIM, "Default");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVertigo);
@@ -390,16 +387,15 @@ void AnimationState::playVertigo()
 void AnimationState::playVolcanoEnd()
 {
 	// delete image entity
-	Container imageEntity = Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+	AnimatedImage imageEntity = AnimatedImage::safeCast(Stage::getChildByName(
+		this->stage,
 		"Image",
 		false
-	);
-	Container::deleteMyself(imageEntity);
+	));
 
-	// add new image entity
-	PositionedEntity POSITIONED_ENTITY = {&VOLCANO_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
+	extern AnimationDescription VOLCANO_ANIM;
+
+	AnimatedImage::changeSpec(imageEntity, &VOLCANO_ANIM, "Loop");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVolcano);
@@ -417,21 +413,32 @@ void AnimationState::playVolcanoEnd()
 		{&ENDE_EN, {86, 54, -0.001f, 0}, 0, "Ende", NULL, NULL, true},
 		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), endeEntity, false);
+	Stage::addChildEntity(this->stage, endeEntity, false);
 }
 
 void AnimationState::playCreditsText()
 {
-	// delete ende entity
-	Container::deleteMyself(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
-		"Ende",
-		false
-	));
+	AnimatedEntity ende = AnimatedEntity::safeCast(
+			Container::getChildByName(
+			this->stage,
+			"Ende",
+			false
+		)
+	);
 
+	if(!isDeleted(ende))
+	{
+		AnimatedEntity::addEventListener(ende, Object::safeCast(this), (EventListener)&AnimationState::onEndeDeleted, kEventContainerDeleted);
+		// delete ende entity
+		AnimatedEntity::deleteMyself(ende);
+	}
+}
+
+void AnimationState::onEndeDeleted(Object eventFirer __attribute__((unused)))
+{
 	// add credits entity
 	PositionedEntity POSITIONED_ENTITY = {&CREDITS_TEXT_EN, {80, 74, 0, 0}, 0, "Credits", NULL, NULL, true};
-	Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
+	Stage::addChildEntity(this->stage, &POSITIONED_ENTITY, false);
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceCredits);

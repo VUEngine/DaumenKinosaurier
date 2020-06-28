@@ -98,22 +98,22 @@ void TitleScreenState::enter(void* owner)
 
 	// get entities
 	this->cursorEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Cursor",
 		false
 	));
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Back",
 		false
 	));
 	this->nextButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Next",
 		false
 	));
@@ -167,7 +167,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 
 				// delete copyright
 				Entity copyright = Entity::safeCast(Container::getChildByName(
-					Game::getStage(Game::getInstance()),
+					this->stage,
 					"Copyright",
 					false
 				));
@@ -177,7 +177,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 
 				// delete menu
 				Entity menu = Entity::safeCast(Container::getChildByName(
-					Game::getStage(Game::getInstance()),
+					this->stage,
 					"Menu",
 					false
 				));
@@ -191,7 +191,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 
 				// get logo entity from stage
 				AnimatedEntity logoEntity = AnimatedEntity::safeCast(Container::getChildByName(
-					Game::getStage(Game::getInstance()),
+					this->stage,
 					"Logo",
 					false
 				));
@@ -214,7 +214,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 
 			// get image entity from stage
 			Container imageEntity = Container::getChildByName(
-				Game::getStage(Game::getInstance()),
+				this->stage,
 				"Image",
 				false
 			);
@@ -226,7 +226,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 
 			// get logo entity from stage
 			Container logoEntity = Container::getChildByName(
-				Game::getStage(Game::getInstance()),
+				this->stage,
 				"Logo",
 				false
 			);
@@ -238,7 +238,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 
 			// get ende entity from stage
 			Container creditsEntity = Container::getChildByName(
-				Game::getStage(Game::getInstance()),
+				this->stage,
 				"CredText",
 				false
 			);
@@ -298,7 +298,7 @@ void TitleScreenState::processUserInput(UserInput userInput)
 				case 3:
 				{
 					AnimatedEntity creditsEntity = AnimatedEntity::safeCast(Container::getChildByName(
-						Game::getStage(Game::getInstance()),
+						this->stage,
 						"CredText",
 						false
 					));
@@ -361,7 +361,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 
 					// get logo entity from stage
 					AnimatedEntity logoEntity = AnimatedEntity::safeCast(Container::getChildByName(
-						Game::getStage(Game::getInstance()),
+						this->stage,
 						"Logo",
 						false
 					));
@@ -376,7 +376,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 				{
 					// remove logo
 					Entity logo = Entity::safeCast(Container::getChildByName(
-						Game::getStage(Game::getInstance()),
+						this->stage,
 						"Logo",
 						false
 					));
@@ -402,11 +402,11 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 			// add new image entity
 			extern EntitySpec CREDITS_TEXT_ALTERNATIVE_EN;
 			PositionedEntity POSITIONED_ENTITY = {&CREDITS_TEXT_ALTERNATIVE_EN, {80, 74, -0.003f, 0}, 0, "CredText", NULL, NULL, true};
-			Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
+			Stage::addChildEntity(this->stage, &POSITIONED_ENTITY, false);
 
 			// pause credits animation
 			AnimatedEntity creditsEntity = AnimatedEntity::safeCast(Container::getChildByName(
-				Game::getStage(Game::getInstance()),
+				this->stage,
 				"CredText",
 				false
 			));
@@ -426,7 +426,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 		{
 			// add image entity
 			PositionedEntity POSITIONED_ENTITY = {&CREDITS_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
-			Stage::addChildEntity(Game::getStage(Game::getInstance()), &POSITIONED_ENTITY, false);
+			Stage::addChildEntity(this->stage, &POSITIONED_ENTITY, false);
 
 			break;
 		}
@@ -488,7 +488,7 @@ void TitleScreenState::playCreditsAnimation()
 {
 	// delete image entity
 	Entity image = Entity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"Image",
 		false
 	));
@@ -498,7 +498,7 @@ void TitleScreenState::playCreditsAnimation()
 
 	// delete credits entity
 	Entity creditsText = Entity::safeCast(Container::getChildByName(
-		Game::getStage(Game::getInstance()),
+		this->stage,
 		"CredText",
 		false
 	));
