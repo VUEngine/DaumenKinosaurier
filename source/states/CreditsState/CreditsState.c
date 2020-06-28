@@ -87,17 +87,17 @@ void CreditsState::enter(void* owner)
 
 	// get entities
 	this->pauseButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		this->stage,
+		Game::getStage(Game::getInstance()),
 		"Pause",
 		false
 	));
 	this->resumeButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		this->stage,
+		Game::getStage(Game::getInstance()),
 		"Resume",
 		false
 	));
 	this->backButtonEntity = AnimatedEntity::safeCast(Container::getChildByName(
-		this->stage,
+		Game::getStage(Game::getInstance()),
 		"Back",
 		false
 	));
@@ -127,7 +127,7 @@ void CreditsState::processUserInput(UserInput userInput)
 
 		// get image entity from stage
 		Container imageEntity = Container::getChildByName(
-			this->stage,
+			Game::getStage(Game::getInstance()),
 			"Image",
 			false
 		);

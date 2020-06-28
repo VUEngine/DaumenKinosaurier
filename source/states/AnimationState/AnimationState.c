@@ -428,6 +428,7 @@ void AnimationState::playCreditsText()
 
 	if(!isDeleted(ende))
 	{
+		// Cannot add the Credits right aways since there is not enough CHAR memory
 		AnimatedEntity::addEventListener(ende, Object::safeCast(this), (EventListener)&AnimationState::onEndeDeleted, kEventContainerDeleted);
 		// delete ende entity
 		AnimatedEntity::deleteMyself(ende);

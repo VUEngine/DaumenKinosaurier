@@ -493,18 +493,23 @@ void TitleScreenState::playCreditsAnimation()
 		false
 	));
 
-	Entity::releaseSprites(image);
-	Container::deleteMyself(Container::safeCast(image));
+	if(!isDeleted(image))
+	{
+		// Cannot add the Credits right aways since there is not enough CHAR memory
+		Entity::addEventListener(image, Object::safeCast(this), (EventListener)&TitleScreenState::onImageDeleted, kEventContainerDeleted);
+		// delete ende entity
+		Entity::deleteMyself(image);
+	}
+}
 
+void TitleScreenState::onImageDeleted(Object eventFirer __attribute__((unused)))
+{
 	// delete credits entity
 	Entity creditsText = Entity::safeCast(Container::getChildByName(
 		this->stage,
 		"CredText",
 		false
 	));
-
-	Entity::releaseSprites(creditsText);
-	Container::deleteMyself(creditsText);
 
 	// delayed adding of credits animation entity
 	MessageDispatcher::dispatchMessage(120, Object::safeCast(TitleScreenState::getInstance()), Object::safeCast(TitleScreenState::getInstance()), kMessageShowCreditsAnimation, NULL);
