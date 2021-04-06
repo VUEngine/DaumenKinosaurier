@@ -4,8 +4,8 @@
 		"maxScale": 2
 	},
 	"animation": {
-		"maxAnimationFunctionNameLength": 16,
 		"maxAnimationFunctions": 8,
+		"maxAnimationFunctionNameLength": 16,
 		"maxFramesPerAnimationFunction": 50
 	},
 	"char": {
@@ -14,10 +14,10 @@
 	"colors": {
 		"brightness": {
 			"brightRed": 128,
+			"mediumRed": 64,
 			"darkRed": 32,
 			"fadeDelay": 8,
-			"fadeIncrement": 8,
-			"mediumRed": 64
+			"fadeIncrement": 8
 		},
 		"palettes": {
 			"bgMap": {
@@ -75,22 +75,17 @@
 		"scrambleBinary": false
 	},
 	"debug": {
-		"showStackOverflowAlert": false,
 		"alertVipOvertime": false,
-		"dimmForProfiling": false,
-		"showDetailedMemoryPoolStatus": false,
-		"printFramerate": false,
-		"showMemoryPoolStatus": false,
-		"profileGame": false,
-		"profileGameStateDuringVipInterrupt": false,
-		"profileStreaming": false,
-		"showGameProfiling": false,
-		"showStreamingProfiling": false,
-		"stackHeadroom": 1000,
 		"alertForTornFrames": false,
-		"alertStackOverflow": false,
-		"printDetailedMemoryPoolStatus": false,
-		"printMemoryPoolStatus": false
+		"dimmForProfiling": false,
+		"enableProfiler": false,
+		"printFramerate": false,
+		"profileStreaming": false,
+		"showDetailedMemoryPoolStatus": false,
+		"showMemoryPoolStatus": false,
+		"showStackOverflowAlert": false,
+		"showStreamingProfiling": false,
+		"stackHeadroom": 1000
 	},
 	"exception": {
 		"position": {
@@ -105,6 +100,9 @@
 		"timerResolution": 10
 	},
 	"game": [],
+	"communications":{
+		"enable": false
+	},
 	"memoryPools": {
 		"cleanUp": false,
 		"pools": [
@@ -238,8 +236,8 @@
 		}
 	},
 	"sound": {
-		"leftEarCenter": 96,
-		"rightEarCenter": 288,
+		"leftEarCenter": 144,
+		"rightEarCenter": 240,
 		"stereoHorizontalAttenuationFactor": 50,
 		"stereoVerticalAttenuationFactor": 50,
 		"stereoAttenuationFactor": 75
@@ -265,15 +263,5 @@
 		"paramTableSegments": 0
 	},
 	"hacks": {
-		"mednafen": {
-			"objectMemoryCleanup": true
-		}
-	},
-	"sections": {
-		"initializedData": ".sdata",
-		"memoryPool": ".sdata",
-		"staticSingletons": ".dram_bss",
-		"uninitializedData": ".sbss",
-		"virtualTables": ".dram_bss"
 	}
 }

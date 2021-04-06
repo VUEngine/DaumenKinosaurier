@@ -190,9 +190,15 @@ AnimatedImageROMSpec CREDITS_TEXT_EN =
 			// class allocator
 			__TYPE(AnimatedImage),
 
-			// behaviors 
+			// children
 			NULL,
 
+			// behaviors
+			NULL,
+
+			// extra
+			NULL,
+			
 			// sprites
 			(SpriteSpec**)CREDITS_TEXT_SPRITES,
 
@@ -228,7 +234,13 @@ AnimatedImageROMSpec CREDITS_TEXT_ALTERNATIVE_EN =
 			// class allocator
 			__TYPE(AnimatedImage),
 
-			// behaviors 
+			// children
+			NULL,
+
+			// behaviors
+			NULL,
+
+			// extra
 			NULL,
 
 			// sprites

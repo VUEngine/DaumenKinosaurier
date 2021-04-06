@@ -338,7 +338,13 @@ AnimatedImageROMSpec REX_EN =
 			// class allocator
 			__TYPE(AnimatedImage),
 
-			// behaviors 
+			// children
+			NULL,
+
+			// behaviors
+			NULL,
+
+			// extra
 			NULL,
 
 			// sprites
@@ -376,7 +382,13 @@ AnimatedImageROMSpec REX_RUN_EN =
 			// class allocator
 			__TYPE(AnimatedImage),
 
-			// behaviors 
+			// children
+			NULL,
+
+			// behaviors
+			NULL,
+
+			// extra
 			NULL,
 
 			// sprites

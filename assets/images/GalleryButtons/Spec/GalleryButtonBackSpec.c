@@ -250,7 +250,13 @@ AnimatedEntityROMSpec GALLERY_BUTTON_BACK_EN =
 		// class allocator
 		__TYPE(AnimatedEntity),
 
-		// behaviors 
+		// children
+		NULL,
+
+		// behaviors
+		NULL,
+
+		// extra
 		NULL,
 
 		// sprites

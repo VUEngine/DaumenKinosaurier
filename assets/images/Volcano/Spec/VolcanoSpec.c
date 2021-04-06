@@ -252,7 +252,13 @@ AnimatedImageROMSpec VOLCANO_EN =
 			// class allocator
 			__TYPE(AnimatedImage),
 
-			// behaviors 
+			// children
+			NULL,
+
+			// behaviors
+			NULL,
+
+			// extra
 			NULL,
 
 			// sprites
