@@ -127,6 +127,7 @@ void AnimationState::enter(void* owner)
 	//Entity::hide(this->framesButtonEntity);
 
 	// show image
+	Camera::startEffect(Camera::getInstance(), kHide);
 	Camera::startEffect(Camera::getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)

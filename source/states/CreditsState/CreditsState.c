@@ -108,6 +108,7 @@ void CreditsState::enter(void* owner)
 	Entity::hide(this->backButtonEntity);
 
 	// show image
+	Camera::startEffect(Camera::getInstance(), kHide);
 	Camera::startEffect(Camera::getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)

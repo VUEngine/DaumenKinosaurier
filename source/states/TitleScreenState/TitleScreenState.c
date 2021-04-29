@@ -124,6 +124,7 @@ void TitleScreenState::enter(void* owner)
 	Entity::hide(this->nextButtonEntity);
 
 	// start fade in effect
+	Camera::startEffect(Camera::getInstance(), kHide);
 	Camera::startEffect(Camera::getInstance(),
 		kFadeTo, // effect type
 		0, // initial delay (in ms)
@@ -504,13 +505,14 @@ void TitleScreenState::playCreditsAnimation()
 
 void TitleScreenState::onImageDeleted(Object eventFirer __attribute__((unused)))
 {
+/*
 	// delete credits entity
 	Entity creditsText = Entity::safeCast(Container::getChildByName(
 		this->stage,
 		"CredText",
 		false
 	));
-
+*/
 	// delayed adding of credits animation entity
 	MessageDispatcher::dispatchMessage(120, Object::safeCast(TitleScreenState::getInstance()), Object::safeCast(TitleScreenState::getInstance()), kMessageShowCreditsAnimation, NULL);
 }

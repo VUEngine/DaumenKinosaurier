@@ -317,7 +317,7 @@ StageROMSpec ANIMATION_ST =
         },
 
         // children
-        ANIMATION_ST_CHILDREN,
+        (PositionedEntity*)ANIMATION_ST_CHILDREN,
     },
 
 	// post processing effects
