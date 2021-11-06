@@ -35,20 +35,20 @@
 //											CLASS'S DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-extern TextureROMSpec REX_L_TX;
-extern TextureROMSpec REX_R_TX;
-extern TextureROMSpec BANANA_L_TX;
-extern TextureROMSpec BANANA_R_TX;
-extern TextureROMSpec VERTIGO_L_TX;
-extern TextureROMSpec VERTIGO_R_TX;
-extern TextureROMSpec VOLCANO_L_TX;
-extern TextureROMSpec VOLCANO_R_TX;
-extern TextureROMSpec CREDITS_TEXT_TX;
-extern AnimationDescriptionROMSpec VOLCANO_ANIM;
-extern AnimationDescriptionROMSpec REX_ANIM;
-extern AnimationDescriptionROMSpec BANANA_ANIM;
-extern AnimationDescriptionROMSpec VERTIGO_ANIM;
-extern AnimationDescriptionROMSpec CREDITS_TEXT_ANIM;
+extern TextureROMSpec RexLTexture;
+extern TextureROMSpec RexRTexture;
+extern TextureROMSpec BananaLTexture;
+extern TextureROMSpec BananaRTexture;
+extern TextureROMSpec VertigoLTexture;
+extern TextureROMSpec VertigoRTexture;
+extern TextureROMSpec VolcanoLTexture;
+extern TextureROMSpec VolcanoRTexture;
+extern TextureROMSpec CreditsTextTexture;
+extern AnimationDescriptionROMSpec VolcanoAnimation;
+extern AnimationDescriptionROMSpec RexAnimation;
+extern AnimationDescriptionROMSpec BananaAnimation;
+extern AnimationDescriptionROMSpec VertigoAnimation;
+extern AnimationDescriptionROMSpec CreditsTextAnimation;
 
 
 
@@ -153,26 +153,26 @@ void AnimatedImage::changeSpec(AnimationDescription* animationDescription, char*
 
 TextureSpec* AnimatedImage::getTextureSpec(AnimationDescription* animationDescription, u8 textureNumber)
 {
-	if(&REX_ANIM == animationDescription)
+	if(&RexAnimation == animationDescription)
 	{
-		return (textureNumber == 0) ? (TextureSpec*)&REX_L_TX : (TextureSpec*)&REX_R_TX;
+		return (textureNumber == 0) ? (TextureSpec*)&RexLTexture : (TextureSpec*)&RexRTexture;
 	}
-	else if(&BANANA_ANIM == animationDescription)
+	else if(&BananaAnimation == animationDescription)
 	{
-		return (textureNumber == 0) ? (TextureSpec*)&BANANA_L_TX : (TextureSpec*)&BANANA_R_TX;
+		return (textureNumber == 0) ? (TextureSpec*)&BananaLTexture : (TextureSpec*)&BananaRTexture;
 	}
-	else if(&VERTIGO_ANIM == animationDescription)
+	else if(&VertigoAnimation == animationDescription)
 	{
-		return (textureNumber == 0) ? (TextureSpec*)&VERTIGO_L_TX : (TextureSpec*)&VERTIGO_R_TX;
+		return (textureNumber == 0) ? (TextureSpec*)&VertigoLTexture : (TextureSpec*)&VertigoRTexture;
 	}
-	else if(&VOLCANO_ANIM == animationDescription)
+	else if(&VolcanoAnimation == animationDescription)
 	{
-		return (textureNumber == 0) ? (TextureSpec*)&VOLCANO_L_TX : (TextureSpec*)&VOLCANO_R_TX;
+		return (textureNumber == 0) ? (TextureSpec*)&VolcanoLTexture : (TextureSpec*)&VolcanoRTexture;
 	}
-	else if(&CREDITS_TEXT_ANIM == animationDescription)
+	else if(&CreditsTextAnimation == animationDescription)
 	{
-		return (TextureSpec*)&CREDITS_TEXT_TX;
+		return (TextureSpec*)&CreditsTextTexture;
 	}
 
-	return (textureNumber == 0) ? (TextureSpec*)&VOLCANO_L_TX : (TextureSpec*)&VOLCANO_R_TX;
+	return (textureNumber == 0) ? (TextureSpec*)&VolcanoLTexture : (TextureSpec*)&VolcanoRTexture;
 }

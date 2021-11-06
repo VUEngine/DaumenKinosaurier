@@ -44,7 +44,7 @@ extern BYTE VolcanoRightMap[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec VOLCANO_DEFAULT_ANIM =
+AnimationFunctionROMSpec VolcanoDefaultAnimation =
 {
 	// number of frames of this animation function
 	10,
@@ -66,11 +66,11 @@ AnimationFunctionROMSpec VOLCANO_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec VOLCANO_ANIM =
+AnimationDescriptionROMSpec VolcanoAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&VOLCANO_DEFAULT_ANIM,
+		(AnimationFunction*)&VolcanoDefaultAnimation,
 		NULL,
 	}
 };
@@ -78,7 +78,7 @@ AnimationDescriptionROMSpec VOLCANO_ANIM =
 
 /* Left */
 
-CharSetROMSpec VOLCANO_L_CH =
+CharSetROMSpec VolcanoLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -93,10 +93,10 @@ CharSetROMSpec VOLCANO_L_CH =
 	VolcanoLeftTiles,
 };
 
-TextureROMSpec VOLCANO_L_TX =
+TextureROMSpec VolcanoLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&VOLCANO_L_CH,
+	(CharSetSpec*)&VolcanoLCharset,
 
 	// bgmap spec
 	VolcanoLeftMap,
@@ -128,14 +128,14 @@ TextureROMSpec VOLCANO_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec VOLCANO_L_SPRITE =
+BgmapSpriteROMSpec VolcanoLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&VOLCANO_L_TX,
+		(TextureSpec*)&VolcanoLTexture,
 
 		// transparent
 		false,
@@ -158,7 +158,7 @@ BgmapSpriteROMSpec VOLCANO_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec VOLCANO_R_CH =
+CharSetROMSpec VolcanoRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -173,10 +173,10 @@ CharSetROMSpec VOLCANO_R_CH =
 	VolcanoRightTiles,
 };
 
-TextureROMSpec VOLCANO_R_TX =
+TextureROMSpec VolcanoRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&VOLCANO_R_CH,
+	(CharSetSpec*)&VolcanoRCharset,
 
 	// bgmap spec
 	VolcanoRightMap,
@@ -208,14 +208,14 @@ TextureROMSpec VOLCANO_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec VOLCANO_R_SPRITE =
+BgmapSpriteROMSpec VolcanoRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&VOLCANO_R_TX,
+		(TextureSpec*)&VolcanoRTexture,
 
 		// transparent
 		false,
@@ -238,14 +238,14 @@ BgmapSpriteROMSpec VOLCANO_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const VOLCANO_SPRITES[] =
+BgmapSpriteROMSpec* const VolcanoSprites[] =
 {
-	&VOLCANO_L_SPRITE,
-	&VOLCANO_R_SPRITE,
+	&VolcanoLSprite,
+	&VolcanoRSprite,
 	NULL
 };
 
-AnimatedImageROMSpec VOLCANO_EN =
+AnimatedImageROMSpec VolcanoEntity =
 {
 	{
 		{
@@ -262,7 +262,7 @@ AnimatedImageROMSpec VOLCANO_EN =
 			NULL,
 
 			// sprites
-			(SpriteSpec**)VOLCANO_SPRITES,
+			(SpriteSpec**)VolcanoSprites,
 
 			// use z displacement in projection
 			false,
@@ -282,7 +282,7 @@ AnimatedImageROMSpec VOLCANO_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&VOLCANO_ANIM,
+		(AnimationDescription*)&VolcanoAnimation,
 
 		// initial animation
 		"Loop",

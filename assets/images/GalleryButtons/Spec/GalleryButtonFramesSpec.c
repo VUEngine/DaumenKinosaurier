@@ -45,7 +45,7 @@ extern BYTE GalleryButtonFramesRightTiles[];
 /* Animations */
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_BUTTON_FRAMES_DEFAULT_ANIM =
+AnimationFunctionROMSpec GalleryButtonFramesDefaultAnimation =
 {
 	// number of frames of this animation function
 	4,
@@ -67,11 +67,11 @@ AnimationFunctionROMSpec GALLERY_BUTTON_FRAMES_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec GALLERY_BUTTON_FRAMES_ANIM =
+AnimationDescriptionROMSpec GalleryButtonFramesAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&GALLERY_BUTTON_FRAMES_DEFAULT_ANIM,
+		(AnimationFunction*)&GalleryButtonFramesDefaultAnimation,
 
 		NULL,
 	}
@@ -79,7 +79,7 @@ AnimationDescriptionROMSpec GALLERY_BUTTON_FRAMES_ANIM =
 
 /* Left */
 
-CharSetROMSpec GALLERY_BUTTON_FRAMES_L_CH =
+CharSetROMSpec GalleryButtonFramesLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -94,10 +94,10 @@ CharSetROMSpec GALLERY_BUTTON_FRAMES_L_CH =
 	GalleryButtonFramesLeftTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_FRAMES_L_TX =
+TextureROMSpec GalleryButtonFramesLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_FRAMES_L_CH,
+	(CharSetSpec*)&GalleryButtonFramesLCharset,
 
 	// bgmap spec
 	GalleryButtonFramesLeftMap,
@@ -129,14 +129,14 @@ TextureROMSpec GALLERY_BUTTON_FRAMES_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_FRAMES_L_SPRITE =
+BgmapSpriteROMSpec GalleryButtonFramesLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_FRAMES_L_TX,
+		(TextureSpec*)&GalleryButtonFramesLTexture,
 
 		// transparent
 		false,
@@ -158,7 +158,7 @@ BgmapSpriteROMSpec GALLERY_BUTTON_FRAMES_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec GALLERY_BUTTON_FRAMES_R_CH =
+CharSetROMSpec GalleryButtonFramesRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -173,10 +173,10 @@ CharSetROMSpec GALLERY_BUTTON_FRAMES_R_CH =
 	GalleryButtonFramesRightTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_FRAMES_R_TX =
+TextureROMSpec GalleryButtonFramesRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_FRAMES_R_CH,
+	(CharSetSpec*)&GalleryButtonFramesRCharset,
 
 	// bgmap spec
 	GalleryButtonFramesLeftMap,
@@ -208,14 +208,14 @@ TextureROMSpec GALLERY_BUTTON_FRAMES_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_FRAMES_R_SPRITE =
+BgmapSpriteROMSpec GalleryButtonFramesRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_FRAMES_R_TX,
+		(TextureSpec*)&GalleryButtonFramesRTexture,
 
 		// transparent
 		false,
@@ -237,14 +237,14 @@ BgmapSpriteROMSpec GALLERY_BUTTON_FRAMES_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const GALLERY_BUTTON_FRAMES_SPRITES[] =
+BgmapSpriteROMSpec* const GalleryButtonFramesSprites[] =
 {
-	&GALLERY_BUTTON_FRAMES_L_SPRITE,
-	&GALLERY_BUTTON_FRAMES_R_SPRITE,
+	&GalleryButtonFramesLSprite,
+	&GalleryButtonFramesRSprite,
 	NULL
 };
 
-AnimatedEntityROMSpec GALLERY_BUTTON_FRAMES_EN =
+AnimatedEntityROMSpec GalleryButtonFramesEntity =
 {
 	{
 		// class allocator
@@ -260,7 +260,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_FRAMES_EN =
 		NULL,
 
 		// sprites
-		(SpriteSpec**)GALLERY_BUTTON_FRAMES_SPRITES,
+		(SpriteSpec**)GalleryButtonFramesSprites,
 
 		// use z displacement in projection
 		false,
@@ -280,7 +280,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_FRAMES_EN =
 	},
 
 	// pointer to the animation spec for the item
-	(AnimationDescription*)&GALLERY_BUTTON_FRAMES_ANIM,
+	(AnimationDescription*)&GalleryButtonFramesAnimation,
 
 	// initial animation
 	"Default",

@@ -44,7 +44,7 @@ extern BYTE CreditsTextMap[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec CREDITS_TEXT_DEFAULT_ANIM =
+AnimationFunctionROMSpec CreditsTextDefaultAnimation =
 {
 	// number of frames of this animation function
 	7,
@@ -66,7 +66,7 @@ AnimationFunctionROMSpec CREDITS_TEXT_DEFAULT_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec CREDITS_TEXT_DEFAULT_ALTERNATIVE_ANIM =
+AnimationFunctionROMSpec CreditsTextDefaultAlternativeAnimation =
 {
 	// number of frames of this animation function
 	5,
@@ -90,17 +90,17 @@ AnimationFunctionROMSpec CREDITS_TEXT_DEFAULT_ALTERNATIVE_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec CREDITS_TEXT_ANIM =
+AnimationDescriptionROMSpec CreditsTextAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&CREDITS_TEXT_DEFAULT_ANIM,
-		(AnimationFunction*)&CREDITS_TEXT_DEFAULT_ALTERNATIVE_ANIM,
+		(AnimationFunction*)&CreditsTextDefaultAnimation,
+		(AnimationFunction*)&CreditsTextDefaultAlternativeAnimation,
 		NULL,
 	}
 };
 
-CharSetROMSpec CREDITS_TEXT_CH =
+CharSetROMSpec CreditsTextCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -115,10 +115,10 @@ CharSetROMSpec CREDITS_TEXT_CH =
 	CreditsTextTiles,
 };
 
-TextureROMSpec CREDITS_TEXT_TX =
+TextureROMSpec CreditsTextTexture =
 {
 	// charset spec
-	(CharSetSpec*)&CREDITS_TEXT_CH,
+	(CharSetSpec*)&CreditsTextCharset,
 
 	// bgmap spec
 	CreditsTextMap,
@@ -150,14 +150,14 @@ TextureROMSpec CREDITS_TEXT_TX =
 	false,
 };
 
-BgmapSpriteROMSpec CREDITS_TEXT_SPRITE =
+BgmapSpriteROMSpec CreditsTextSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&CREDITS_TEXT_TX,
+		(TextureSpec*)&CreditsTextTexture,
 
 		// transparent
 		false,
@@ -177,13 +177,13 @@ BgmapSpriteROMSpec CREDITS_TEXT_SPRITE =
 	__WORLD_ON,
 };
 
-BgmapSpriteROMSpec* const CREDITS_TEXT_SPRITES[] =
+BgmapSpriteROMSpec* const CreditsTextSprites[] =
 {
-	&CREDITS_TEXT_SPRITE,
+	&CreditsTextSprite,
 	NULL
 };
 
-AnimatedImageROMSpec CREDITS_TEXT_EN =
+AnimatedImageROMSpec CreditsTextEntity =
 {	
 	{
 		{
@@ -200,7 +200,7 @@ AnimatedImageROMSpec CREDITS_TEXT_EN =
 			NULL,
 			
 			// sprites
-			(SpriteSpec**)CREDITS_TEXT_SPRITES,
+			(SpriteSpec**)CreditsTextSprites,
 
 			// use z displacement in projection
 			false,
@@ -220,14 +220,14 @@ AnimatedImageROMSpec CREDITS_TEXT_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&CREDITS_TEXT_ANIM,
+		(AnimationDescription*)&CreditsTextAnimation,
 
 		// initial animation
 		"Default",
 	}
 };
 
-AnimatedImageROMSpec CREDITS_TEXT_ALTERNATIVE_EN =
+AnimatedImageROMSpec CreditsTextAlternativeEntity =
 {	
 	{
 		{
@@ -244,7 +244,7 @@ AnimatedImageROMSpec CREDITS_TEXT_ALTERNATIVE_EN =
 			NULL,
 
 			// sprites
-			(SpriteSpec**)CREDITS_TEXT_SPRITES,
+			(SpriteSpec**)CreditsTextSprites,
 
 			// use z displacement in projection
 			false,
@@ -264,7 +264,7 @@ AnimatedImageROMSpec CREDITS_TEXT_ALTERNATIVE_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&CREDITS_TEXT_ANIM,
+		(AnimationDescription*)&CreditsTextAnimation,
 
 		// initial animation
 		"DfltAlt",

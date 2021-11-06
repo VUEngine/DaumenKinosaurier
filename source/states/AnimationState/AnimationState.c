@@ -40,16 +40,16 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern StageROMSpec ANIMATION_ST;
+extern StageROMSpec AnimationSt;
 
-extern EntitySpec REX_EN;
-extern EntitySpec BANANA_EN;
-extern EntitySpec REX_RUN_EN;
-extern EntitySpec VERTIGO_EN;
-extern EntitySpec VOLCANO_EN;
-extern EntitySpec ENDE_EN;
-extern EntitySpec CREDITS_TEXT_EN;
-extern EntitySpec CREDITS_EN;
+extern EntitySpec RexEntity;
+extern EntitySpec BananaEntity;
+extern EntitySpec RexRunEntity;
+extern EntitySpec VertigoEntity;
+extern EntitySpec VolcanoEntity;
+extern EntitySpec EndeEntity;
+extern EntitySpec CreditsTextEntity;
+extern EntitySpec CreditsEntity;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ void AnimationState::enter(void* owner)
 	Camera::setCameraEffectManager(Camera::getInstance(), CameraEffectManager::safeCast(CustomCameraEffectManager_getInstance()));
 
 	// load stage
-	GameState::loadStage(this, (StageSpec*)&ANIMATION_ST, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&AnimationSt, NULL, true);
 
 	// enable user input
     Game::enableKeypad(Game::getInstance());
@@ -343,9 +343,9 @@ void AnimationState::playBanana()
 		false
 	));
 
-	extern AnimationDescription BANANA_ANIM;
+	extern AnimationDescription BananaAnimation;
 
-	AnimatedImage::changeSpec(imageEntity, &BANANA_ANIM, "Default");
+	AnimatedImage::changeSpec(imageEntity, &BananaAnimation, "Default");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceBanana);
@@ -360,9 +360,9 @@ void AnimationState::playRexRun()
 		false
 	));
 
-	extern AnimationDescription REX_ANIM;
+	extern AnimationDescription RexAnimation;
 
-	AnimatedImage::changeSpec(imageEntity, &REX_ANIM, "Run");
+	AnimatedImage::changeSpec(imageEntity, &RexAnimation, "Run");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceRexRun);
@@ -377,9 +377,9 @@ void AnimationState::playVertigo()
 		false
 	));
 
-	extern AnimationDescription VERTIGO_ANIM;
+	extern AnimationDescription VertigoAnimation;
 
-	AnimatedImage::changeSpec(imageEntity, &VERTIGO_ANIM, "Default");
+	AnimatedImage::changeSpec(imageEntity, &VertigoAnimation, "Default");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVertigo);
@@ -394,9 +394,9 @@ void AnimationState::playVolcanoEnd()
 		false
 	));
 
-	extern AnimationDescription VOLCANO_ANIM;
+	extern AnimationDescription VolcanoAnimation;
 
-	AnimatedImage::changeSpec(imageEntity, &VOLCANO_ANIM, "Loop");
+	AnimatedImage::changeSpec(imageEntity, &VolcanoAnimation, "Loop");
 
 	// update current animation sequence
 	AnimationState::setCurrentAnimationSequence(AnimationState::getInstance(), kAnimationSequenceVolcano);
@@ -411,7 +411,7 @@ void AnimationState::playVolcanoEnd()
 	// play "ende" fade in animation
 	PositionedEntityROMSpec endeEntity[] =
 	{
-		{&ENDE_EN, {86, 54, -0.001f, 0}, 0, "Ende", NULL, NULL, true},
+		{&EndeEntity, {86, 54, -0.001f, 0}, 0, "Ende", NULL, NULL, true},
 		{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 	};
 	Stage::addChildEntity(this->stage, endeEntity, false);
@@ -439,7 +439,7 @@ void AnimationState::playCreditsText()
 void AnimationState::onEndeDeleted(Object eventFirer __attribute__((unused)))
 {
 	// add credits entity
-	PositionedEntity POSITIONED_ENTITY = {&CREDITS_TEXT_EN, {80, 74, 0, 0}, 0, "Credits", NULL, NULL, true};
+	PositionedEntity POSITIONED_ENTITY = {&CreditsTextEntity, {80, 74, 0, 0}, 0, "Credits", NULL, NULL, true};
 	Stage::addChildEntity(this->stage, &POSITIONED_ENTITY, false);
 
 	// update current animation sequence

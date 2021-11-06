@@ -44,7 +44,7 @@ extern BYTE CreditsRightMap[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec CREDITS_DEFAULT_ANIM =
+AnimationFunctionROMSpec CreditsDefaultAnimation =
 {
 	// number of frames of this animation function
 	4,
@@ -66,11 +66,11 @@ AnimationFunctionROMSpec CREDITS_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec CREDITS_ANIM =
+AnimationDescriptionROMSpec CreditsAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&CREDITS_DEFAULT_ANIM,
+		(AnimationFunction*)&CreditsDefaultAnimation,
 		NULL,
 	}
 };
@@ -78,7 +78,7 @@ AnimationDescriptionROMSpec CREDITS_ANIM =
 
 /* Left */
 
-CharSetROMSpec CREDITS_L_CH =
+CharSetROMSpec CreditsLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -93,10 +93,10 @@ CharSetROMSpec CREDITS_L_CH =
 	CreditsLeftTiles,
 };
 
-TextureROMSpec CREDITS_L_TX =
+TextureROMSpec CreditsLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&CREDITS_L_CH,
+	(CharSetSpec*)&CreditsLCharset,
 
 	// bgmap spec
 	CreditsLeftMap,
@@ -128,14 +128,14 @@ TextureROMSpec CREDITS_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec CREDITS_L_SPRITE =
+BgmapSpriteROMSpec CreditsLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&CREDITS_L_TX,
+		(TextureSpec*)&CreditsLTexture,
 
 		// transparent
 		false,
@@ -158,7 +158,7 @@ BgmapSpriteROMSpec CREDITS_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec CREDITS_R_CH =
+CharSetROMSpec CreditsRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -173,10 +173,10 @@ CharSetROMSpec CREDITS_R_CH =
 	CreditsRightTiles,
 };
 
-TextureROMSpec CREDITS_R_TX =
+TextureROMSpec CreditsRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&CREDITS_R_CH,
+	(CharSetSpec*)&CreditsRCharset,
 
 	// bgmap spec
 	CreditsRightMap,
@@ -208,14 +208,14 @@ TextureROMSpec CREDITS_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec CREDITS_R_SPRITE =
+BgmapSpriteROMSpec CreditsRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&CREDITS_R_TX,
+		(TextureSpec*)&CreditsRTexture,
 
 		// transparent
 		false,
@@ -238,14 +238,14 @@ BgmapSpriteROMSpec CREDITS_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const CREDITS_SPRITES[] =
+BgmapSpriteROMSpec* const CreditsSprites[] =
 {
-	&CREDITS_L_SPRITE,
-	&CREDITS_R_SPRITE,
+	&CreditsLSprite,
+	&CreditsRSprite,
 	NULL
 };
 
-AnimatedEntityROMSpec CREDITS_EN =
+AnimatedEntityROMSpec CreditsEntity =
 {
 	{
 		// class allocator
@@ -261,7 +261,7 @@ AnimatedEntityROMSpec CREDITS_EN =
 		NULL,
 
 		// sprites
-		(SpriteSpec**)CREDITS_SPRITES,
+		(SpriteSpec**)CreditsSprites,
 
 		// use z displacement in projection
 		false,
@@ -281,7 +281,7 @@ AnimatedEntityROMSpec CREDITS_EN =
 	},
 
 	// pointer to the animation spec for the item
-	(AnimationDescription*)&CREDITS_ANIM,
+	(AnimationDescription*)&CreditsAnimation,
 
 	// initial animation
 	"Default",

@@ -40,19 +40,19 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern StageROMSpec IMAGE_VIEWER_ST;
-extern TextureROMSpec REX_L_TX;
-extern TextureROMSpec REX_R_TX;
-extern TextureROMSpec BANANA_L_TX;
-extern TextureROMSpec BANANA_R_TX;
-extern TextureROMSpec VERTIGO_L_TX;
-extern TextureROMSpec VERTIGO_R_TX;
-extern TextureROMSpec VOLCANO_L_TX;
-extern TextureROMSpec VOLCANO_R_TX;
-extern AnimationDescriptionROMSpec VOLCANO_ANIM;
-extern AnimationDescriptionROMSpec REX_ANIM;
-extern AnimationDescriptionROMSpec BANANA_ANIM;
-extern AnimationDescriptionROMSpec VERTIGO_ANIM;
+extern StageROMSpec ImageViewerSt;
+extern TextureROMSpec RexLTexture;
+extern TextureROMSpec RexRTexture;
+extern TextureROMSpec BananaLTexture;
+extern TextureROMSpec BananaRTexture;
+extern TextureROMSpec VertigoLTexture;
+extern TextureROMSpec VertigoRTexture;
+extern TextureROMSpec VolcanoLTexture;
+extern TextureROMSpec VolcanoRTexture;
+extern AnimationDescriptionROMSpec VolcanoAnimation;
+extern AnimationDescriptionROMSpec RexAnimation;
+extern AnimationDescriptionROMSpec BananaAnimation;
+extern AnimationDescriptionROMSpec VertigoAnimation;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ void ImageViewerState::enter(void* owner)
 	Base::enter(this, owner);
 
 	// load stage
-	GameState::loadStage(this, (StageSpec*)&IMAGE_VIEWER_ST, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&ImageViewerSt, NULL, true);
 
 	// enable user input
     Game::enableKeypad(Game::getInstance());
@@ -307,23 +307,23 @@ TextureSpec* ImageViewerState::getTexture(u8 textureNumber)
 		case 0:
 		default:
 			{
-				return (textureNumber == 0) ? (TextureSpec*)&VOLCANO_L_TX : (TextureSpec*)&VOLCANO_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&VolcanoLTexture : (TextureSpec*)&VolcanoRTexture;
 				break;
 			}
 		case 1:
 		case 2:
 			{
-				return (textureNumber == 0) ? (TextureSpec*)&REX_L_TX : (TextureSpec*)&REX_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&RexLTexture : (TextureSpec*)&RexRTexture;
 				break;
 			}
 		case 3:
 			{
-				return (textureNumber == 0) ? (TextureSpec*)&BANANA_L_TX : (TextureSpec*)&BANANA_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&BananaLTexture : (TextureSpec*)&BananaRTexture;
 				break;
 			}
 		case 4:
 			{
-				return (textureNumber == 0) ? (TextureSpec*)&VERTIGO_L_TX : (TextureSpec*)&VERTIGO_R_TX;
+				return (textureNumber == 0) ? (TextureSpec*)&VertigoLTexture : (TextureSpec*)&VertigoRTexture;
 				break;
 			}
 	}
@@ -336,23 +336,23 @@ AnimationDescription* ImageViewerState::getAnimationDescription()
 		case 0:
 		default:
 			{
-				return (AnimationDescription*)&VOLCANO_ANIM;
+				return (AnimationDescription*)&VolcanoAnimation;
 				break;
 			}
 		case 1:
 		case 2:
 			{
-				return (AnimationDescription*)&REX_ANIM;
+				return (AnimationDescription*)&RexAnimation;
 				break;
 			}
 		case 3:
 			{
-				return (AnimationDescription*)&BANANA_ANIM;
+				return (AnimationDescription*)&BananaAnimation;
 				break;
 			}
 		case 4:
 			{
-				return (AnimationDescription*)&VERTIGO_ANIM;
+				return (AnimationDescription*)&VertigoAnimation;
 				break;
 			}
 	}

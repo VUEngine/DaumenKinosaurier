@@ -45,7 +45,7 @@ extern BYTE GalleryButtonNextRightTiles[];
 /* Animations */
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_BUTTON_NEXT_DEFAULT_ANIM =
+AnimationFunctionROMSpec GalleryButtonNextDefaultAnimation =
 {
 	// number of frames of this animation function
 	2,
@@ -67,11 +67,11 @@ AnimationFunctionROMSpec GALLERY_BUTTON_NEXT_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec GALLERY_BUTTON_NEXT_ANIM =
+AnimationDescriptionROMSpec GalleryButtonNextAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&GALLERY_BUTTON_NEXT_DEFAULT_ANIM,
+		(AnimationFunction*)&GalleryButtonNextDefaultAnimation,
 
 		NULL,
 	}
@@ -79,7 +79,7 @@ AnimationDescriptionROMSpec GALLERY_BUTTON_NEXT_ANIM =
 
 /* Left */
 
-CharSetROMSpec GALLERY_BUTTON_NEXT_L_CH =
+CharSetROMSpec GalleryButtonNextLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -94,10 +94,10 @@ CharSetROMSpec GALLERY_BUTTON_NEXT_L_CH =
 	GalleryButtonNextLeftTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_NEXT_L_TX =
+TextureROMSpec GalleryButtonNextLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_NEXT_L_CH,
+	(CharSetSpec*)&GalleryButtonNextLCharset,
 
 	// bgmap spec
 	GalleryButtonNextLeftMap,
@@ -129,14 +129,14 @@ TextureROMSpec GALLERY_BUTTON_NEXT_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_NEXT_L_SPRITE =
+BgmapSpriteROMSpec GalleryButtonNextLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_NEXT_L_TX,
+		(TextureSpec*)&GalleryButtonNextLTexture,
 
 		// transparent
 		false,
@@ -158,7 +158,7 @@ BgmapSpriteROMSpec GALLERY_BUTTON_NEXT_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec GALLERY_BUTTON_NEXT_R_CH =
+CharSetROMSpec GalleryButtonNextRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -173,10 +173,10 @@ CharSetROMSpec GALLERY_BUTTON_NEXT_R_CH =
 	GalleryButtonNextRightTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_NEXT_R_TX =
+TextureROMSpec GalleryButtonNextRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_NEXT_R_CH,
+	(CharSetSpec*)&GalleryButtonNextRCharset,
 
 	// bgmap spec
 	GalleryButtonNextLeftMap,
@@ -208,14 +208,14 @@ TextureROMSpec GALLERY_BUTTON_NEXT_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_NEXT_R_SPRITE =
+BgmapSpriteROMSpec GalleryButtonNextRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_NEXT_R_TX,
+		(TextureSpec*)&GalleryButtonNextRTexture,
 
 		// transparent
 		false,
@@ -237,14 +237,14 @@ BgmapSpriteROMSpec GALLERY_BUTTON_NEXT_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const GALLERY_BUTTON_NEXT_SPRITES[] =
+BgmapSpriteROMSpec* const GalleryButtonNextSprites[] =
 {
-	&GALLERY_BUTTON_NEXT_L_SPRITE,
-	&GALLERY_BUTTON_NEXT_R_SPRITE,
+	&GalleryButtonNextLSprite,
+	&GalleryButtonNextRSprite,
 	NULL
 };
 
-AnimatedEntityROMSpec GALLERY_BUTTON_NEXT_EN =
+AnimatedEntityROMSpec GalleryButtonNextEntity =
 {
 	{
 		// class allocator
@@ -260,7 +260,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_NEXT_EN =
 		NULL,
 
 		// sprites
-		(SpriteSpec**)GALLERY_BUTTON_NEXT_SPRITES,
+		(SpriteSpec**)GalleryButtonNextSprites,
 
 		// use z displacement in projection
 		false,
@@ -280,7 +280,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_NEXT_EN =
 	},
 
 	// pointer to the animation spec for the item
-	(AnimationDescription*)&GALLERY_BUTTON_NEXT_ANIM,
+	(AnimationDescription*)&GalleryButtonNextAnimation,
 
 	// initial animation
 	"Default",

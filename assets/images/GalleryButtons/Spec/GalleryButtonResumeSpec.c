@@ -45,7 +45,7 @@ extern BYTE GalleryButtonResumeRightTiles[];
 /* Animations */
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_BUTTON_RESUME_DEFAULT_ANIM =
+AnimationFunctionROMSpec GalleryButtonResumeDefaultAnimation =
 {
 	// number of frames of this animation function
 	2,
@@ -67,11 +67,11 @@ AnimationFunctionROMSpec GALLERY_BUTTON_RESUME_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec GALLERY_BUTTON_RESUME_ANIM =
+AnimationDescriptionROMSpec GalleryButtonResumeAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&GALLERY_BUTTON_RESUME_DEFAULT_ANIM,
+		(AnimationFunction*)&GalleryButtonResumeDefaultAnimation,
 
 		NULL,
 	}
@@ -79,7 +79,7 @@ AnimationDescriptionROMSpec GALLERY_BUTTON_RESUME_ANIM =
 
 /* Left */
 
-CharSetROMSpec GALLERY_BUTTON_RESUME_L_CH =
+CharSetROMSpec GalleryButtonResumeLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -94,10 +94,10 @@ CharSetROMSpec GALLERY_BUTTON_RESUME_L_CH =
 	GalleryButtonResumeLeftTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_RESUME_L_TX =
+TextureROMSpec GalleryButtonResumeLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_RESUME_L_CH,
+	(CharSetSpec*)&GalleryButtonResumeLCharset,
 
 	// bgmap spec
 	GalleryButtonResumeLeftMap,
@@ -129,14 +129,14 @@ TextureROMSpec GALLERY_BUTTON_RESUME_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_RESUME_L_SPRITE =
+BgmapSpriteROMSpec GalleryButtonResumeLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_RESUME_L_TX,
+		(TextureSpec*)&GalleryButtonResumeLTexture,
 
 		// transparent
 		false,
@@ -158,7 +158,7 @@ BgmapSpriteROMSpec GALLERY_BUTTON_RESUME_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec GALLERY_BUTTON_RESUME_R_CH =
+CharSetROMSpec GalleryButtonResumeRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -173,10 +173,10 @@ CharSetROMSpec GALLERY_BUTTON_RESUME_R_CH =
 	GalleryButtonResumeRightTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_RESUME_R_TX =
+TextureROMSpec GalleryButtonResumeRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_RESUME_R_CH,
+	(CharSetSpec*)&GalleryButtonResumeRCharset,
 
 	// bgmap spec
 	GalleryButtonResumeLeftMap,
@@ -208,14 +208,14 @@ TextureROMSpec GALLERY_BUTTON_RESUME_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_RESUME_R_SPRITE =
+BgmapSpriteROMSpec GalleryButtonResumeRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_RESUME_R_TX,
+		(TextureSpec*)&GalleryButtonResumeRTexture,
 
 		// transparent
 		false,
@@ -237,14 +237,14 @@ BgmapSpriteROMSpec GALLERY_BUTTON_RESUME_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const GALLERY_BUTTON_RESUME_SPRITES[] =
+BgmapSpriteROMSpec* const GalleryButtonResumeSprites[] =
 {
-	&GALLERY_BUTTON_RESUME_L_SPRITE,
-	&GALLERY_BUTTON_RESUME_R_SPRITE,
+	&GalleryButtonResumeLSprite,
+	&GalleryButtonResumeRSprite,
 	NULL
 };
 
-AnimatedEntityROMSpec GALLERY_BUTTON_RESUME_EN =
+AnimatedEntityROMSpec GalleryButtonResumeEntity =
 {
 	{
 		// class allocator
@@ -260,7 +260,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_RESUME_EN =
 		NULL,
 
 		// sprites
-		(SpriteSpec**)GALLERY_BUTTON_RESUME_SPRITES,
+		(SpriteSpec**)GalleryButtonResumeSprites,
 
 		// use z displacement in projection
 		false,
@@ -280,7 +280,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_RESUME_EN =
 	},
 
 	// pointer to the animation spec for the item
-	(AnimationDescription*)&GALLERY_BUTTON_RESUME_ANIM,
+	(AnimationDescription*)&GalleryButtonResumeAnimation,
 
 	// initial animation
 	"Default",

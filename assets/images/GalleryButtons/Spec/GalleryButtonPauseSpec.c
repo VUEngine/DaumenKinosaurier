@@ -45,7 +45,7 @@ extern BYTE GalleryButtonPauseRightTiles[];
 /* Animations */
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_BUTTON_PAUSE_DEFAULT_ANIM =
+AnimationFunctionROMSpec GalleryButtonPauseDefaultAnimation =
 {
 	// number of frames of this animation function
 	2,
@@ -67,11 +67,11 @@ AnimationFunctionROMSpec GALLERY_BUTTON_PAUSE_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec GALLERY_BUTTON_PAUSE_ANIM =
+AnimationDescriptionROMSpec GalleryButtonPauseAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&GALLERY_BUTTON_PAUSE_DEFAULT_ANIM,
+		(AnimationFunction*)&GalleryButtonPauseDefaultAnimation,
 
 		NULL,
 	}
@@ -79,7 +79,7 @@ AnimationDescriptionROMSpec GALLERY_BUTTON_PAUSE_ANIM =
 
 /* Left */
 
-CharSetROMSpec GALLERY_BUTTON_PAUSE_L_CH =
+CharSetROMSpec GalleryButtonPauseLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -94,10 +94,10 @@ CharSetROMSpec GALLERY_BUTTON_PAUSE_L_CH =
 	GalleryButtonPauseLeftTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_PAUSE_L_TX =
+TextureROMSpec GalleryButtonPauseLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_PAUSE_L_CH,
+	(CharSetSpec*)&GalleryButtonPauseLCharset,
 
 	// bgmap spec
 	GalleryButtonPauseLeftMap,
@@ -129,14 +129,14 @@ TextureROMSpec GALLERY_BUTTON_PAUSE_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_PAUSE_L_SPRITE =
+BgmapSpriteROMSpec GalleryButtonPauseLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_PAUSE_L_TX,
+		(TextureSpec*)&GalleryButtonPauseLTexture,
 
 		// transparent
 		false,
@@ -158,7 +158,7 @@ BgmapSpriteROMSpec GALLERY_BUTTON_PAUSE_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec GALLERY_BUTTON_PAUSE_R_CH =
+CharSetROMSpec GalleryButtonPauseRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -173,10 +173,10 @@ CharSetROMSpec GALLERY_BUTTON_PAUSE_R_CH =
 	GalleryButtonPauseRightTiles,
 };
 
-TextureROMSpec GALLERY_BUTTON_PAUSE_R_TX =
+TextureROMSpec GalleryButtonPauseRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_BUTTON_PAUSE_R_CH,
+	(CharSetSpec*)&GalleryButtonPauseRCharset,
 
 	// bgmap spec
 	GalleryButtonPauseLeftMap,
@@ -208,14 +208,14 @@ TextureROMSpec GALLERY_BUTTON_PAUSE_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_BUTTON_PAUSE_R_SPRITE =
+BgmapSpriteROMSpec GalleryButtonPauseRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_BUTTON_PAUSE_R_TX,
+		(TextureSpec*)&GalleryButtonPauseRTexture,
 
 		// transparent
 		false,
@@ -237,14 +237,14 @@ BgmapSpriteROMSpec GALLERY_BUTTON_PAUSE_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const GALLERY_BUTTON_PAUSE_SPRITES[] =
+BgmapSpriteROMSpec* const GalleryButtonPauseSprites[] =
 {
-	&GALLERY_BUTTON_PAUSE_L_SPRITE,
-	&GALLERY_BUTTON_PAUSE_R_SPRITE,
+	&GalleryButtonPauseLSprite,
+	&GalleryButtonPauseRSprite,
 	NULL
 };
 
-AnimatedEntityROMSpec GALLERY_BUTTON_PAUSE_EN =
+AnimatedEntityROMSpec GalleryButtonPauseEntity =
 {
 	{
 		// class allocator
@@ -260,7 +260,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_PAUSE_EN =
 		NULL,
 
 		// sprites
-		(SpriteSpec**)GALLERY_BUTTON_PAUSE_SPRITES,
+		(SpriteSpec**)GalleryButtonPauseSprites,
 
 		// use z displacement in projection
 		false,
@@ -280,7 +280,7 @@ AnimatedEntityROMSpec GALLERY_BUTTON_PAUSE_EN =
 	},
 
 	// pointer to the animation spec for the item
-	(AnimationDescription*)&GALLERY_BUTTON_PAUSE_ANIM,
+	(AnimationDescription*)&GalleryButtonPauseAnimation,
 
 	// initial animation
 	"Default",

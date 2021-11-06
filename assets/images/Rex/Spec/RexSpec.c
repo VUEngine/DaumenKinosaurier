@@ -45,7 +45,7 @@ extern BYTE RexMiddleMap[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec REX_DEFAULT_ANIM =
+AnimationFunctionROMSpec RexDefaultAnimation =
 {
 	// number of frames of this animation function
 	50,
@@ -72,7 +72,7 @@ AnimationFunctionROMSpec REX_DEFAULT_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec REX_SCREAM_LOOP_ANIM =
+AnimationFunctionROMSpec RexScreamLoopAnimation =
 {
 	// number of frames of this animation function
 	24,
@@ -99,7 +99,7 @@ AnimationFunctionROMSpec REX_SCREAM_LOOP_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec REX_RUN_ANIM =
+AnimationFunctionROMSpec RexRunAnimation =
 {
 	// number of frames of this animation function
 	27,
@@ -126,7 +126,7 @@ AnimationFunctionROMSpec REX_RUN_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec REX_RUN_LOOP_ANIM =
+AnimationFunctionROMSpec RexRunLoopAnimation =
 {
 	// number of frames of this animation function
 	8,
@@ -148,14 +148,14 @@ AnimationFunctionROMSpec REX_RUN_LOOP_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec REX_ANIM =
+AnimationDescriptionROMSpec RexAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&REX_DEFAULT_ANIM,
-		(AnimationFunction*)&REX_SCREAM_LOOP_ANIM,
-		(AnimationFunction*)&REX_RUN_ANIM,
-		(AnimationFunction*)&REX_RUN_LOOP_ANIM,
+		(AnimationFunction*)&RexDefaultAnimation,
+		(AnimationFunction*)&RexScreamLoopAnimation,
+		(AnimationFunction*)&RexRunAnimation,
+		(AnimationFunction*)&RexRunLoopAnimation,
 
 		NULL,
 	}
@@ -164,7 +164,7 @@ AnimationDescriptionROMSpec REX_ANIM =
 
 /* Left */
 
-CharSetROMSpec REX_L_CH =
+CharSetROMSpec RexLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -179,10 +179,10 @@ CharSetROMSpec REX_L_CH =
 	RexLeftTiles,
 };
 
-TextureROMSpec REX_L_TX =
+TextureROMSpec RexLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&REX_L_CH,
+	(CharSetSpec*)&RexLCharset,
 
 	// bgmap spec
 	RexLeftMap,
@@ -214,14 +214,14 @@ TextureROMSpec REX_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec REX_L_SPRITE =
+BgmapSpriteROMSpec RexLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&REX_L_TX,
+		(TextureSpec*)&RexLTexture,
 
 		// transparent
 		false,
@@ -244,7 +244,7 @@ BgmapSpriteROMSpec REX_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec REX_R_CH =
+CharSetROMSpec RexRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -259,10 +259,10 @@ CharSetROMSpec REX_R_CH =
 	RexMiddleTiles,
 };
 
-TextureROMSpec REX_R_TX =
+TextureROMSpec RexRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&REX_R_CH,
+	(CharSetSpec*)&RexRCharset,
 
 	// bgmap spec
 	RexMiddleMap,
@@ -294,14 +294,14 @@ TextureROMSpec REX_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec REX_R_SPRITE =
+BgmapSpriteROMSpec RexRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&REX_R_TX,
+		(TextureSpec*)&RexRTexture,
 
 		// transparent
 		false,
@@ -324,14 +324,14 @@ BgmapSpriteROMSpec REX_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const REX_SPRITES[] =
+BgmapSpriteROMSpec* const RexSprites[] =
 {
-	&REX_L_SPRITE,
-	&REX_R_SPRITE,
+	&RexLSprite,
+	&RexRSprite,
 	NULL
 };
 
-AnimatedImageROMSpec REX_EN =
+AnimatedImageROMSpec RexEntity =
 {	
 	{
 		{
@@ -348,7 +348,7 @@ AnimatedImageROMSpec REX_EN =
 			NULL,
 
 			// sprites
-			(SpriteSpec**)REX_SPRITES,
+			(SpriteSpec**)RexSprites,
 
 			// use z displacement in projection
 			false,
@@ -368,14 +368,14 @@ AnimatedImageROMSpec REX_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&REX_ANIM,
+		(AnimationDescription*)&RexAnimation,
 
 		// initial animation
 		"Default",
 	}
 };
 
-AnimatedImageROMSpec REX_RUN_EN =
+AnimatedImageROMSpec RexRunEntity =
 {
 	{
 		{
@@ -392,7 +392,7 @@ AnimatedImageROMSpec REX_RUN_EN =
 			NULL,
 
 			// sprites
-			(SpriteSpec**)REX_SPRITES,
+			(SpriteSpec**)RexSprites,
 
 			// use z displacement in projection
 			false,
@@ -412,7 +412,7 @@ AnimatedImageROMSpec REX_RUN_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&REX_ANIM,
+		(AnimationDescription*)&RexAnimation,
 
 		// initial animation
 		"Run",

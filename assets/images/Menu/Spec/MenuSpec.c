@@ -40,7 +40,7 @@ extern BYTE MenuMap[];
 //												DEFINITIONS
 //---------------------------------------------------------------------------------------------------------
 
-CharSetROMSpec MENU_CH =
+CharSetROMSpec MenuCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -55,10 +55,10 @@ CharSetROMSpec MENU_CH =
 	MenuTiles,
 };
 
-TextureROMSpec MENU_TX =
+TextureROMSpec MenuTexture =
 {
 	// charset spec
-	(CharSetSpec*)&MENU_CH,
+	(CharSetSpec*)&MenuCharset,
 
 	// bgmap spec
 	MenuMap,
@@ -90,14 +90,14 @@ TextureROMSpec MENU_TX =
 	false,
 };
 
-BgmapSpriteROMSpec MENU_SPRITE =
+BgmapSpriteROMSpec MenuSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapSprite),
 
 		// texture spec
-		(TextureSpec*)&MENU_TX,
+		(TextureSpec*)&MenuTexture,
 
 		// transparent
 		false,
@@ -117,13 +117,13 @@ BgmapSpriteROMSpec MENU_SPRITE =
 	__WORLD_ON,
 };
 
-BgmapSpriteROMSpec* const MENU_SPRITES[] =
+BgmapSpriteROMSpec* const MenuSprites[] =
 {
-	&MENU_SPRITE,
+	&MenuSprite,
 	NULL
 };
 
-EntityROMSpec MENU_EN =
+EntityROMSpec MenuEntity =
 {
 	// class allocator
 	__TYPE(Entity),
@@ -138,7 +138,7 @@ EntityROMSpec MENU_EN =
 	NULL,
 
 	// sprites
-	(SpriteSpec**)MENU_SPRITES,
+	(SpriteSpec**)MenuSprites,
 
 	// use z displacement in projection
 	false,

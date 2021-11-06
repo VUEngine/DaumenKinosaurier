@@ -45,7 +45,7 @@ extern BYTE BananaMiddleMap[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec BANANA_DEFAULT_ANIM =
+AnimationFunctionROMSpec BananaDefaultAnimation =
 {
 	// number of frames of this animation function
 	16,
@@ -70,7 +70,7 @@ AnimationFunctionROMSpec BANANA_DEFAULT_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec BANANA_DEFAULT_LOOP_ANIM =
+AnimationFunctionROMSpec BananaDefaultLoopAnimation =
 {
 	// number of frames of this animation function
 	8,
@@ -92,12 +92,12 @@ AnimationFunctionROMSpec BANANA_DEFAULT_LOOP_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec BANANA_ANIM =
+AnimationDescriptionROMSpec BananaAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&BANANA_DEFAULT_ANIM,
-		(AnimationFunction*)&BANANA_DEFAULT_LOOP_ANIM,
+		(AnimationFunction*)&BananaDefaultAnimation,
+		(AnimationFunction*)&BananaDefaultLoopAnimation,
 		NULL,
 	}
 };
@@ -105,7 +105,7 @@ AnimationDescriptionROMSpec BANANA_ANIM =
 
 /* Left */
 
-CharSetROMSpec BANANA_L_CH =
+CharSetROMSpec BananaLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -120,10 +120,10 @@ CharSetROMSpec BANANA_L_CH =
 	BananaLeftTiles,
 };
 
-TextureROMSpec BANANA_L_TX =
+TextureROMSpec BananaLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&BANANA_L_CH,
+	(CharSetSpec*)&BananaLCharset,
 
 	// bgmap spec
 	BananaLeftMap,
@@ -155,14 +155,14 @@ TextureROMSpec BANANA_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec BANANA_L_SPRITE =
+BgmapSpriteROMSpec BananaLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&BANANA_L_TX,
+		(TextureSpec*)&BananaLTexture,
 
 		// transparent
 		false,
@@ -185,7 +185,7 @@ BgmapSpriteROMSpec BANANA_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec BANANA_R_CH =
+CharSetROMSpec BananaRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -200,10 +200,10 @@ CharSetROMSpec BANANA_R_CH =
 	BananaMiddleTiles,
 };
 
-TextureROMSpec BANANA_R_TX =
+TextureROMSpec BananaRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&BANANA_R_CH,
+	(CharSetSpec*)&BananaRCharset,
 
 	// bgmap spec
 	BananaMiddleMap,
@@ -235,14 +235,14 @@ TextureROMSpec BANANA_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec BANANA_R_SPRITE =
+BgmapSpriteROMSpec BananaRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&BANANA_R_TX,
+		(TextureSpec*)&BananaRTexture,
 
 		// transparent
 		false,
@@ -265,14 +265,14 @@ BgmapSpriteROMSpec BANANA_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const BANANA_SPRITES[] =
+BgmapSpriteROMSpec* const BananaSprites[] =
 {
-	&BANANA_L_SPRITE,
-	&BANANA_R_SPRITE,
+	&BananaLSprite,
+	&BananaRSprite,
 	NULL
 };
 
-AnimatedImageROMSpec BANANA_EN =
+AnimatedImageROMSpec BananaEntity =
 {	
 	{
 		{
@@ -289,7 +289,7 @@ AnimatedImageROMSpec BANANA_EN =
 			NULL,
 
 			// sprites
-			(SpriteSpec**)BANANA_SPRITES,
+			(SpriteSpec**)BananaSprites,
 
 			// use z displacement in projection
 			false,
@@ -309,7 +309,7 @@ AnimatedImageROMSpec BANANA_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&BANANA_ANIM,
+		(AnimationDescription*)&BananaAnimation,
 
 		// initial animation
 		"Loop",

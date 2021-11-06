@@ -42,7 +42,7 @@ extern BYTE MenuCursorMap[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec MENU_CURSOR_DEFAULT_ANIM =
+AnimationFunctionROMSpec MenuCursorDefaultAnimation =
 {
 	// number of frames of this animation function
 	4,
@@ -64,16 +64,16 @@ AnimationFunctionROMSpec MENU_CURSOR_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec MENU_CURSOR_ANIM =
+AnimationDescriptionROMSpec MenuCursorAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&MENU_CURSOR_DEFAULT_ANIM,
+		(AnimationFunction*)&MenuCursorDefaultAnimation,
 		NULL,
 	}
 };
 
-CharSetROMSpec MENU_CURSOR_CH =
+CharSetROMSpec MenuCursorCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -88,10 +88,10 @@ CharSetROMSpec MENU_CURSOR_CH =
 	MenuCursorTiles,
 };
 
-TextureROMSpec MENU_CURSOR_TX =
+TextureROMSpec MenuCursorTexture =
 {
 	// charset spec
-	(CharSetSpec*)&MENU_CURSOR_CH,
+	(CharSetSpec*)&MenuCursorCharset,
 
 	// bgmap spec
 	MenuCursorMap,
@@ -123,14 +123,14 @@ TextureROMSpec MENU_CURSOR_TX =
 	false,
 };
 
-BgmapSpriteROMSpec MENU_CURSOR_SPRITE =
+BgmapSpriteROMSpec MenuCursorSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&MENU_CURSOR_TX,
+		(TextureSpec*)&MenuCursorTexture,
 
 		// transparent
 		false,
@@ -150,13 +150,13 @@ BgmapSpriteROMSpec MENU_CURSOR_SPRITE =
 	__WORLD_ON,
 };
 
-BgmapSpriteROMSpec* const MENU_CURSOR_SPRITES[] =
+BgmapSpriteROMSpec* const MenuCursorSprites[] =
 {
-	&MENU_CURSOR_SPRITE,
+	&MenuCursorSprite,
 	NULL
 };
 
-AnimatedEntityROMSpec MENU_CURSOR_EN =
+AnimatedEntityROMSpec MenuCursorEntity =
 {
 	{
 		// class allocator
@@ -172,7 +172,7 @@ AnimatedEntityROMSpec MENU_CURSOR_EN =
 		NULL,
 
 		// sprites
-		(SpriteSpec**)MENU_CURSOR_SPRITES,
+		(SpriteSpec**)MenuCursorSprites,
 
 		// use z displacement in projection
 		false,
@@ -192,7 +192,7 @@ AnimatedEntityROMSpec MENU_CURSOR_EN =
 	},
 
 	// pointer to the animation spec for the item
-	(AnimationDescription*)&MENU_CURSOR_ANIM,
+	(AnimationDescription*)&MenuCursorAnimation,
 
 	// initial animation
 	"Default",

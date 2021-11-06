@@ -40,7 +40,7 @@ extern BYTE copyrightMap[];
 //												DEFINITIONS
 //---------------------------------------------------------------------------------------------------------
 
-CharSetROMSpec COPYRIGHT_CH =
+CharSetROMSpec CopyrightCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -55,10 +55,10 @@ CharSetROMSpec COPYRIGHT_CH =
 	copyrightTiles,
 };
 
-TextureROMSpec COPYRIGHT_TX =
+TextureROMSpec CopyrightTexture =
 {
 	// charset spec
-	(CharSetSpec*)&COPYRIGHT_CH,
+	(CharSetSpec*)&CopyrightCharset,
 
 	// bgmap spec
 	copyrightMap,
@@ -90,14 +90,14 @@ TextureROMSpec COPYRIGHT_TX =
 	false,
 };
 
-BgmapSpriteROMSpec COPYRIGHT_SPRITE =
+BgmapSpriteROMSpec CopyrightSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapSprite),
 
 		// texture spec
-		(TextureSpec*)&COPYRIGHT_TX,
+		(TextureSpec*)&CopyrightTexture,
 
 		// transparent
 		false,
@@ -117,13 +117,13 @@ BgmapSpriteROMSpec COPYRIGHT_SPRITE =
 	__WORLD_ON,
 };
 
-BgmapSpriteROMSpec* const COPYRIGHT_SPRITES[] =
+BgmapSpriteROMSpec* const CopyrightSprites[] =
 {
-	&COPYRIGHT_SPRITE,
+	&CopyrightSprite,
 	NULL
 };
 
-EntityROMSpec COPYRIGHT_EN =
+EntityROMSpec CopyrightEntity =
 {
 	// class allocator
 	__TYPE(Entity),
@@ -138,7 +138,7 @@ EntityROMSpec COPYRIGHT_EN =
 	NULL,
 
 	// sprites
-	(SpriteSpec**)COPYRIGHT_SPRITES,
+	(SpriteSpec**)CopyrightSprites,
 
 	// use z displacement in projection
 	false,

@@ -19,8 +19,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef TITLE_SCREEN_STATE_H_
-#define TITLE_SCREEN_STATE_H_
+#ifndef TitleScreenStATE_H_
+#define TitleScreenStATE_H_
 
 
 //---------------------------------------------------------------------------------------------------------

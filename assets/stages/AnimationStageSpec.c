@@ -32,65 +32,36 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern FontROMSpec VUENGINE_FONT;
+extern FontROMSpec VUEngineFont;
 
-extern CharSetSpec VOLCANO_L_CH;
-extern CharSetSpec VOLCANO_R_CH;
-extern CharSetSpec COPYRIGHT_CH;
-extern CharSetSpec MENU_CH;
-extern CharSetSpec MENU_CURSOR_CH;
-extern CharSetSpec LOGO_L_CH;
-extern CharSetSpec LOGO_R_CH;
-extern CharSetSpec GALLERY_BUTTON_PAUSE_L_CH;
-extern CharSetSpec GALLERY_BUTTON_PAUSE_R_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
-extern CharSetSpec GALLERY_BUTTON_NEXT_L_CH;
-extern CharSetSpec GALLERY_BUTTON_NEXT_R_CH;
+extern CharSetSpec RexLCharset;
+extern CharSetSpec RexRCharset;
+extern CharSetSpec GalleryButtonResumeLCharset;
+extern CharSetSpec GalleryButtonResumeRCharset;
+extern CharSetSpec GalleryButtonBackLCharset;
+extern CharSetSpec GalleryButtonBackRCharset;
 
-extern TextureSpec VOLCANO_L_TX;
-extern TextureSpec VOLCANO_R_TX;
-extern TextureSpec COPYRIGHT_TX;
-extern TextureSpec MENU_TX;
-extern TextureSpec MENU_CURSOR_TX;
-extern TextureSpec LOGO_L_TX;
-extern TextureSpec LOGO_R_TX;
-extern TextureSpec GALLERY_BUTTON_PAUSE_L_TX;
-extern TextureSpec GALLERY_BUTTON_PAUSE_R_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
-extern TextureSpec GALLERY_BUTTON_NEXT_L_TX;
-extern TextureSpec GALLERY_BUTTON_NEXT_R_TX;
+extern TextureSpec RexLTexture;
+extern TextureSpec RexRTexture;
+extern TextureSpec GalleryButtonResumeLTexture;
+extern TextureSpec GalleryButtonResumeRTexture;
+extern TextureSpec GalleryButtonBackLTexture;
+extern TextureSpec GalleryButtonBackRTexture;
 
-extern EntitySpec VOLCANO_EN;
-extern EntitySpec COPYRIGHT_EN;
-extern EntitySpec MENU_EN;
-extern EntitySpec MENU_CURSOR_EN;
-extern EntitySpec LOGO_EN;
-extern EntitySpec GALLERY_BUTTON_PAUSE_EN;
-extern EntitySpec GALLERY_BUTTON_RESUME_EN;
-extern EntitySpec GALLERY_BUTTON_BACK_EN;
-extern EntitySpec GALLERY_BUTTON_NEXT_EN;
+extern EntitySpec RexEntity;
+extern EntitySpec GalleryButtonResumeEntity;
+extern EntitySpec GalleryButtonBackEntity;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMSpec TITLE_SCREEN_ST_CHILDREN[] =
+PositionedEntityROMSpec AnimationStChildren[] =
 {
-	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0},	0, "Back",		NULL, NULL, true},
-	{&GALLERY_BUTTON_NEXT_EN,	{354,  12, -0.001f, 0},	0, "Next",		NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, -0.001f, 0},	0, "Resume",	NULL, NULL, true},
-	{&COPYRIGHT_EN,				{192, 192, -0.001f, 0},	0, "Copyright",	NULL, NULL, true},
-	{&LOGO_EN,					{ 86,  54, -0.001f, 0},	0, "Logo",		NULL, NULL, true},
-	{&MENU_EN,					{ 76, 100, -0.001f, 0},	0, "Menu",		NULL, NULL, true},
-	{&MENU_CURSOR_EN,			{ 18, 108, -0.001f, 0},	0, "Cursor",	NULL, NULL, true},
-	{&VOLCANO_EN,				{192, 112,       0, 0},	0, "Image",		NULL, NULL, true},
+	{&GalleryButtonBackEntity,	{354,  30, 	-1, 0}, 0, "Back",   NULL, NULL, true},
+	{&GalleryButtonResumeEntity,	{346,  12, 	-1, 0}, 0, "Resume", NULL, NULL, true},
+	{&RexEntity,					{192, 112,   0, 0}, 0, "Image",  NULL, NULL, true},
 
 	{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 };
@@ -100,20 +71,30 @@ PositionedEntityROMSpec TITLE_SCREEN_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMSpec* const TITLE_SCREEN_ST_FONTS[] =
+FontROMSpec* const AnimationStFonts[] =
 {
-	//&VUENGINE_FONT,
+	//&VUEngineFont,
 
 	NULL
 };
 
-CharSetROMSpec* const TITLE_SCREEN_ST_CHARSETS[] =
+CharSetROMSpec* const AnimationStCharsets[] =
 {
+	&GalleryButtonBackLCharset,
+	&GalleryButtonBackRCharset,
+	&GalleryButtonResumeLCharset,
+	&GalleryButtonResumeRCharset,
+
 	NULL
 };
 
-TextureSpec* const TITLE_SCREEN_ST_TEXTURES[] =
+TextureSpec* const AnimationStTextures[] =
 {
+	&GalleryButtonBackLTexture,
+	&GalleryButtonBackRTexture,
+	&GalleryButtonResumeLTexture,
+	&GalleryButtonResumeRTexture,
+
 	NULL
 };
 
@@ -122,7 +103,7 @@ TextureSpec* const TITLE_SCREEN_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMSpec TITLE_SCREEN_ST =
+StageROMSpec AnimationSt =
 {
 	// allocator
 	__TYPE(Stage),
@@ -130,7 +111,7 @@ StageROMSpec TITLE_SCREEN_ST =
 	// Timer config
 	{
 		__TIMER_100US,
-		10,
+		20,
 		kMS
 	},
 
@@ -258,13 +239,13 @@ StageROMSpec TITLE_SCREEN_ST =
     	// obj segments sizes (must total 1024)
         {
             // __spt0
-        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
+        	0,
             // __spt1
-        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
+        	0,
             // __spt2
-        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
+        	0,
             // __spt3
-        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
+        	0,
         },
 
         // obj segments z coordinates
@@ -315,13 +296,13 @@ StageROMSpec TITLE_SCREEN_ST =
     // assets
     {
         // fonts to preload
-        (FontSpec**)TITLE_SCREEN_ST_FONTS,
+        (FontSpec**)AnimationStFonts,
 
 		// char sets to preload
-		(CharSetSpec**)TITLE_SCREEN_ST_CHARSETS,
+		(CharSetSpec**)AnimationStCharsets,
 
 		// textures to preload
-		(TextureSpec**)TITLE_SCREEN_ST_TEXTURES,
+		(TextureSpec**)AnimationStTextures,
 
         // background sounds
 		(Sound**)NULL,
@@ -336,7 +317,7 @@ StageROMSpec TITLE_SCREEN_ST =
         },
 
         // children
-        TITLE_SCREEN_ST_CHILDREN,
+        (PositionedEntity*)AnimationStChildren,
     },
 
 	// post processing effects

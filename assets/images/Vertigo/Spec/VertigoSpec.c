@@ -45,7 +45,7 @@ extern BYTE VertigoRightMap[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec VERTIGO_DEFAULT_ANIM =
+AnimationFunctionROMSpec VertigoDefaultAnimation =
 {
 	// number of frames of this animation function
 	18,
@@ -67,7 +67,7 @@ AnimationFunctionROMSpec VERTIGO_DEFAULT_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec VERTIGO_DEFAULT_LOOP_ANIM =
+AnimationFunctionROMSpec VertigoDefaultLoopAnimation =
 {
 	// number of frames of this animation function
 	30,
@@ -92,12 +92,12 @@ AnimationFunctionROMSpec VERTIGO_DEFAULT_LOOP_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec VERTIGO_ANIM =
+AnimationDescriptionROMSpec VertigoAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&VERTIGO_DEFAULT_ANIM,
-		(AnimationFunction*)&VERTIGO_DEFAULT_LOOP_ANIM,
+		(AnimationFunction*)&VertigoDefaultAnimation,
+		(AnimationFunction*)&VertigoDefaultLoopAnimation,
 		NULL,
 	}
 };
@@ -105,7 +105,7 @@ AnimationDescriptionROMSpec VERTIGO_ANIM =
 
 /* Left */
 
-CharSetROMSpec VERTIGO_L_CH =
+CharSetROMSpec VertigoLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -120,10 +120,10 @@ CharSetROMSpec VERTIGO_L_CH =
 	VertigoLeftTiles,
 };
 
-TextureROMSpec VERTIGO_L_TX =
+TextureROMSpec VertigoLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&VERTIGO_L_CH,
+	(CharSetSpec*)&VertigoLCharset,
 
 	// bgmap spec
 	VertigoLeftMap,
@@ -155,14 +155,14 @@ TextureROMSpec VERTIGO_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec VERTIGO_L_SPRITE =
+BgmapSpriteROMSpec VertigoLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&VERTIGO_L_TX,
+		(TextureSpec*)&VertigoLTexture,
 
 		// transparent
 		false,
@@ -185,7 +185,7 @@ BgmapSpriteROMSpec VERTIGO_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec VERTIGO_R_CH =
+CharSetROMSpec VertigoRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -200,10 +200,10 @@ CharSetROMSpec VERTIGO_R_CH =
 	VertigoRightTiles,
 };
 
-TextureROMSpec VERTIGO_R_TX =
+TextureROMSpec VertigoRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&VERTIGO_R_CH,
+	(CharSetSpec*)&VertigoRCharset,
 
 	// bgmap spec
 	VertigoRightMap,
@@ -235,14 +235,14 @@ TextureROMSpec VERTIGO_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec VERTIGO_R_SPRITE =
+BgmapSpriteROMSpec VertigoRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&VERTIGO_R_TX,
+		(TextureSpec*)&VertigoRTexture,
 
 		// transparent
 		false,
@@ -265,14 +265,14 @@ BgmapSpriteROMSpec VERTIGO_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const VERTIGO_SPRITES[] =
+BgmapSpriteROMSpec* const VertigoSprites[] =
 {
-	&VERTIGO_L_SPRITE,
-	&VERTIGO_R_SPRITE,
+	&VertigoLSprite,
+	&VertigoRSprite,
 	NULL
 };
 
-AnimatedImageROMSpec VERTIGO_EN =
+AnimatedImageROMSpec VertigoEntity =
 {
 	{
 		{
@@ -289,7 +289,7 @@ AnimatedImageROMSpec VERTIGO_EN =
 			NULL,
 
 			// sprites
-			(SpriteSpec**)VERTIGO_SPRITES,
+			(SpriteSpec**)VertigoSprites,
 
 			// use z displacement in projection
 			false,
@@ -309,7 +309,7 @@ AnimatedImageROMSpec VERTIGO_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&VERTIGO_ANIM,
+		(AnimationDescription*)&VertigoAnimation,
 
 		// initial animation
 		"Default",

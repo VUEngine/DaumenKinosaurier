@@ -14,11 +14,11 @@
 //												DEFINITIONS
 //---------------------------------------------------------------------------------------------------------
 
-FontSpec* const __FONTS[] =
+FontSpec* const _fonts[] =
 {
 	(FontSpec*)&DEFAULT_FONT,
 	(FontSpec*)&PROFILER_FONT,
-	(FontSpec*)&NUMBER_FONT,
+	(FontSpec*)&NumberFont,
 	
 	NULL
 };

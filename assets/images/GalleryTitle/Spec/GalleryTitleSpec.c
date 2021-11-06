@@ -45,7 +45,7 @@ extern BYTE GalleryTitleRightTiles[];
 /* Animations */
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_TITLE_OPTION_1_ANIM =
+AnimationFunctionROMSpec GalleryTitleOption1Animation =
 {
 	// number of frames of this animation function
 	2,
@@ -67,7 +67,7 @@ AnimationFunctionROMSpec GALLERY_TITLE_OPTION_1_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_TITLE_OPTION_2_ANIM =
+AnimationFunctionROMSpec GalleryTitleOption2Animation =
 {
 	// number of frames of this animation function
 	2,
@@ -89,7 +89,7 @@ AnimationFunctionROMSpec GALLERY_TITLE_OPTION_2_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_TITLE_OPTION_3_ANIM =
+AnimationFunctionROMSpec GalleryTitleOption3Animation =
 {
 	// number of frames of this animation function
 	2,
@@ -111,7 +111,7 @@ AnimationFunctionROMSpec GALLERY_TITLE_OPTION_3_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_TITLE_OPTION_4_ANIM =
+AnimationFunctionROMSpec GalleryTitleOption4Animation =
 {
 	// number of frames of this animation function
 	2,
@@ -133,7 +133,7 @@ AnimationFunctionROMSpec GALLERY_TITLE_OPTION_4_ANIM =
 };
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec GALLERY_TITLE_OPTION_5_ANIM =
+AnimationFunctionROMSpec GalleryTitleOption5Animation =
 {
 	// number of frames of this animation function
 	2,
@@ -155,15 +155,15 @@ AnimationFunctionROMSpec GALLERY_TITLE_OPTION_5_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec GALLERY_TITLE_ANIM =
+AnimationDescriptionROMSpec GalleryTitleAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&GALLERY_TITLE_OPTION_1_ANIM,
-		(AnimationFunction*)&GALLERY_TITLE_OPTION_2_ANIM,
-		(AnimationFunction*)&GALLERY_TITLE_OPTION_3_ANIM,
-		(AnimationFunction*)&GALLERY_TITLE_OPTION_4_ANIM,
-		(AnimationFunction*)&GALLERY_TITLE_OPTION_5_ANIM,
+		(AnimationFunction*)&GalleryTitleOption1Animation,
+		(AnimationFunction*)&GalleryTitleOption2Animation,
+		(AnimationFunction*)&GalleryTitleOption3Animation,
+		(AnimationFunction*)&GalleryTitleOption4Animation,
+		(AnimationFunction*)&GalleryTitleOption5Animation,
 
 		NULL,
 	}
@@ -171,7 +171,7 @@ AnimationDescriptionROMSpec GALLERY_TITLE_ANIM =
 
 /* Left */
 
-CharSetROMSpec GALLERY_TITLE_L_CH =
+CharSetROMSpec GalleryTitleLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -186,10 +186,10 @@ CharSetROMSpec GALLERY_TITLE_L_CH =
 	GalleryTitleLeftTiles,
 };
 
-TextureROMSpec GALLERY_TITLE_L_TX =
+TextureROMSpec GalleryTitleLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_TITLE_L_CH,
+	(CharSetSpec*)&GalleryTitleLCharset,
 
 	// bgmap spec
 	GalleryTitleLeftMap,
@@ -221,14 +221,14 @@ TextureROMSpec GALLERY_TITLE_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_TITLE_L_SPRITE =
+BgmapSpriteROMSpec GalleryTitleLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_TITLE_L_TX,
+		(TextureSpec*)&GalleryTitleLTexture,
 
 		// transparent
 		false,
@@ -250,7 +250,7 @@ BgmapSpriteROMSpec GALLERY_TITLE_L_SPRITE =
 
 /* Right */
 
-CharSetROMSpec GALLERY_TITLE_R_CH =
+CharSetROMSpec GalleryTitleRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -265,10 +265,10 @@ CharSetROMSpec GALLERY_TITLE_R_CH =
 	GalleryTitleRightTiles,
 };
 
-TextureROMSpec GALLERY_TITLE_R_TX =
+TextureROMSpec GalleryTitleRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&GALLERY_TITLE_R_CH,
+	(CharSetSpec*)&GalleryTitleRCharset,
 
 	// bgmap spec
 	GalleryTitleLeftMap,
@@ -300,14 +300,14 @@ TextureROMSpec GALLERY_TITLE_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec GALLERY_TITLE_R_SPRITE =
+BgmapSpriteROMSpec GalleryTitleRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&GALLERY_TITLE_R_TX,
+		(TextureSpec*)&GalleryTitleRTexture,
 
 		// transparent
 		false,
@@ -329,14 +329,14 @@ BgmapSpriteROMSpec GALLERY_TITLE_R_SPRITE =
 
 /* Entity */
 
-BgmapSpriteROMSpec* const GALLERY_TITLE_SPRITES[] =
+BgmapSpriteROMSpec* const GalleryTitleSprites[] =
 {
-	&GALLERY_TITLE_L_SPRITE,
-	&GALLERY_TITLE_R_SPRITE,
+	&GalleryTitleLSprite,
+	&GalleryTitleRSprite,
 	NULL
 };
 
-AnimatedEntityROMSpec GALLERY_TITLE_EN =
+AnimatedEntityROMSpec GalleryTitleEntity =
 {
 	{
 		// class allocator
@@ -352,7 +352,7 @@ AnimatedEntityROMSpec GALLERY_TITLE_EN =
 		NULL,
 
 		// sprites
-		(SpriteSpec**)GALLERY_TITLE_SPRITES,
+		(SpriteSpec**)GalleryTitleSprites,
 
 		// use z displacement in projection
 		false,
@@ -372,7 +372,7 @@ AnimatedEntityROMSpec GALLERY_TITLE_EN =
 	},
 
 	// pointer to the animation spec for the item
-	(AnimationDescription*)&GALLERY_TITLE_ANIM,
+	(AnimationDescription*)&GalleryTitleAnimation,
 
 	// initial animation
 	"Volcano",

@@ -26,59 +26,71 @@
 
 #include <Stage.h>
 #include <VIPManager.h>
-#include <Fonts.h>
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern CharSetSpec VOLCANO_L_CH;
-extern CharSetSpec VOLCANO_R_CH;
-extern CharSetSpec GALLERY_TITLE_L_CH;
-extern CharSetSpec GALLERY_TITLE_R_CH;
-extern CharSetSpec GALLERY_BUTTON_PAUSE_L_CH;
-extern CharSetSpec GALLERY_BUTTON_PAUSE_R_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
-extern CharSetSpec GALLERY_BUTTON_FRAMES_L_CH;
-extern CharSetSpec GALLERY_BUTTON_FRAMES_R_CH;
+extern FontROMSpec VUEngineFont;
 
-extern TextureSpec VOLCANO_L_TX;
-extern TextureSpec VOLCANO_R_TX;
-extern TextureSpec GALLERY_TITLE_L_TX;
-extern TextureSpec GALLERY_TITLE_R_TX;
-extern TextureSpec GALLERY_BUTTON_PAUSE_L_TX;
-extern TextureSpec GALLERY_BUTTON_PAUSE_R_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
-extern TextureSpec GALLERY_BUTTON_FRAMES_L_TX;
-extern TextureSpec GALLERY_BUTTON_FRAMES_R_TX;
+extern CharSetSpec VolcanoLCharset;
+extern CharSetSpec VolcanoRCharset;
+extern CharSetSpec CopyrightCharset;
+extern CharSetSpec MenuCharset;
+extern CharSetSpec MenuCursorCharset;
+extern CharSetSpec LogoLCharset;
+extern CharSetSpec LogoRCharset;
+extern CharSetSpec GalleryButtonPauseLCharset;
+extern CharSetSpec GalleryButtonPauseRCharset;
+extern CharSetSpec GalleryButtonResumeLCharset;
+extern CharSetSpec GalleryButtonResumeRCharset;
+extern CharSetSpec GalleryButtonBackLCharset;
+extern CharSetSpec GalleryButtonBackRCharset;
+extern CharSetSpec GalleryButtonNextLCharset;
+extern CharSetSpec GalleryButtonNextRCharset;
 
-extern EntitySpec VOLCANO_EN;
-extern EntitySpec GALLERY_TITLE_EN;
-extern EntitySpec GALLERY_BUTTON_PAUSE_EN;
-extern EntitySpec GALLERY_BUTTON_RESUME_EN;
-extern EntitySpec GALLERY_BUTTON_BACK_EN;
-extern EntitySpec GALLERY_BUTTON_FRAMES_EN;
+extern TextureSpec VolcanoLTexture;
+extern TextureSpec VolcanoRTexture;
+extern TextureSpec CopyrightTexture;
+extern TextureSpec MenuTexture;
+extern TextureSpec MenuCursorTexture;
+extern TextureSpec LogoLTexture;
+extern TextureSpec LogoRTexture;
+extern TextureSpec GalleryButtonPauseLTexture;
+extern TextureSpec GalleryButtonPauseRTexture;
+extern TextureSpec GalleryButtonResumeLTexture;
+extern TextureSpec GalleryButtonResumeRTexture;
+extern TextureSpec GalleryButtonBackLTexture;
+extern TextureSpec GalleryButtonBackRTexture;
+extern TextureSpec GalleryButtonNextLTexture;
+extern TextureSpec GalleryButtonNextRTexture;
+
+extern EntitySpec VolcanoEntity;
+extern EntitySpec CopyrightEntity;
+extern EntitySpec MenuEntity;
+extern EntitySpec MenuCursorEntity;
+extern EntitySpec LogoEntity;
+extern EntitySpec GalleryButtonPauseEntity;
+extern EntitySpec GalleryButtonResumeEntity;
+extern EntitySpec GalleryButtonBackEntity;
+extern EntitySpec GalleryButtonNextEntity;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMSpec IMAGE_VIEWER_ST_CHILDREN[] =
+PositionedEntityROMSpec TitleScreenStChildren[] =
 {
-	{&GALLERY_BUTTON_FRAMES_EN,	{346,  48, -0.001f, 0}, 0, "Frames", NULL, NULL, true},
-	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
-	{&GALLERY_BUTTON_PAUSE_EN,	{350,  12, -0.001f, 0}, 0, "Pause",  NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
-	{&GALLERY_TITLE_EN,			{ 48,  24, -0.001f, 0}, 0, "Title",  NULL, NULL, true},
-	{&VOLCANO_EN,				{192, 112,       0, 0}, 0, "Image",  NULL, NULL, true},
+	{&GalleryButtonBackEntity,	{354,  30, -0.001f, 0},	0, "Back",		NULL, NULL, true},
+	{&GalleryButtonNextEntity,	{354,  12, -0.001f, 0},	0, "Next",		NULL, NULL, true},
+	{&GalleryButtonResumeEntity,	{346,  12, -0.001f, 0},	0, "Resume",	NULL, NULL, true},
+	{&CopyrightEntity,				{192, 192, -0.001f, 0},	0, "Copyright",	NULL, NULL, true},
+	{&LogoEntity,					{ 86,  54, -0.001f, 0},	0, "Logo",		NULL, NULL, true},
+	{&MenuEntity,					{ 76, 100, -0.001f, 0},	0, "Menu",		NULL, NULL, true},
+	{&MenuCursorEntity,			{ 18, 108, -0.001f, 0},	0, "Cursor",	NULL, NULL, true},
+	{&VolcanoEntity,				{192, 112,       0, 0},	0, "Image",		NULL, NULL, true},
 
 	{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 };
@@ -88,45 +100,20 @@ PositionedEntityROMSpec IMAGE_VIEWER_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMSpec* const IMAGE_VIEWER_ST_FONTS[] =
+FontROMSpec* const TitleScreenStFonts[] =
 {
-	&NUMBER_FONT,
+	//&VUEngineFont,
 
 	NULL
 };
 
-CharSetROMSpec* const IMAGE_VIEWER_ST_CHARSETS[] =
+CharSetROMSpec* const TitleScreenStCharsets[] =
 {
-	&GALLERY_BUTTON_FRAMES_L_CH,
-	&GALLERY_BUTTON_FRAMES_R_CH,
-	&GALLERY_BUTTON_BACK_L_CH,
-	&GALLERY_BUTTON_BACK_R_CH,
-	&GALLERY_BUTTON_PAUSE_L_CH,
-	&GALLERY_BUTTON_PAUSE_R_CH,
-	&GALLERY_BUTTON_RESUME_L_CH,
-	&GALLERY_BUTTON_RESUME_R_CH,
-	&GALLERY_TITLE_L_CH,
-	&GALLERY_TITLE_R_CH,
-	&VOLCANO_L_CH,
-	&VOLCANO_R_CH,
-
 	NULL
 };
 
-TextureSpec* const IMAGE_VIEWER_ST_TEXTURES[] =
+TextureSpec* const TitleScreenStTextures[] =
 {
-	&GALLERY_BUTTON_FRAMES_L_TX,
-	&GALLERY_BUTTON_FRAMES_R_TX,
-	&GALLERY_BUTTON_BACK_L_TX,
-	&GALLERY_BUTTON_BACK_R_TX,
-	&GALLERY_BUTTON_PAUSE_L_TX,
-	&GALLERY_BUTTON_PAUSE_R_TX,
-	&GALLERY_BUTTON_RESUME_L_TX,
-	&GALLERY_BUTTON_RESUME_R_TX,
-	&GALLERY_TITLE_L_TX,
-	&GALLERY_TITLE_R_TX,
-	&VOLCANO_L_TX,
-	&VOLCANO_R_TX,
 	NULL
 };
 
@@ -135,7 +122,7 @@ TextureSpec* const IMAGE_VIEWER_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMSpec IMAGE_VIEWER_ST =
+StageROMSpec TitleScreenSt =
 {
 	// allocator
 	__TYPE(Stage),
@@ -328,13 +315,13 @@ StageROMSpec IMAGE_VIEWER_ST =
     // assets
     {
         // fonts to preload
-        (FontSpec**)IMAGE_VIEWER_ST_FONTS,
+        (FontSpec**)TitleScreenStFonts,
 
 		// char sets to preload
-		(CharSetSpec**)IMAGE_VIEWER_ST_CHARSETS,
+		(CharSetSpec**)TitleScreenStCharsets,
 
 		// textures to preload
-		(TextureSpec**)IMAGE_VIEWER_ST_TEXTURES,
+		(TextureSpec**)TitleScreenStTextures,
 
         // background sounds
 		(Sound**)NULL,
@@ -349,7 +336,7 @@ StageROMSpec IMAGE_VIEWER_ST =
         },
 
         // children
-        IMAGE_VIEWER_ST_CHILDREN,
+        TitleScreenStChildren,
     },
 
 	// post processing effects

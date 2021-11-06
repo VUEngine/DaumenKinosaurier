@@ -44,7 +44,7 @@ extern BYTE EndeRightTiles[];
 //---------------------------------------------------------------------------------------------------------
 
 // a function which defines the frames to play
-AnimationFunctionROMSpec ENDE_DEFAULT_ANIM =
+AnimationFunctionROMSpec EndeDefaultAnimation =
 {
 	// number of frames of this animation function
 	50,
@@ -77,11 +77,11 @@ AnimationFunctionROMSpec ENDE_DEFAULT_ANIM =
 };
 
 // an animation spec
-AnimationDescriptionROMSpec ENDE_ANIM =
+AnimationDescriptionROMSpec EndeAnimation =
 {
 	// animation functions
 	{
-		(AnimationFunction*)&ENDE_DEFAULT_ANIM,
+		(AnimationFunction*)&EndeDefaultAnimation,
 		NULL,
 	}
 };
@@ -89,7 +89,7 @@ AnimationDescriptionROMSpec ENDE_ANIM =
 
 /* LEFT */
 
-CharSetROMSpec ENDE_L_CH =
+CharSetROMSpec EndeLCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -104,10 +104,10 @@ CharSetROMSpec ENDE_L_CH =
 	EndeLeftTiles,
 };
 
-TextureROMSpec ENDE_L_TX =
+TextureROMSpec EndeLTexture =
 {
 	// charset spec
-	(CharSetSpec*)&ENDE_L_CH,
+	(CharSetSpec*)&EndeLCharset,
 
 	// bgmap spec
 	EndeLeftMap,
@@ -139,14 +139,14 @@ TextureROMSpec ENDE_L_TX =
 	false,
 };
 
-BgmapSpriteROMSpec ENDE_L_SPRITE =
+BgmapSpriteROMSpec EndeLSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&ENDE_L_TX,
+		(TextureSpec*)&EndeLTexture,
 
 		// transparent
 		false,
@@ -169,7 +169,7 @@ BgmapSpriteROMSpec ENDE_L_SPRITE =
 
 /* RIGHT */
 
-CharSetROMSpec ENDE_R_CH =
+CharSetROMSpec EndeRCharset =
 {
 	// number of chars, depending on allocation type:
 	// __ANIMATED_SINGLE*, __ANIMATED_SHARED*: number of chars of a single animation frame (cols * rows)
@@ -184,10 +184,10 @@ CharSetROMSpec ENDE_R_CH =
 	EndeRightTiles,
 };
 
-TextureROMSpec ENDE_R_TX =
+TextureROMSpec EndeRTexture =
 {
 	// charset spec
-	(CharSetSpec*)&ENDE_R_CH,
+	(CharSetSpec*)&EndeRCharset,
 
 	// bgmap spec
 	EndeLeftMap,
@@ -219,14 +219,14 @@ TextureROMSpec ENDE_R_TX =
 	false,
 };
 
-BgmapSpriteROMSpec ENDE_R_SPRITE =
+BgmapSpriteROMSpec EndeRSprite =
 {
 	{
 		// sprite's type
 		__TYPE(BgmapAnimatedSprite),
 
 		// texture spec
-		(TextureSpec*)&ENDE_R_TX,
+		(TextureSpec*)&EndeRTexture,
 
 		// transparent
 		false,
@@ -249,14 +249,14 @@ BgmapSpriteROMSpec ENDE_R_SPRITE =
 
 /* ENTITY */
 
-BgmapSpriteROMSpec* const ENDE_SPRITES[] =
+BgmapSpriteROMSpec* const EndeSprites[] =
 {
-	&ENDE_L_SPRITE,
-	&ENDE_R_SPRITE,
+	&EndeLSprite,
+	&EndeRSprite,
 	NULL
 };
 
-AnimatedImageROMSpec ENDE_EN =
+AnimatedImageROMSpec EndeEntity =
 {	
 	{
 		{
@@ -273,7 +273,7 @@ AnimatedImageROMSpec ENDE_EN =
 			NULL,
 
 			// sprites
-			(SpriteSpec**)ENDE_SPRITES,
+			(SpriteSpec**)EndeSprites,
 
 			// use z displacement in projection
 			false,
@@ -293,7 +293,7 @@ AnimatedImageROMSpec ENDE_EN =
 		},
 
 		// pointer to the animation spec for the item
-		(AnimationDescription*)&ENDE_ANIM,
+		(AnimationDescription*)&EndeAnimation,
 
 		// initial animation
 		"Default",

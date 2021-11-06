@@ -42,8 +42,8 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern StageROMSpec TITLE_SCREEN_ST;
-extern EntitySpec CREDITS_EN;
+extern StageROMSpec TitleScreenSt;
+extern EntitySpec CreditsEntity;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ void TitleScreenState::enter(void* owner)
 	KeypadManager::registerInput(KeypadManager::getInstance(), __KEY_PRESSED | __KEY_RELEASED | __KEY_HOLD);
 
 	// load stage
-	GameState::loadStage(this, (StageSpec*)&TITLE_SCREEN_ST, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&TitleScreenSt, NULL, true);
 
 	// start clocks to start animations
 	GameState::startClocks(this);
@@ -401,8 +401,8 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 			Game::enableKeypad(Game::getInstance());
 
 			// add new image entity
-			extern EntitySpec CREDITS_TEXT_ALTERNATIVE_EN;
-			PositionedEntity POSITIONED_ENTITY = {&CREDITS_TEXT_ALTERNATIVE_EN, {80, 74, -0.003f, 0}, 0, "CredText", NULL, NULL, true};
+			extern EntitySpec CreditsTextAlternativeEntity;
+			PositionedEntity POSITIONED_ENTITY = {&CreditsTextAlternativeEntity, {80, 74, -0.003f, 0}, 0, "CredText", NULL, NULL, true};
 			Stage::addChildEntity(this->stage, &POSITIONED_ENTITY, false);
 
 			// pause credits animation
@@ -426,7 +426,7 @@ bool TitleScreenState::handleMessage(Telegram telegram)
 		case kMessageShowCreditsAnimation:
 		{
 			// add image entity
-			PositionedEntity POSITIONED_ENTITY = {&CREDITS_EN, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
+			PositionedEntity POSITIONED_ENTITY = {&CreditsEntity, {192, 112, 0, 0}, 0, "Image", NULL, NULL, true};
 			Stage::addChildEntity(this->stage, &POSITIONED_ENTITY, false);
 
 			break;

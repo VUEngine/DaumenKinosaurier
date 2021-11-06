@@ -19,8 +19,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef IMAGE_VIEWER_STATE_H_
-#define IMAGE_VIEWER_STATE_H_
+#ifndef ImageViewerStATE_H_
+#define ImageViewerStATE_H_
 
 
 //---------------------------------------------------------------------------------------------------------

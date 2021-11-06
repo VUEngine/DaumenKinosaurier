@@ -32,42 +32,42 @@
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern FontROMSpec VUENGINE_FONT;
+extern FontROMSpec VUEngineFont;
 
-extern CharSetSpec CREDITS_L_CH;
-extern CharSetSpec CREDITS_R_CH;
-extern CharSetSpec GALLERY_BUTTON_PAUSE_L_CH;
-extern CharSetSpec GALLERY_BUTTON_PAUSE_R_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
+extern CharSetSpec CreditsLCharset;
+extern CharSetSpec CreditsRCharset;
+extern CharSetSpec GalleryButtonPauseLCharset;
+extern CharSetSpec GalleryButtonPauseRCharset;
+extern CharSetSpec GalleryButtonResumeLCharset;
+extern CharSetSpec GalleryButtonResumeRCharset;
+extern CharSetSpec GalleryButtonBackLCharset;
+extern CharSetSpec GalleryButtonBackRCharset;
 
-extern TextureSpec CREDITS_L_TX;
-extern TextureSpec CREDITS_R_TX;
-extern TextureSpec GALLERY_BUTTON_PAUSE_L_TX;
-extern TextureSpec GALLERY_BUTTON_PAUSE_R_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
+extern TextureSpec CreditsLTexture;
+extern TextureSpec CreditsRTexture;
+extern TextureSpec GalleryButtonPauseLTexture;
+extern TextureSpec GalleryButtonPauseRTexture;
+extern TextureSpec GalleryButtonResumeLTexture;
+extern TextureSpec GalleryButtonResumeRTexture;
+extern TextureSpec GalleryButtonBackLTexture;
+extern TextureSpec GalleryButtonBackRTexture;
 
-extern EntitySpec CREDITS_EN;
-extern EntitySpec GALLERY_BUTTON_PAUSE_EN;
-extern EntitySpec GALLERY_BUTTON_RESUME_EN;
-extern EntitySpec GALLERY_BUTTON_BACK_EN;
+extern EntitySpec CreditsEntity;
+extern EntitySpec GalleryButtonPauseEntity;
+extern EntitySpec GalleryButtonResumeEntity;
+extern EntitySpec GalleryButtonBackEntity;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMSpec CREDITS_ST_CHILDREN[] =
+PositionedEntityROMSpec CreditsStChildren[] =
 {
-	{&GALLERY_BUTTON_BACK_EN,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
-	{&GALLERY_BUTTON_PAUSE_EN,	{350,  12, -0.001f, 0}, 0, "Pause",  NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
-	{&CREDITS_EN,				{192, 112,       0, 0},	0, "Image",  NULL, NULL, true},
+	{&GalleryButtonBackEntity,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
+	{&GalleryButtonPauseEntity,	{350,  12, -0.001f, 0}, 0, "Pause",  NULL, NULL, true},
+	{&GalleryButtonResumeEntity,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
+	{&CreditsEntity,				{192, 112,       0, 0},	0, "Image",  NULL, NULL, true},
 
 	{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 };
@@ -77,37 +77,37 @@ PositionedEntityROMSpec CREDITS_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMSpec* const CREDITS_ST_FONTS[] =
+FontROMSpec* const CreditsStFonts[] =
 {
-	//&VUENGINE_FONT,
+	//&VUEngineFont,
 
 	NULL
 };
 
-CharSetROMSpec* const CREDITS_ST_CHARSETS[] =
+CharSetROMSpec* const CreditsStCharsets[] =
 {
-	&GALLERY_BUTTON_BACK_L_CH,
-	&GALLERY_BUTTON_BACK_R_CH,
-	&GALLERY_BUTTON_PAUSE_L_CH,
-	&GALLERY_BUTTON_PAUSE_R_CH,
-	&GALLERY_BUTTON_RESUME_L_CH,
-	&GALLERY_BUTTON_RESUME_R_CH,
-	&CREDITS_L_CH,
-	&CREDITS_R_CH,
+	&GalleryButtonBackLCharset,
+	&GalleryButtonBackRCharset,
+	&GalleryButtonPauseLCharset,
+	&GalleryButtonPauseRCharset,
+	&GalleryButtonResumeLCharset,
+	&GalleryButtonResumeRCharset,
+	&CreditsLCharset,
+	&CreditsRCharset,
 
 	NULL
 };
 
-TextureSpec* const CREDITS_ST_TEXTURES[] =
+TextureSpec* const CreditsStTextures[] =
 {
-	&GALLERY_BUTTON_BACK_L_TX,
-	&GALLERY_BUTTON_BACK_R_TX,
-	&GALLERY_BUTTON_PAUSE_L_TX,
-	&GALLERY_BUTTON_PAUSE_R_TX,
-	&GALLERY_BUTTON_RESUME_L_TX,
-	&GALLERY_BUTTON_RESUME_R_TX,
-	&CREDITS_L_TX,
-	&CREDITS_R_TX,
+	&GalleryButtonBackLTexture,
+	&GalleryButtonBackRTexture,
+	&GalleryButtonPauseLTexture,
+	&GalleryButtonPauseRTexture,
+	&GalleryButtonResumeLTexture,
+	&GalleryButtonResumeRTexture,
+	&CreditsLTexture,
+	&CreditsRTexture,
 	NULL
 };
 
@@ -116,7 +116,7 @@ TextureSpec* const CREDITS_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMSpec CREDITS_ST =
+StageROMSpec CreditsSt =
 {
 	// allocator
 	__TYPE(Stage),
@@ -309,13 +309,13 @@ StageROMSpec CREDITS_ST =
     // assets
     {
         // fonts to preload
-        (FontSpec**)CREDITS_ST_FONTS,
+        (FontSpec**)CreditsStFonts,
 
 		// char sets to preload
-		(CharSetSpec**)CREDITS_ST_CHARSETS,
+		(CharSetSpec**)CreditsStCharsets,
 
 		// textures to preload
-		(TextureSpec**)CREDITS_ST_TEXTURES,
+		(TextureSpec**)CreditsStTextures,
 
         // background sounds
 		(Sound**)NULL,
@@ -330,7 +330,7 @@ StageROMSpec CREDITS_ST =
         },
 
         // children
-        CREDITS_ST_CHILDREN,
+        CreditsStChildren,
     },
 
 	// post processing effects

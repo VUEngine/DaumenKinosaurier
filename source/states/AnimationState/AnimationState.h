@@ -19,8 +19,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef ANIMATION_STATE_H_
-#define ANIMATION_STATE_H_
+#ifndef AnimationStATE_H_
+#define AnimationStATE_H_
 
 
 //---------------------------------------------------------------------------------------------------------

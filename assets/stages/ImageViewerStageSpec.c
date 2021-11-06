@@ -26,42 +26,59 @@
 
 #include <Stage.h>
 #include <VIPManager.h>
+#include <Fonts.h>
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												DECLARATIONS
 //---------------------------------------------------------------------------------------------------------
 
-extern FontROMSpec VUENGINE_FONT;
+extern CharSetSpec VolcanoLCharset;
+extern CharSetSpec VolcanoRCharset;
+extern CharSetSpec GalleryTitleLCharset;
+extern CharSetSpec GalleryTitleRCharset;
+extern CharSetSpec GalleryButtonPauseLCharset;
+extern CharSetSpec GalleryButtonPauseRCharset;
+extern CharSetSpec GalleryButtonResumeLCharset;
+extern CharSetSpec GalleryButtonResumeRCharset;
+extern CharSetSpec GalleryButtonBackLCharset;
+extern CharSetSpec GalleryButtonBackRCharset;
+extern CharSetSpec GalleryButtonFramesLCharset;
+extern CharSetSpec GalleryButtonFramesRCharset;
 
-extern CharSetSpec REX_L_CH;
-extern CharSetSpec REX_R_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_L_CH;
-extern CharSetSpec GALLERY_BUTTON_RESUME_R_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_L_CH;
-extern CharSetSpec GALLERY_BUTTON_BACK_R_CH;
+extern TextureSpec VolcanoLTexture;
+extern TextureSpec VolcanoRTexture;
+extern TextureSpec GalleryTitleLTexture;
+extern TextureSpec GalleryTitleRTexture;
+extern TextureSpec GalleryButtonPauseLTexture;
+extern TextureSpec GalleryButtonPauseRTexture;
+extern TextureSpec GalleryButtonResumeLTexture;
+extern TextureSpec GalleryButtonResumeRTexture;
+extern TextureSpec GalleryButtonBackLTexture;
+extern TextureSpec GalleryButtonBackRTexture;
+extern TextureSpec GalleryButtonFramesLTexture;
+extern TextureSpec GalleryButtonFramesRTexture;
 
-extern TextureSpec REX_L_TX;
-extern TextureSpec REX_R_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_L_TX;
-extern TextureSpec GALLERY_BUTTON_RESUME_R_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_L_TX;
-extern TextureSpec GALLERY_BUTTON_BACK_R_TX;
-
-extern EntitySpec REX_EN;
-extern EntitySpec GALLERY_BUTTON_RESUME_EN;
-extern EntitySpec GALLERY_BUTTON_BACK_EN;
+extern EntitySpec VolcanoEntity;
+extern EntitySpec GalleryTitleEntity;
+extern EntitySpec GalleryButtonPauseEntity;
+extern EntitySpec GalleryButtonResumeEntity;
+extern EntitySpec GalleryButtonBackEntity;
+extern EntitySpec GalleryButtonFramesEntity;
 
 
 //---------------------------------------------------------------------------------------------------------
 // 												ASSETS
 //---------------------------------------------------------------------------------------------------------
 
-PositionedEntityROMSpec ANIMATION_ST_CHILDREN[] =
+PositionedEntityROMSpec ImageViewerStChildren[] =
 {
-	{&GALLERY_BUTTON_BACK_EN,	{354,  30, 	-1, 0}, 0, "Back",   NULL, NULL, true},
-	{&GALLERY_BUTTON_RESUME_EN,	{346,  12, 	-1, 0}, 0, "Resume", NULL, NULL, true},
-	{&REX_EN,					{192, 112,   0, 0}, 0, "Image",  NULL, NULL, true},
+	{&GalleryButtonFramesEntity,	{346,  48, -0.001f, 0}, 0, "Frames", NULL, NULL, true},
+	{&GalleryButtonBackEntity,	{354,  30, -0.001f, 0}, 0, "Back",   NULL, NULL, true},
+	{&GalleryButtonPauseEntity,	{350,  12, -0.001f, 0}, 0, "Pause",  NULL, NULL, true},
+	{&GalleryButtonResumeEntity,	{346,  12, -0.001f, 0}, 0, "Resume", NULL, NULL, true},
+	{&GalleryTitleEntity,			{ 48,  24, -0.001f, 0}, 0, "Title",  NULL, NULL, true},
+	{&VolcanoEntity,				{192, 112,       0, 0}, 0, "Image",  NULL, NULL, true},
 
 	{NULL, {0,0,0,0}, 0, NULL, NULL, NULL, false},
 };
@@ -71,30 +88,45 @@ PositionedEntityROMSpec ANIMATION_ST_CHILDREN[] =
 // 											PRELOAD LISTS
 //---------------------------------------------------------------------------------------------------------
 
-FontROMSpec* const ANIMATION_ST_FONTS[] =
+FontROMSpec* const ImageViewerStFonts[] =
 {
-	//&VUENGINE_FONT,
+	&NumberFont,
 
 	NULL
 };
 
-CharSetROMSpec* const ANIMATION_ST_CHARSETS[] =
+CharSetROMSpec* const ImageViewerStCharsets[] =
 {
-	&GALLERY_BUTTON_BACK_L_CH,
-	&GALLERY_BUTTON_BACK_R_CH,
-	&GALLERY_BUTTON_RESUME_L_CH,
-	&GALLERY_BUTTON_RESUME_R_CH,
+	&GalleryButtonFramesLCharset,
+	&GalleryButtonFramesRCharset,
+	&GalleryButtonBackLCharset,
+	&GalleryButtonBackRCharset,
+	&GalleryButtonPauseLCharset,
+	&GalleryButtonPauseRCharset,
+	&GalleryButtonResumeLCharset,
+	&GalleryButtonResumeRCharset,
+	&GalleryTitleLCharset,
+	&GalleryTitleRCharset,
+	&VolcanoLCharset,
+	&VolcanoRCharset,
 
 	NULL
 };
 
-TextureSpec* const ANIMATION_ST_TEXTURES[] =
+TextureSpec* const ImageViewerStTextures[] =
 {
-	&GALLERY_BUTTON_BACK_L_TX,
-	&GALLERY_BUTTON_BACK_R_TX,
-	&GALLERY_BUTTON_RESUME_L_TX,
-	&GALLERY_BUTTON_RESUME_R_TX,
-
+	&GalleryButtonFramesLTexture,
+	&GalleryButtonFramesRTexture,
+	&GalleryButtonBackLTexture,
+	&GalleryButtonBackRTexture,
+	&GalleryButtonPauseLTexture,
+	&GalleryButtonPauseRTexture,
+	&GalleryButtonResumeLTexture,
+	&GalleryButtonResumeRTexture,
+	&GalleryTitleLTexture,
+	&GalleryTitleRTexture,
+	&VolcanoLTexture,
+	&VolcanoRTexture,
 	NULL
 };
 
@@ -103,7 +135,7 @@ TextureSpec* const ANIMATION_ST_TEXTURES[] =
 // 											STAGE DEFINITION
 //---------------------------------------------------------------------------------------------------------
 
-StageROMSpec ANIMATION_ST =
+StageROMSpec ImageViewerSt =
 {
 	// allocator
 	__TYPE(Stage),
@@ -111,7 +143,7 @@ StageROMSpec ANIMATION_ST =
 	// Timer config
 	{
 		__TIMER_100US,
-		20,
+		10,
 		kMS
 	},
 
@@ -239,13 +271,13 @@ StageROMSpec ANIMATION_ST =
     	// obj segments sizes (must total 1024)
         {
             // __spt0
-        	0,
+        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
             // __spt1
-        	0,
+        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
             // __spt2
-        	0,
+        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
             // __spt3
-        	0,
+        	__AVAILABLE_CHAR_OBJECTS / __TOTAL_OBJECT_SEGMENTS,
         },
 
         // obj segments z coordinates
@@ -296,13 +328,13 @@ StageROMSpec ANIMATION_ST =
     // assets
     {
         // fonts to preload
-        (FontSpec**)ANIMATION_ST_FONTS,
+        (FontSpec**)ImageViewerStFonts,
 
 		// char sets to preload
-		(CharSetSpec**)ANIMATION_ST_CHARSETS,
+		(CharSetSpec**)ImageViewerStCharsets,
 
 		// textures to preload
-		(TextureSpec**)ANIMATION_ST_TEXTURES,
+		(TextureSpec**)ImageViewerStTextures,
 
         // background sounds
 		(Sound**)NULL,
@@ -317,7 +349,7 @@ StageROMSpec ANIMATION_ST =
         },
 
         // children
-        (PositionedEntity*)ANIMATION_ST_CHILDREN,
+        ImageViewerStChildren,
     },
 
 	// post processing effects

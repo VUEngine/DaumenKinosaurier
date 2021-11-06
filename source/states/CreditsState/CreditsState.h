@@ -19,8 +19,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef CREDITS_STATE_H_
-#define CREDITS_STATE_H_
+#ifndef CreditsStATE_H_
+#define CreditsStATE_H_
 
 
 //---------------------------------------------------------------------------------------------------------

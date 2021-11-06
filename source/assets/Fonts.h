@@ -20,7 +20,7 @@
 
 extern FontSpec DEFAULT_FONT;
 extern FontSpec PROFILER_FONT;
-extern FontSpec NUMBER_FONT;
+extern FontSpec NumberFont;
 
 
 #endif
