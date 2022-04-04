@@ -1,0 +1,11 @@
+{
+	"name": "Number",
+	"tiles": "NumberFontTiles",
+	"offset": 46,
+	"characterCount": 12,
+	"charactersPerLine": 1,
+	"size": {
+		"x": 1,
+		"y": 1
+	}
+}

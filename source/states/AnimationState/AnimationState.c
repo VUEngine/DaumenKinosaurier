@@ -1,22 +1,10 @@
-/* VUEngine - Virtual Utopia Engine <http://vuengine.planetvb.com/>
- * A universal game engine for the Nintendo Virtual Boy
+/**
+ * DaumenKinosaurier – VUEdition
  *
- * Copyright (C) 2007, 2018 by Jorge Eremiev <jorgech3@gmail.com> and Christian Radke <chris@vr32.de>
+ * © Marten Reiß and Christian Radke
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- * associated documentation files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to
- * the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
- * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
- * NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * For the full copyright and license information, please view the LICENSE file
+ * that was distributed with this source code.
  */
 
 
@@ -90,7 +78,7 @@ void AnimationState::enter(void* owner)
 	Camera::setCameraEffectManager(Camera::getInstance(), CameraEffectManager::safeCast(CustomCameraEffectManager_getInstance()));
 
 	// load stage
-	GameState::loadStage(this, (StageSpec*)&AnimationSt, NULL, true);
+	GameState::loadStage(this, (StageSpec*)&AnimationSt, NULL, true, false);
 
 	// enable user input
     Game::enableKeypad(Game::getInstance());
@@ -156,7 +144,7 @@ void AnimationState::processUserInput(UserInput userInput)
 		AnimatedEntity::pauseAnimation(imageEntity, this->isPaused);
 
 		// stop all sound playback
-		SoundManager::stopAllSounds(SoundManager::getInstance());
+		SoundManager::stopAllSounds(SoundManager::getInstance(), false);
 
 		// get ende entity from stage
 		Container endeEntity = Container::getChildByName(
@@ -243,7 +231,7 @@ void AnimationState::execute(void* owner)
 	));
 
 	// get current animation frame
-	s8 currentFrame = AnimatedEntity::getActualFrame(imageEntity);
+	int8 currentFrame = AnimatedEntity::getActualFrame(imageEntity);
 
 	// play sounds according to current animation sequence and current animation frame
 	switch (this->currentSequence)
@@ -329,7 +317,7 @@ void AnimationState::execute(void* owner)
 	}
 }
 
-void AnimationState::setCurrentAnimationSequence(u8 currentSequence)
+void AnimationState::setCurrentAnimationSequence(uint8 currentSequence)
 {
 	this->currentSequence = currentSequence;
 }
